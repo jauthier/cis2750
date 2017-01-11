@@ -4,6 +4,7 @@ void parseFile(FILE *fp) {
 
 	char c = fgetc(fp);
 	char last = ' ';
+	FILE *fWrite = fopen("parsedProgram.txt","w")
 
 	while (!feof(fp)) {
 
@@ -13,30 +14,32 @@ void parseFile(FILE *fp) {
 		// deals with strings ---- need to deal with quotes in strings
 		if (c == '"'){
 			// print first quotation mark
-			printf("%c", c);
+			fprintf(fWrite,"%c", c);
 			c = fgetc(fp);
 			// print the letters in between
 			while (c != '"') {
-				printf("%c", c);
+				fprintf(fWrite,"%c", c);
 				c =fgetc(fp);
 			}
-			printf("%c\n", c);
+			fprintf(fWrite,"%c\n", c);
 			last = c;
 			c = fgetc(fp);
 		}
 
 		if (check == 3) //
-			printf("%c", c);
+			fprintf(fWrite,"%c", c);
 		else if (check == 2 && (checkLast == 1 || checkLast == 2))
-			printf("%c\n", c);
+			fprintf(fWrite,"%c\n", c);
 		else if (check == 2 && checkLast == 3)
-			printf("\n%c\n", c);
+			fprintf(fWrite,"\n%c\n", c);
 		else if (check == 1 && checkLast == 3)
-			printf("\n");
+			fprintf(fWrite,"\n");
+		
 
 		last = c;
 		c = fgetc(fp);
 	}
+	fclose(fWrite);
 }
 
 
