@@ -4,7 +4,7 @@ void parseFile(FILE *fp) {
 
 	char c = fgetc(fp);
 	char last = ' ';
-	FILE *fWrite = fopen("parsedProgram.txt","w")
+	FILE *fWrite = fopen("parsedProgram.txt","w");
 
 	while (!feof(fp)) {
 
