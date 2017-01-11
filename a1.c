@@ -29,7 +29,7 @@ void parseFile(FILE *fp) {
 		int checkLast = sort(last);
 
 		if (check == 3)
-			printf("%c\n", c);
+			printf("%c", c);
 		else if (check == 2 && (checkLast == 1 || checkLast == 2))
 			printf("%c\n", c);
 		else if (check == 2 && checkLast == 3)
