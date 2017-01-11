@@ -27,6 +27,17 @@ void parseFile(FILE *fp) {
 
 		int check = sort(c);
 		int checkLast = sort(last);
+		if (c == '"'){
+			// print first quotation mark
+			printf("%c", c);
+			c = fgetc(fp);
+			// print the letters in between
+			while (c != '"') {
+				printf("%c", c);
+			}
+			printf("%c\n", c);
+			c = fgetc(fp);
+		}
 
 		if (check == 3)
 			printf("%c", c);
