@@ -34,6 +34,7 @@ void parseFile(FILE *fp) {
 			// print the letters in between
 			while (c != '"') {
 				printf("%c", c);
+				c =fgetc(fp);
 			}
 			printf("%c\n", c);
 			c = fgetc(fp);
