@@ -46,7 +46,7 @@ int sort(char c) {
 
 if (c==' '||c=='\t'||c=='\n'||c=='\r') 
 	return 1;
-else if (c==','||c==';'||c=='('||c==')'||c=='{'||c=='}'||c=='"')
+else if (c==','||c==';'||c=='('||c==')'||c=='{'||c=='}')
 	return 2;
 else 
 	return 3;
