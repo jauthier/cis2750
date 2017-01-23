@@ -34,7 +34,7 @@ void parseFile(FILE *fp) {
 			c = fgetc(fp); // check the next
 			if (c == '/') { // single line comment
 				fprintf(fWrite, "%c",last);
-				while (c != \n) { // print out the line
+				while (c != '\n') { // print out the line
 					fprintf(fWrite, "%c", c);
 					last = c;
 					c = fgetc(fp);
