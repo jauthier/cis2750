@@ -17,23 +17,47 @@ void parseFile(FILE *fp) {
 
 		int check = sort(c);
 		int checkLast = sort(last);
-
-		// deals with strings ---- need to deal with quotes in strings
-		if (c == '"'){
-			// print first quotation mark
-			fprintf(fWrite,"%c", c);
+		
+		if (c == '"'){ // deals with strings
+			fprintf(fWrite,"\n%c", c); // print first quotation mark
 			c = fgetc(fp);
 			// print the letters in between
-			while (c != '"') {
+			while (c != '"' || last == '/') { // if c is " and last is not / then stop, we have reached the end of the string
 				fprintf(fWrite,"%c", c);
-				c =fgetc(fp);
+				c = fgetc(fp);
 			}
 			fprintf(fWrite,"%c\n", c);
 			last = c;
 			c = fgetc(fp);
-		}
+		} else if (c == '/') {
+			last = c;
+			c = fgetc(fp); // check the next
+			if (c == '/') { // single line comment
+				fprintf(fWrite, "%c",last);
+				while (c != \n) { // print out the line
+					fprintf(fWrite, "%c", c);
+					last = c;
+					c = fgetc(fp);
+				}
+			} else if (c == '*') { //multi line comment
+				fprintf(fWrite, "%c%c", last, c);
+				c = fgetc(fp);
+				fprintf(fWrite, "%c", c);
+				last = c;
+				c = fgetc(fp); // these avoid /*/...
+				while (last != '*' || c != '/'){
+					fprintf(fWrite, "%c", c);
+					last = c;
+					c = fgetc(fp);
+				}
+				fprintf(fWrite, "%c", c);
+				last = c;
+				c = fgetc(fp);
+			} else {
+				fprintf(fWrite, "%c", last);
+			}
 
-		if (check == 3 && checkLast == 3) // current is 'regular' character, last is 'regular' character
+		} else if (check == 3 && checkLast == 3) // current is 'regular' character, last is 'regular' character
 			fprintf(fWrite,"%c", c);
 		else if (check == 1 && checkLast == 1) // current is whitespace, last is whitespace -- store the whitespace
 			fprintf(fWrite,"%c", c);
@@ -53,7 +77,7 @@ int sort(char c) {
 
 if (c==' '||c=='\t'||c=='\n'||c=='\r') 
 	return 1;
-else if (c==','||c==';'||c=='('||c==')'||c=='{'||c=='}')
+else if (c==','||c==';'||c=='('||c==')'||c=='{'||c=='}'||c=='+'||c=='*'||c=='=')
 	return 2;
 else 
 	return 3;
