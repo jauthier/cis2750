@@ -45,6 +45,7 @@ void parseFile(FILE *fp) {
 	}
 	
 	fclose(fWrite);
+	printf("here\n");
 	fileToList(fileName);
 }
 
