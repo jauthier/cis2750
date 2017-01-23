@@ -22,7 +22,7 @@ void parseFile(FILE *fp) {
 			fprintf(fWrite,"\n%c", c); // print first quotation mark
 			c = fgetc(fp);
 			// print the letters in between
-			while (c != '"' || last == '/') { // if c is " and last is not / then stop, we have reached the end of the string
+			while (c != '"' || last == '\\') { // if c is " and last is not / then stop, we have reached the end of the string
 				fprintf(fWrite,"%c", c);
 				c = fgetc(fp);
 			}
