@@ -21,7 +21,7 @@ int isWhiteSpace(char * str) {
 	int len = strlen(str);
 	int i = 0;
 	for (i=0;i<len;i++) {
-		if (str[i] != ' ' || str[i] != '\t' || str[i] != '\n' || str[i] != '\r'){
+		if (str[i] != ' ' && str[i] != '\t' && str[i] != '\n' && str[i] != '\r'){
 			printf("here \"%c\"\n", str[i]);
 			return 0;
 		}
