@@ -8,10 +8,12 @@ int sort(char c);
 int main(int argc, char *argv[]) {
 	
 	char *fileName;
-	if (argc == 2)
+	if (argc == 2) {
 		fileName = argv[1];
-	else 
-		fileName = "Sample.c";
+	} else {
+		printf("Please enter the name of the file you wish to translate.\n");
+		exit(0);
+	} 	
 
 	FILE *fp = fopen(fileName,"r");
 	
