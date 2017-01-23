@@ -1,10 +1,17 @@
+/*
+	parse.c
+	Jessica Authier
+	2017/01/16
+*/
+
 #include "parse.h"
 
 void parseFile(FILE *fp) {
 
 	char c = fgetc(fp);
 	char last = ' ';
-	FILE *fWrite = fopen("parsedProgram.txt","w");
+	char *fileName = "parsedProgram.txt";
+	FILE *fWrite = fopen(fileName,"w");
 
 	while (!feof(fp)) {
 
@@ -26,24 +33,20 @@ void parseFile(FILE *fp) {
 			c = fgetc(fp);
 		}
 
-		if (check == 3) //
+		if (check == 3 && checkLast == 3) // current is 'regular' character, last is 'regular' character
 			fprintf(fWrite,"%c", c);
-		else if (check == 2 && (checkLast == 1 || checkLast == 2))
-			fprintf(fWrite,"%c\n", c);
-		else if (check == 2 && checkLast == 3)
-			fprintf(fWrite,"\n%c\n", c);
-		else if (check == 1 && checkLast == 3)
-			fprintf(fWrite,"\n");		
+		else if (check == 1 && checkLast == 1) // current is whitespace, last is whitespace -- store the whitespace
+			fprintf(fWrite,"%c", c);
+		else
+			fprintf(fWrite,"\n%c", c);		
 
 		last = c;
 		c = fgetc(fp);
 	}
 	
 	fclose(fWrite);
+	fileToList(fileName);
 }
-
-
-
 
 int sort(char c) {
 
@@ -53,4 +56,21 @@ else if (c==','||c==';'||c=='('||c==')'||c=='{'||c=='}')
 	return 2;
 else 
 	return 3;
+}
+
+List *fileToList(char *fileName){
+
+	FILE *fp = fopen(fileName,"r");
+
+	char hold[200];
+	List *tokenList = createList();
+
+	while (fgets(hold,200,fp) != NULL){
+		char * token = malloc(sizeof(char)*strlen(hold));
+		strcpy(token, hold);
+		Element * toAdd = createElement(token);
+		tokenList = addBack(tokenList, toAdd);
+	}
+	fclose(fp);
+	return tokenList;
 }
