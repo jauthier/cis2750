@@ -92,7 +92,12 @@ List *fileToList(char *fileName){
 	List *tokenList = createList();
 
 	while (fgets(hold,200,fp) != NULL){
-		char * token = malloc(sizeof(char)*strlen(hold));
+		//remove the \n
+		int len = strlen(hold);
+		if (hold[len-1]=='\n')
+			hold[len-1]='\0';
+
+		char * token = malloc(sizeof(char)*strlen(len));
 		strcpy(token, hold);
 		Line * toAdd = createLine(token);
 		tokenList = addBack(tokenList, toAdd);
