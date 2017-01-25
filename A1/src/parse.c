@@ -94,8 +94,10 @@ List *fileToList(char *fileName){
 	while (fgets(hold,200,fp) != NULL){
 		//remove the \n
 		int len = strlen(hold);
-		if (hold[len-1]=='\n')
+		if (hold[len-1]=='\n'){
+			printf("here2\n");
 			hold[len-1]='\0';
+		}
 
 		char * token = malloc(sizeof(char)*strlen(len));
 		strcpy(token, hold);
