@@ -65,17 +65,13 @@ Line *classToStruct(Line *class, Line *restOfList){
     strcpy(structure,"struct");
     class = changeData (class, structure);
     /*get the name of the class*/
-    checkWS = isWhiteSpace(hold->data); 
-    checkC = isComment(hold->data);
 
-    printf("after C\n");
-    while (checkC==1||checkWS==1){
-        printf("in loop\n");
+    
+    while (isComment(hold->data)==1||isWhiteSpace(hold->data)==1){
         hold = hold->next;
-        checkWS = isWhiteSpace(hold->data); 
-        checkC = isComment(hold->data);
     }
-    printf("after loop\n");
+    if (hold == NULL)
+        printf("null\n");
     strcpy(className,hold->data);
     printf("HERE1\n");
     /*go through the list, check each line*/ 
