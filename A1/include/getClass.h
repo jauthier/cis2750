@@ -18,7 +18,7 @@ Line *classToStruct(Line *class, Line *restOfList);
 
 char *methodParameters (Line * line);
 
-Line *changeFuncNames(Line *list, char * className, char *oldName, char *newName);
+void changeFuncNames(Line *list, char * className, char *oldName, char *newName);
 
 int isType(char * str);
 
