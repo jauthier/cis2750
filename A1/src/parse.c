@@ -6,7 +6,7 @@
 
 #include "parse.h"
 
-List * parseFile(FILE *fp) {
+List *parseFile(FILE *fp) {
 
 	char c = fgetc(fp);
 	char last = ' ';

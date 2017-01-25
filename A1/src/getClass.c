@@ -1,6 +1,7 @@
-
+#include "getClass.h"
 
 void translate(List *tokenList){
+	printf("IN translate\n");
     Line *start = NULL; // this will hold the Line that is before the Line of interest
     Line *current = tokenList->head; // the Line being looked at by while loop
     while (current != NULL){ // while not at then end of the list
@@ -55,8 +56,8 @@ Line *classToStruct(Line *class, Line *restOfList){
     int checkC, checkWS, checkT;
     char *className;
     /*change class to struct*/
-    char strcture = malloc(sizeof("struct"));
-    strcpy(strcture,"struct");
+    char *structure = malloc(sizeof(char)*strlen("struct"));
+    strcpy(structure,"struct");
     class = changeData (class, structure);
     /*get the name of the class*/
     checkWS = isWhiteSpace(hold->data); 
@@ -134,7 +135,7 @@ Line *classToStruct(Line *class, Line *restOfList){
                 strcat(tempName,"(*");
                 char * fnPtrName = malloc(sizeof(char)*strlen(tempName));
 
-                Line *fnPtr() = createLine(fnPtrName);
+                Line *fnPtr = createLine(fnPtrName);
                 last->next = fnPtr;
                 fnPtr->next = afterFunct;
 
@@ -154,12 +155,13 @@ Line *classToStruct(Line *class, Line *restOfList){
 /*takes in the list of tokens, looks for any parameters and returns a string with a character 
 for each parameter. If there is an int i is returned, if there is an int and a char ic is returned ...*/
 char *methodParameters (Line * line){
-    int checkWS, checkC, checkT;
+    int i = 0;
     line = line->next;
     char hold[10];
     while (isEqual(line, ")") != 1) {
         if (isType(line->data)==1){
-            strcat(hold,line->data[0]);
+            hold[i] = line->data[0];
+            i++;
         }
         line = line->next;
     }
@@ -167,15 +169,15 @@ char *methodParameters (Line * line){
     return toAdd;
 }
 
-Element *changeFuncNames(Element *list, char * className, char *oldName, char *newName){
+Line *changeFuncNames(Line *list, char * className, char *oldName, char *newName){
     //search for the class name, thus we will get any names of the objects that were made
 
-    Element *hold = list;
+    Line *hold = list;
     while (hold != NULL){
         if (isEqual(hold,className)==1){
             do {
-                hold = hold->data;
-            } while(isWhiteSpace(hold->data)==1||isComment(temp->data)==1);
+                hold = hold->next;
+            } while(isWhiteSpace(hold->data)==1||isComment(hold->data)==1);
             // should be the name of a class variable
             //seach for the name of this var
             Line * temp = hold->next;

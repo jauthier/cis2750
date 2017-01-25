@@ -1,9 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "parse.h"
-
-void parseFile(FILE *fp);
-int sort(char c);
+#include "getClass.h"
 
 int main(int argc, char *argv[]) {
 	
@@ -18,6 +16,7 @@ int main(int argc, char *argv[]) {
 	FILE *fp = fopen(fileName,"r");
 	
 	List *list = parseFile(fp);
+	translate(list);
 
 	return 0;
 }

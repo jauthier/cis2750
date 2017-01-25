@@ -4,6 +4,9 @@
 * 2017/01/25
 */
 
+#ifndef LINELIST_H
+#define LINELIST_H
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -37,3 +40,5 @@ Line * removeBack (List * list);
 int isEqual (Line *line, char *str);
 
 Line * changeData (Line * line, char *newData);
+
+#endif
