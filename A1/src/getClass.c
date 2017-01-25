@@ -174,8 +174,25 @@ Element *changeFuncNames(Element *list, char * className, char *oldName, char *n
 
     Element *hold = list;
     while (hold != NULL){
-        if (strcmp(hold->elementPtr))
-
+        if (isEqual(hold,className)==1){
+            do {
+                hold = hold->data;
+            } while(isWhiteSpace(hold->data)==1||isComment(temp->data)==1);
+            // should be the name of a class variable
+            //seach for the name of this var
+            Line * temp = hold->next;
+            while (temp != NULL){
+                if (isEqual(temp,hold->data)==1){ // found a variable
+                    if (isEqual(temp->next, ".")==1&&isEqual(temp->next->next,oldName)==1){
+                        temp = temp->next->next;
+                        char *name = malloc(sizeof(char)*strlen(newName));
+                        strcpy(name,newName);
+                        temp = changeData(temp,name);
+                    }
+                }
+                temp = temp->next;
+            }
+        }
         hold = hold->next;
     }
 }

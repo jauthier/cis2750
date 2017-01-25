@@ -1,23 +1,16 @@
+/*
+* Jessica Authier
+* 2017/01/25
+*/
+#include "lineList.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-
-typedef struct Line {
-    char * data;
-    struct Line * next;
-} Line;
-
-typedef struct List {
-    Line * head;
-} List;
-
-List * createList(){
+List * createList (){
     List *list = malloc(sizeof(List));
     list->head == NULL;
     return list;
 }
 
-void destroyList(List * toDestroy) {
+void destroyList (List * toDestroy) {
     
     Line * head = toDestroy->head;
     while (head != NULL){ /* While the list isn't empty */
@@ -40,7 +33,7 @@ void destroyLine (Line * toDestroy){
     free(toDestroy);
 }
 
-List * addFront(List * list, Line * toAdd){
+List * addFront (List * list, Line * toAdd){
     
     if (list->head == NULL){ /* if the list is empty */
         list->head = toAdd;
@@ -52,7 +45,7 @@ List * addFront(List * list, Line * toAdd){
     return list;
 }
 
-List * addBack(List * list, Line * toAdd){
+List * addBack (List * list, Line * toAdd){
     
     if (list->head == NULL){ /* if the list is empty */
         list->head = toAdd;
@@ -66,7 +59,7 @@ List * addBack(List * list, Line * toAdd){
     return list;
 }
 
-Line * removeFront(List * list){
+Line * removeFront (List * list){
     
     if (list->head == NULL){ /* if the list is empty then there is not Lines to remove */
         printf("There are no Lines to remove.\n");
@@ -78,7 +71,7 @@ Line * removeFront(List * list){
     }
 }
 
-Line * removeBack(List * list){
+Line * removeBack (List * list){
     
     Line * temp = list->head;
     if (temp == NULL){ /* if the list is empty */
@@ -94,4 +87,18 @@ Line * removeBack(List * list){
         temp = hold;
     }
     return temp;
+}
+
+int isEqual (Line *line, char *str){
+    if (strcmp(line->data,str)==0)
+        return 1;
+    else
+        return 0;
+}
+
+Line * changeData (Line * line, char *newData){
+    char * oldData = line->data;
+    line->data = newData;
+    free(oldData);
+    return line;
 }

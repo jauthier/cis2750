@@ -6,7 +6,7 @@
 
 #include "parse.h"
 
-void parseFile(FILE *fp) {
+List * parseFile(FILE *fp) {
 
 	char c = fgetc(fp);
 	char last = ' ';
@@ -70,7 +70,8 @@ void parseFile(FILE *fp) {
 	
 	fclose(fWrite);
 	printf("here\n");
-	fileToList(fileName);
+	List *list = fileToList(fileName);
+	return list;
 }
 
 int sort(char c) {

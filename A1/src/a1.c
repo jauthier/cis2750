@@ -17,7 +17,7 @@ int main(int argc, char *argv[]) {
 
 	FILE *fp = fopen(fileName,"r");
 	
-	parseFile(fp);
+	List *list = parseFile(fp);
 
 	return 0;
 }
