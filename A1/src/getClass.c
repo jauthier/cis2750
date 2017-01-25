@@ -59,7 +59,7 @@ Line *classToStruct(Line *class, Line *restOfList){
     List *variableNames = createList();
     Line *hold = class->next;
     int checkC, checkWS, checkT;
-    char *className;
+    char className[20];
     /*change class to struct*/
     char *structure = malloc(sizeof(char)*strlen("struct"));
     strcpy(structure,"struct");
@@ -70,8 +70,8 @@ Line *classToStruct(Line *class, Line *restOfList){
     while (isComment(hold->data)==1||isWhiteSpace(hold->data)==1){
         hold = hold->next;
     }
-    if (hold == NULL)
-        printf("null\n");
+   
+    printf("null\n");
     strcpy(className,hold->data);
     printf("HERE1\n");
     /*go through the list, check each line*/ 
