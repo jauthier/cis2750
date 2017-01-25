@@ -5,7 +5,7 @@ void translate(List *tokenList){
     Line *start = NULL; // this will hold the Line that is before the Line of interest
     Line *current = tokenList->head; // the Line being looked at by while loop
     while (current != NULL){ // while not at then end of the list
-        printf("%s\n", current->data);
+        printf("%s: %d\n", current->data,isEqual(current,"class"));
         if (isEqual(current,"class") == 1){
             printf("IN CLASS\n");
 
