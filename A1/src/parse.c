@@ -69,7 +69,6 @@ List *parseFile(FILE *fp) {
 	}
 	
 	fclose(fWrite);
-	printf("here\n");
 	List *list = fileToList(fileName);
 	return list;
 }
@@ -95,7 +94,6 @@ List *fileToList(char *fileName){
 		//remove the \n
 		int len = strlen(hold);
 		if (hold[len-1]=='\n'){
-			printf("here2\n");
 			hold[len-1]='\0';
 		}
 

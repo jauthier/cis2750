@@ -64,6 +64,10 @@ Line *classToStruct(Line *class, Line *restOfList){
     char *structure = malloc(sizeof(char)*strlen("struct"));
     strcpy(structure,"struct");
     class = changeData (class, structure);
+
+
+    printf("after name change\n");
+
     /*get the name of the class*/
     checkWS = isWhiteSpace(hold->data); 
     checkC = isComment(hold->data);
