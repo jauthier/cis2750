@@ -99,7 +99,7 @@ List *fileToList(char *fileName){
 			hold[len-1]='\0';
 		}
 
-		char * token = malloc(sizeof(char)*strlen(len));
+		char * token = malloc(sizeof(char)*len);
 		strcpy(token, hold);
 		Line * toAdd = createLine(token);
 		tokenList = addBack(tokenList, toAdd);
