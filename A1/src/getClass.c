@@ -1,0 +1,210 @@
+
+
+void translate(List *tokenList){
+    Line *start = NULL; // this will hold the Line that is before the Line of interest
+    Line *current = tokenList->head; // the Line being looked at by while loop
+    while (current != NULL){ // while not at then end of the list
+
+        if (isEqual(current,"class") == 1){
+            Line *hold = current->next;
+
+            /*pass through the whitespace and the name of the class*/
+            int checkWS = isWhiteSpace(hold->data);
+            int checkC = isComment(hold->data);
+            while (checkWS == 1 || checkC == 1){
+                hold = hold->next;
+                checkWS = isWhiteSpace(hold->data);
+                checkC = isComment(hold->data);
+            }
+            do {
+                hold = hold->next;
+                checkWS = isWhiteSpace(hold->data);
+                checkC = isComment(hold->data);
+            } while (checkWS == 1 || checkC == 1);
+
+            /*determine if this is a class or an instance of a class*/
+            if (isEqual(hold, "{") == 1){
+                hold = hold->next;
+                int openBraces = 0;
+                while (strcmp(hold->data,"}") != 0 && openBraces != 0){ // if hold is not a } and openBraces is not 0 then keep looking
+                    if (strcmp(hold->data,"{") == 0)
+                        openBraces++; // record if there is an open brace
+                    else if (strcmp(hold->data,"}") == 0)
+                        openBraces--;
+                    hold = hold->next;
+                }
+                // once the close brace is found
+                Line *end = hold->next; // save the Line that follows
+                hold->next = NULL;
+                // send the List to a function that turns the class into a method
+                Line *structHead = classToStruct(current,end);  
+            } else {
+
+            }
+        } else if (){
+
+        }
+        start = current; // keep trake of the last
+        current = current->next; // get the next
+    }
+}
+
+Line *classToStruct(Line *class, Line *restOfList){
+    List *funcToAdd = createList();
+    Line *hold = class->next;
+    int checkC, checkWS, checkT;
+    char *className;
+    /*change class to struct*/
+    char strcture = malloc(sizeof("struct"));
+    strcpy(strcture,"struct");
+    class = changeData (class, structure);
+    /*get the name of the class*/
+    checkWS = isWhiteSpace(hold->data); 
+    checkC = isComment(hold->data);
+    while (checkC==1||checkWS==1){
+        hold = hold->next;
+        checkWS = isWhiteSpace(hold->data); 
+        checkC = isComment(hold->data);
+    }
+    strcpy(className,hold->data);
+    /*go through the list, check each line*/ 
+    while (hold != NULL) {
+        checkWS = isWhiteSpace(hold->data);
+        checkC = isComment(hold->data);
+        checkT = isType(hold->data);
+        if (checkC == 1 ||checkWS == 1){ // whitespace or comment
+            hold = hold->next;
+        } else if (isEqual(hold,"*") == 1||checkT==1){ //a variable or a method
+            Line *last; // this will hold the Line before the { or method name
+            Line * temp = hold;
+            do {
+                last = temp;
+                temp = temp->next;
+                checkWS = isWhiteSpace(temp->data);
+                checkC = isComment(temp->data);
+                checkT = isType(temp->data);
+            } while (checkWS == 1||checkC == 1||checkT);
+            if (isEqual(temp,";")==1 ||isEqual(temp,",")==1){ // variable
+                while (isEqual(temp,";")!=1) {
+                    temp = temp->next;
+                }
+                temp = temp->next;
+            } else { // method
+                /*change the name of the method*/
+                char *funcParam = methodParameters(temp);
+                char * functionName = malloc(sizeof(char) *(strlen(className)+strlen(temp->data)+strlen(funcParam)));
+                strcpy(functionName,funcParam);
+                strcat(functionName,className);
+                strcat(functionName,temp->data);
+                temp = changeData (temp,functionName);
+                free(funcParam);
+                // search for any other uses of the function to change the names
+
+
+
+
+                /*find the end of the method so the whole thing can be removed from the struct*/
+                while (isEqual(temp,"}") != 0){
+                    temp = temp->next;
+                }
+                /*save the Line after the } so it can be added back on after the function pointer is added*/
+                Line * afterFunct = temp->next;
+                temp->next = NULL;
+
+                /*add the type to the method list, while also keeping it in the struct*/
+                List *methodList = createList();
+                Line *method = createLine(hold->data);
+                methodList = addBack(methodList,method);
+                hold = hold->next;
+                while (hold != last) {
+                    Line * newLine = createLine(hold->data);
+                    methodList = addBack(methodList,newLine);
+                    hold = hold->next;
+                }
+                Line *newL = createLine(hold->data);
+                methodList = addBack(methodList,newL);
+
+                // make hold equal the name of the function
+                hold = hold->next;
+                methodList = addBack(methodList,hold);
+
+                // add a function pointer and put the rest of the class after
+                char *tempName = ")();";
+                strcat(tempName,functionName);
+                strcat(tempName,"(*");
+                char * fnPtrName = malloc(sizeof(char)*strlen(tempName));
+
+                Line *fnPtr() = createLine(fnPtrName);
+                last->next = fnPtr;
+                fnPtr->next = afterFunct;
+
+                // send the method list off
+
+            }
+
+
+
+        } else if (){ // check for structs inside the class
+
+        }
+
+    }
+
+
+}
+
+/*takes in the list of tokens, looks for any parameters and returns a string with a character 
+for each parameter. If there is an int i is returned, if there is an int and a char ic is returned ...*/
+char *methodParameters (Line * line){
+    int checkWS, checkC, checkT;
+    line = line->next;
+    char hold[10];
+    while (isEqual(line, ")") != 1) {
+        if (isType(line->data)==1){
+            strcat(hold,line->data[0]);
+        }
+        line = line->next;
+    }
+    char *toAdd = malloc(sizeof(char)*strlen(hold));
+    return toAdd;
+}
+
+Element *changeFuncNames(Element *list, char * className, char *oldName, char *newName){
+    //search for the class name, thus we will get any names of the objects that were made
+
+    Element *hold = list;
+    while (hold != NULL){
+        if (strcmp(hold->elementPtr))
+
+        hold = hold->next;
+    }
+}
+
+int isType(char * str){
+    if (strcmp(str,"int")==0||strcmp(str,"char")==0||strcmp(str,"short")==0
+        ||strcmp(str,"long")==0||strcmp(str,"double")==0||strcmp(str,"float")==0
+        ||strcmp(str,"void")==0)
+        return 1;
+    else 
+        return 0;
+}
+
+int isWhiteSpace(char * str) {
+	int len = strlen(str);
+	int i = 0;
+	for (i=0;i<len;i++) {
+		if (str[i] != ' ' && str[i] != '\t' && str[i] != '\n' && str[i] != '\r'){
+			return 0;
+		}
+	}
+	return 1;
+}
+
+int isComment(char *str) {
+    if (strlen(str) < 3)
+        return 0;
+    else if (str[0] == '/' && (str[1] == '/' || str[1] == '*')) // if // or /*
+        return 1;
+    else
+        return 0;
+}
