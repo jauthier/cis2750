@@ -41,8 +41,8 @@ void translate(List *tokenList){
             } else {
 
             }
-        } else if (){
-
+        } else {
+            printf("not a class\n");
         }
         start = current; // keep trake of the last
         current = current->next; // get the next
@@ -144,13 +144,11 @@ Line *classToStruct(Line *class, Line *restOfList){
 
 
 
-        } else if (){ // check for structs inside the class
-
+        } else { // check for structs inside the class
+            printf("other\n");
         }
-
     }
-
-
+    return class;
 }
 
 /*takes in the list of tokens, looks for any parameters and returns a string with a character 
