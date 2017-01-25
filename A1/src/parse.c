@@ -1,7 +1,7 @@
 /*
 	parse.c
 	Jessica Authier
-	2017/01/16
+	2017/01/24
 */
 
 #include "parse.h"
@@ -93,7 +93,7 @@ List *fileToList(char *fileName){
 	while (fgets(hold,200,fp) != NULL){
 		char * token = malloc(sizeof(char)*strlen(hold));
 		strcpy(token, hold);
-		Element * toAdd = createElement(token);
+		Line * toAdd = createLine(token);
 		tokenList = addBack(tokenList, toAdd);
 	}
 	fclose(fp);
