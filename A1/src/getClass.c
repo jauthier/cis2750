@@ -74,6 +74,7 @@ List *classToStruct (Line *class, Line *restOfList){
     hold = hold->next;
     /*go through the list, check each line*/ 
     while (hold != NULL) {
+        printf("%s\n", hold->data);
         if (isType(hold->data)==1||isEqual(hold,"struct")==1){ /*a variable or a method*/
             Line * temp = hold;
             Line * methodName;
