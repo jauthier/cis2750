@@ -46,28 +46,23 @@ List *addVar (List *list, Line *vars){
     int isStruct = 0;
     if  (isEqual(vars, "struct")==1) {
         isStruct = 1;
-        Line *struct1 = createLine(vars->data);
-        list = addBack(list, ptr);
+        list = addBack(list, createLine(vars->data));
         vars = vars->next;
         vars = whileWSC(vars);/*find the name of the struct*/
-        Line *structName = createLine(vars->data);
-        vars = vars->next;
     }
+    Line *type = createLine(vars->data);
+    vars = vars->next;
     while (isEqual(vars,";")!=1){
         if (isEqual(vars,",")==1){
             if (isStruct == 1){
-                Line *struct2 = createLine(srtuct1->data);
-                list = addBack(list, struct2);
-                Line *structName2 = createLine(structName->data);
-                list = addBack(list,structName2);
+                list = addBack(list, createLine("struct"));
+                
             }
-            Line *type2 = createLine(type->data);
-            list = addBack(list, type2)
+            list = addBack(list,createLine(type->data));
         } else if (isWhiteSpace(vars->data)==1||isComment(vars->data)==1){
             continue;
         } else {
-            Line * name = createLine(vars->data);
-            list = addBack(list, name);
+            list = addBack(list, createLine(vars->data));
         } 
         vars = vars->next;
     }
@@ -119,7 +114,7 @@ int checkStructVar (List *methodList, List * varList, char *structName){
     Line *holdVars = varList->head;
     int check = 0;
     char structVarName[10];
-    strcpy(structVarName,"svName");
+    strcpy(structVarName,"sVar");
     while (holdVars != NULL){
         Line *holdType = holdVars;
         if (isEqual(holdVars,"struct")==1)

@@ -41,7 +41,7 @@ void translate(List *tokenList){
                 printf("goind to make a struct\n");
                 /* send the List to a function that turns the class into a method*/
                 List *structHead = classToStruct(current,end);
-                Line *structLast = getLast(structHead);
+                /*Line *structLast = getLast(structHead);*/
 
             } else {
 
@@ -144,7 +144,7 @@ List *classToStruct (Line *class, Line *restOfList){  /*make a list to return*/
                     Line * toAdd = createLine(temp->data);
                     paramList = addBack(paramList,toAdd);
                 }
-                paramList = addBack(paramList, createLine(")"))
+                paramList = addBack(paramList, createLine(")"));
 
                 /*find the end of the method so the whole thing can be removed from the struct*/
                 while (isEqual(temp,"}") != 0){
@@ -175,14 +175,14 @@ List *classToStruct (Line *class, Line *restOfList){  /*make a list to return*/
                 /*check if the method uses any struct variables*/
                 int checkSV = checkStructVar(methodList,variableList,className);
                 /*make the function ptr*/
-                if (checkSV == 1) { // parameters
-                    char * param = malloc(sizeof(char)*(strlen(structName)+strlen(structVarName)+10));
-                    strcpy(param,structVarName);
+                if (checkSV == 1) { /* parameters*/
+                    char * param = malloc(sizeof(char)*(strlen(className)+strlen("sVar")+10));
+                    strcpy(param,"sVar");
                     strcat(param," *");
-                    strcat(param,structName);
+                    strcat(param,className);
                     strcat(param,"struct ");
                     Line * parameters = createLine(param);
-                    paramList = addParameters(paramList,parameters)
+                    paramList = addParameters(paramList,parameters);
                 }
                 char *fnPtrName = malloc(sizeof(char)*(strlen(functionName)+4));
                 strcpy (fnPtrName,")");
@@ -208,7 +208,10 @@ List *classToStruct (Line *class, Line *restOfList){  /*make a list to return*/
         }
 
     }
-    return class;
+
+    List *finalList = createList();
+    finalList = addBack(finalList,class);
+    return finalList;
 }
 
 List * methodToFunction (List *list){
