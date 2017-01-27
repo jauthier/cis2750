@@ -36,7 +36,7 @@ int isWhiteSpace (char * str) {
 int isComment (char *str) {
     if (strlen(str) < 3)
         return 0;
-    else if (str[0] == '/' && (str[1] == '/' || str[1] == '*')) // if // or /*
+    else if (str[0] == '/' && (str[1] == '/' || str[1] == '*'))
         return 1;
     else
         return 0;
@@ -211,6 +211,6 @@ List *makeConst (List *methodList, char *className){
     }
     char *last = malloc(sizeof(char)*strlen("}\n"));
     Line *last2 = createLine(last);
-    conList = addBack(conList,last);
+    conList = addBack(conList,last2);
     return conList;
 }

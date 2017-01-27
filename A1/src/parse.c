@@ -91,7 +91,6 @@ List *fileToList (char *fileName){
 	List *tokenList = createList();
 
 	while (fgets(hold,200,fp) != NULL){
-		//remove the \n
 		int len = strlen(hold);
 		if (hold[len-1]=='\n'){
 			hold[len-1]='\0';
