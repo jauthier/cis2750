@@ -14,13 +14,12 @@ void translate(List *tokenList){
 
             /*determine if this is a class or an instance of a class*/
             if (isEqual(hold, "{") == 1){
-                printf("here\n");
                 hold = hold->next;
                 int openBraces = 0;
-                while (strcmp(hold->data,"}") != 0 && openBraces != 0){ /* if hold is not a } and openBraces is not 0 then keep looking*/
-                    if (strcmp(hold->data,"{") == 0)
+                while (isEqual(hold,"}") != 0 && openBraces != 0){ /* if hold is not a } and openBraces is not 0 then keep looking*/
+                    if (isEqual(hold,"{") == 0)
                         openBraces++; /* record if there is an open brace*/
-                    else if (strcmp(hold->data,"}") == 0)
+                    else if (isEqual(hold,"}") == 0)
                         openBraces--;
                     hold = hold->next;
                 }
@@ -29,6 +28,11 @@ void translate(List *tokenList){
                 hold->next = NULL;
                 printf("goind to make a struct\n");
                 /* send the List to a function that turns the class into a method*/
+                List *list = createList();
+                list->head = current;
+                printList(list);
+
+
                 
                 List *structHead = classToStruct(current,end);
                 printf("list:\n");
