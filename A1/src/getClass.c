@@ -41,6 +41,7 @@ void translate(List *tokenList){
                 printf("goind to make a struct\n");
                 /* send the List to a function that turns the class into a method*/
                 List *structHead = classToStruct(current,end);
+                printf("list:\n");
                 printList(structHead);
                 /*Line *structLast = getLast(structHead);*/
 
@@ -201,6 +202,7 @@ List *classToStruct (Line *class, Line *restOfList){
                 hold = afterFunct;
             }
         } else {
+            printf("in else\n");
             last = hold;
             hold = hold->next;
         }
