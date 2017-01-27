@@ -42,20 +42,19 @@ int isComment (char *str) {
         return 0;
 }
 
-List *addVar (List *list, Line *vars){ // make it handle struct variables
+List *addVar (List *list, Line *vars){
     int isStruct = 0;
     if  (isEqual(vars, "struct")==1) {
         isStruct = 1;
         Line *struct1 = createLine(vars->data);
         list = addBack(list, ptr);
         vars = vars->next;
-        vars = whileWSC(vars);//find the name of the struct
+        vars = whileWSC(vars);/*find the name of the struct*/
         Line *structName = createLine(vars->data);
         vars = vars->next;
     }
     while (isEqual(vars,";")!=1){
         if (isEqual(vars,",")==1){
-            // addd the type again
             if (isStruct == 1){
                 Line *struct2 = createLine(srtuct1->data);
                 list = addBack(list, struct2);
@@ -66,7 +65,7 @@ List *addVar (List *list, Line *vars){ // make it handle struct variables
             list = addBack(list, type2)
         } else if (isWhiteSpace(vars->data)==1||isComment(vars->data)==1){
             continue;
-        } else { //we have a name
+        } else {
             Line * name = createLine(vars->data);
             list = addBack(list, name);
         } 
@@ -91,7 +90,7 @@ char *methodParameters (Line * line){
 }
 
 void changeFuncNames (Line *list, char * className, char *oldName, char *newName){
-    //search for the class name, thus we will get any names of the objects that were made
+    /*search for the class name, thus we will get any names of the objects that were made*/
 
     Line *hold = list;
     while (hold != NULL){
@@ -99,11 +98,9 @@ void changeFuncNames (Line *list, char * className, char *oldName, char *newName
             do {
                 hold = hold->next;
             } while(isWhiteSpace(hold->data)==1||isComment(hold->data)==1);
-            // should be the name of a class variable
-            //seach for the name of this var
             Line * temp = hold->next;
             while (temp != NULL){
-                if (isEqual(temp,hold->data)==1){ // found a variable
+                if (isEqual(temp,hold->data)==1){
                     if (isEqual(temp->next, ".")==1&&isEqual(temp->next->next,oldName)==1){
                         temp = temp->next->next;
                         char *name = malloc(sizeof(char)*strlen(newName));
@@ -164,13 +161,13 @@ List * addParameters (List * methodList, Line *parameters){
     Line * holdParam = hold->next;
     Line * temp = hold->next;
     hold->next = parameters;
-    while (hold->next != NULL){ //find the end of the parameter that was added
+    while (hold->next != NULL){ /*find the end of the parameter that was added*/
         hold = hold->next;
     }
     while (isComment(temp->data)==1||isWhiteSpace(temp->data)==1){
         temp = temp->next;
     }
-    if (isEqual(temp,")")!=1){ // other parameters so add a comma
+    if (isEqual(temp,")")!=1){ /* other parameters so add a comma*/
         Line *comma = createLine(", ");
         hold->next = comma;
         hold = hold->next;

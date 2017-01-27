@@ -15,7 +15,7 @@
 
 void translate (List *tokenList);
 
-Line *classToStruct (Line *class, Line *restOfList);
+List *classToStruct (Line *class, Line *restOfList);
 
 List * methodToFunction (List *list);
 

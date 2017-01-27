@@ -6,7 +6,7 @@
 
 List * createList (){
     List *list = malloc(sizeof(List));
-    list->head == NULL;
+    //list->head == NULL;
     return list;
 }
 

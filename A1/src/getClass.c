@@ -30,16 +30,16 @@ void translate(List *tokenList){
                 int openBraces = 0;
                 while (strcmp(hold->data,"}") != 0 && openBraces != 0){ /* if hold is not a } and openBraces is not 0 then keep looking*/
                     if (strcmp(hold->data,"{") == 0)
-                        openBraces++; // record if there is an open brace
+                        openBraces++; /* record if there is an open brace*/
                     else if (strcmp(hold->data,"}") == 0)
                         openBraces--;
                     hold = hold->next;
                 }
-                // once the close brace is found
-                Line *end = hold->next; // save the Line that follows
+                /* once the close brace is found*/
+                Line *end = hold->next; /* save the Line that follows*/
                 hold->next = NULL;
                 printf("goind to make a struct\n");
-                // send the List to a function that turns the class into a method
+                /* send the List to a function that turns the class into a method*/
                 List *structHead = classToStruct(current,end);
                 Line *structLast = getLast(structHead);
 
@@ -49,14 +49,14 @@ void translate(List *tokenList){
         } else {
             printf("not a class\n");
         }
-        current = current->next; // get the next
+        current = current->next; /* get the next*/
     }
 }
 
 List *classToStruct (Line *class, Line *restOfList){  /*make a list to return*/
     List *funcToAdd = createList();
     List *variableList = createList(); /*list of the variables*/
-    List *methodNameList = createLine(); /*list of method names*/
+    List *methodNameList = createList(); /*list of method names*/
     Line *hold = class->next;
     char className[20];
     /*change class to struct*/
@@ -97,15 +97,15 @@ List *classToStruct (Line *class, Line *restOfList){  /*make a list to return*/
                 temp = temp->next;
                 temp = whileWSC(temp);
             }
-            if (isEqual(temp,";")==1 ||isEqual(temp,",")==1){ // variable
+            if (isEqual(temp,";")==1 ||isEqual(temp,",")==1){ /*variable*/
                 variableList = addVar(variableList,hold); 
                 while (isEqual(temp,";")!=1) {
                     temp = temp->next;
                 }
                 last = temp;
                 hold = temp->next;          
-            } else if (isEqual(temp,"{")==1){ //stuct declaration
-                // move the struct outside of the class
+            } else if (isEqual(temp,"{")==1){ /*stuct declaration*/
+                /* move the struct outside of the class*/
                 while (isEqual(temp,"}")!=1){
                     temp = temp->next;
                 }
@@ -119,10 +119,10 @@ List *classToStruct (Line *class, Line *restOfList){  /*make a list to return*/
                 last->next = afterStruct;
                 funcToAdd = addFront(funcToAdd,hold);
                 hold = afterStruct; 
-            } else { // method
+            } else { /* method */
                 List *paramList = createList();
                 /*change the name of the method*/
-                char *funcParam = methodParameters(temp); // get the letters to add to the name
+                char *funcParam = methodParameters(temp); /*get the letters to add to the name*/
                 char * functionName = malloc(sizeof(char) *(strlen(className)+strlen(methodName->data)+strlen(funcParam)));
                 strcpy(functionName,funcParam);
                 strcat(functionName,methodName->data);
@@ -161,7 +161,7 @@ List *classToStruct (Line *class, Line *restOfList){  /*make a list to return*/
                 /*add the type to the method list, while also keeping it in the struct*/
                 List *methodList = createList();
                 Line *method = createLine(hold->data);
-                methodList = addBack(methodList,method); // add the type
+                methodList = addBack(methodList,method); /* add the type*/
                 hold = hold->next;
                 while (hold != methodName) { 
                     Line * newLine = createLine(hold->data);
@@ -188,19 +188,19 @@ List *classToStruct (Line *class, Line *restOfList){  /*make a list to return*/
                 strcpy (fnPtrName,")");
                 strcat(fnPtrName,functionName);
                 strcat(fnPtrName,"(*");
-                Line *fnPtr = createLine(fnPtrName); //pointer bit
-                afterType->next = fnPtr; // add the pointer bit to the struct
-                fnPtr->next = paramList->head; // add the parameters to the struct
+                Line *fnPtr = createLine(fnPtrName); 
+                afterType->next = fnPtr; /* add the pointer bit to the struct*/
+                fnPtr->next = paramList->head; /*add the parameters to the struct*/
                 while (fnPtr->next != NULL){
                     fnPtr = fnPtr->next;
                 }
-                fnPtr->next = afterFunct; // add the rest of the struct back on
+                fnPtr->next = afterFunct; /*add the rest of the struct back on*/
                 last = fnPtr;
                 hold = afterFunct;
-                // send the method list off, and add it to the function pointer
+                /*send the method list off, and add it to the function pointer*/
 
             }
-        } else { // check for structs inside the class
+        } else { /*check for structs inside the class*/
 
 
             printf("other\n");

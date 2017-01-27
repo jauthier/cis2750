@@ -25,7 +25,7 @@ List * createList ();
 
 void destroyList (List * toDestroy) ;
 
-Line *createLine (char * data);
+Line * createLine (char * data);
 
 void destroyLine (Line * toDestroy);
 
