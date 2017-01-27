@@ -2,9 +2,8 @@
 
 void translate(List *tokenList){
 	printf("IN translate\n");
-    Line *start = NULL; // this will hold the Line that is before the Line of interest
-    Line *current = tokenList->head; // the Line being looked at by while loop
-    while (current != NULL){ // while not at then end of the list
+    Line *current = tokenList->head; /* the Line being looked at by while loop*/
+    while (current != NULL){ /* while not at then end of the list*/
         printf("%s: %d\n", current->data,isEqual(current,"class"));
         if (isEqual(current,"class") == 1){
             printf("IN CLASS\n");
@@ -29,7 +28,7 @@ void translate(List *tokenList){
             if (isEqual(hold, "{") == 1){
                 hold = hold->next;
                 int openBraces = 0;
-                while (strcmp(hold->data,"}") != 0 && openBraces != 0){ // if hold is not a } and openBraces is not 0 then keep looking
+                while (strcmp(hold->data,"}") != 0 && openBraces != 0){ /* if hold is not a } and openBraces is not 0 then keep looking*/
                     if (strcmp(hold->data,"{") == 0)
                         openBraces++; // record if there is an open brace
                     else if (strcmp(hold->data,"}") == 0)
@@ -50,15 +49,14 @@ void translate(List *tokenList){
         } else {
             printf("not a class\n");
         }
-        start = current; // keep trake of the last
         current = current->next; // get the next
     }
 }
 
-List *classToStruct (Line *class, Line *restOfList){  ///make a list to return
+List *classToStruct (Line *class, Line *restOfList){  /*make a list to return*/
     List *funcToAdd = createList();
-    List *variableList = createList(); //list of the variables
-    List *methodNameList = createLine(); //list of method names
+    List *variableList = createList(); /*list of the variables*/
+    List *methodNameList = createLine(); /*list of method names*/
     Line *hold = class->next;
     char className[20];
     /*change class to struct*/
@@ -74,21 +72,21 @@ List *classToStruct (Line *class, Line *restOfList){  ///make a list to return
     hold = hold->next;
     /*go through the list, check each line*/ 
     while (hold != NULL) {
-        if (isWhiteSpace(hold->data) == 1 ||isComment(hold->data) == 1){ // whitespace or comment
+        if (isWhiteSpace(hold->data) == 1 ||isComment(hold->data) == 1){ /*whitespace or comment*/
             last = hold;
             hold = hold->next;
-        } else if (isType(hold->data)==1||isEqual(hold,"struct")==1){ //a variable or a method
+        } else if (isType(hold->data)==1||isEqual(hold,"struct")==1){ /*a variable or a method*/
             Line * temp = hold;
             Line * methodName;
             Line *afterType;
             /*get to the line after the name*/
             if (isEqual(temp,"struct")==1){
                 temp = temp->next;
-                temp = whileWSC(temp); // will end up at the name of the struct
+                temp = whileWSC(temp); /* will end up at the name of the struct*/
             }
             afterType = temp;
             temp = temp->next;
-            temp = whileWSC(temp); // be *, { or the method/variable name
+            temp = whileWSC(temp); /* be *, { or the method/variable name*/
             if (isEqual(temp,"*")==1){
                 afterType = temp;
                 temp = temp->next;

@@ -18,11 +18,11 @@ List *parseFile (FILE *fp) {
 		int check = sort(c);
 		int checkLast = sort(last);
 		
-		if (c == '"'){ // deals with strings
-			fprintf(fWrite,"\n%c", c); // print first quotation mark
+		if (c == '"'){ /*deals with strings*/
+			fprintf(fWrite,"\n%c", c); /*print first quotation mark*/
 			c = fgetc(fp);
-			// print the letters in between
-			while (c != '"' || last == '\\') { // if c is " and last is not / then stop, we have reached the end of the string
+			/*print the letters in between*/
+			while (c != '"' || last == '\\') { /*if c is " and last is not / then stop, we have reached the end of the string*/
 				fprintf(fWrite,"%c", c);
 				c = fgetc(fp);
 			}
@@ -31,20 +31,20 @@ List *parseFile (FILE *fp) {
 			c = fgetc(fp);
 		} else if (c == '/') {
 			last = c;
-			c = fgetc(fp); // check the next
-			if (c == '/') { // single line comment
+			c = fgetc(fp); /*check the next*/
+			if (c == '/') { /* single line comment*/
 				fprintf(fWrite, "%c",last);
-				while (c != '\n') { // print out the line
+				while (c != '\n') { /*print out the line*/
 					fprintf(fWrite, "%c", c);
 					last = c;
 					c = fgetc(fp);
 				}
-			} else if (c == '*') { //multi line comment
+			} else if (c == '*') { /*multi line comment*/
 				fprintf(fWrite, "%c%c", last, c);
 				c = fgetc(fp);
 				fprintf(fWrite, "%c", c);
 				last = c;
-				c = fgetc(fp); // these avoid /*/...
+				c = fgetc(fp);
 				while (last != '*' || c != '/'){
 					fprintf(fWrite, "%c", c);
 					last = c;
@@ -57,9 +57,9 @@ List *parseFile (FILE *fp) {
 				fprintf(fWrite, "%c", last);
 			}
 
-		} else if (check == 3 && checkLast == 3) // current is 'regular' character, last is 'regular' character
+		} else if (check == 3 && checkLast == 3) /* current is 'regular' character, last is 'regular' character*/
 			fprintf(fWrite,"%c", c);
-		else if (check == 1 && checkLast == 1) // current is whitespace, last is whitespace -- store the whitespace
+		else if (check == 1 && checkLast == 1) /* current is whitespace, last is whitespace -- store the whitespace*/
 			fprintf(fWrite,"%c", c);
 		else
 			fprintf(fWrite,"\n%c", c);		

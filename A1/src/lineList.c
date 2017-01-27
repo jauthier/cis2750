@@ -104,7 +104,7 @@ Line * changeData (Line * line, char *newData){
 }
 
 Line * getLast (List * list){
-    hold = list->head;
+    Line *hold = list->head;
     while (hold->next != NULL){
         hold = hold->next;
     }
