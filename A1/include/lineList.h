@@ -41,4 +41,8 @@ int isEqual (Line *line, char *str);
 
 Line * changeData (Line * line, char *newData);
 
+Line * getLast(List * list);
+
+void printList (List *list);
+
 #endif

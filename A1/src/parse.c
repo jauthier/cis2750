@@ -6,11 +6,11 @@
 
 #include "parse.h"
 
-List *parseFile(FILE *fp) {
+List *parseFile (FILE *fp) {
 
 	char c = fgetc(fp);
 	char last = ' ';
-	char *fileName = "parsedProgram.txt";
+	char *fileName = "docs/parsedProgram.txt";
 	FILE *fWrite = fopen(fileName,"w");
 
 	while (!feof(fp)) {
@@ -73,7 +73,7 @@ List *parseFile(FILE *fp) {
 	return list;
 }
 
-int sort(char c) {
+int sort (char c) {
 
 if (c==' '||c=='\t'||c=='\n'||c=='\r') 
 	return 1;
@@ -83,7 +83,7 @@ else
 	return 3;
 }
 
-List *fileToList(char *fileName){
+List *fileToList (char *fileName){
 
 	FILE *fp = fopen(fileName,"r");
 

@@ -1,3 +1,10 @@
+CC = gcc
+CFLAGS = -Wall -g -ansi
+INCLUDES = -Iinclude
+BINDIR = bin/
+SOURCE = src/a1.c src/lineList.c src/getClass.c src/listFunctions.c src/parse.c
+
+
 all:
-	gcc src/a1.c src/parse.c src/getClass.c src/lineList.c -Iinclude -o run
+	$(CC) $(CFLAGS) $(SOURCE) $(INCLUDES) -o $(BINDIR)run
 

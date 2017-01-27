@@ -10,20 +10,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <lineList.h>
+#include "lineList.h"
+#include "listFunctions.h"
 
-void translate(List *tokenList);
+void translate (List *tokenList);
 
-Line *classToStruct(Line *class, Line *restOfList);
+Line *classToStruct (Line *class, Line *restOfList);
 
-char *methodParameters (Line * line);
+List * methodToFunction (List *list);
 
-void changeFuncNames(Line *list, char * className, char *oldName, char *newName);
-
-int isType(char * str);
-
-int isWhiteSpace(char * str);
-
-int isComment(char *str);
 
 #endif

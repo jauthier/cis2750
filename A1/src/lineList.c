@@ -102,3 +102,19 @@ Line * changeData (Line * line, char *newData){
     free(oldData);
     return line;
 }
+
+Line * getLast (List * list){
+    hold = list->head;
+    while (hold->next != NULL){
+        hold = hold->next;
+    }
+    return hold;
+}
+
+void printList (List *list){
+    Line *hold = list->head;
+    while (hold != NULL){
+        printf("%s", hold->data);
+        hold = hold->next;
+    }
+}
