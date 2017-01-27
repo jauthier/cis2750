@@ -96,10 +96,10 @@ List *fileToList (char *fileName){
 		if (strcmp(hold,"\n")==1)
 			printf("only and new line \n");
 
-		if (hold[len-1]=='\n'&&strcmp(hold,"\n")!=1){
+		/*if (hold[len-1]=='\n'&&strcmp(hold,"\n")!=1){
 
 			hold[len-1]='\0';
-		}
+		}*/
 
 		char * token = malloc(sizeof(char)*len);
 		strcpy(token, hold);
