@@ -94,7 +94,7 @@ List *fileToList (char *fileName){
 		int len = strlen(hold);
 
 		if (strcmp(hold,"\n")==1)
-			print("only and new line \n");
+			printf("only and new line \n");
 
 		if (hold[len-1]=='\n'&&strcmp(hold,"\n")!=1){
 
