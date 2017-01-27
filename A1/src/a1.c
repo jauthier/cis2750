@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "parse.h"
 #include "getClass.h"
+#include "lineList.h"
 
 int main(int argc, char *argv[]) {
 	
@@ -16,6 +17,7 @@ int main(int argc, char *argv[]) {
 	FILE *fp = fopen(fileName,"r");
 	
 	List *list = parseFile(fp);
+	printList(list);
 	translate(list);
 
 	return 0;
