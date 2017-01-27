@@ -92,7 +92,7 @@ List *fileToList (char *fileName){
 
 	while (fgets(hold,200,fp) != NULL){
 		int len = strlen(hold);
-		if (hold[len-1]=='\n'){
+		if (hold[len-1]=='\n'&&isEqual(hold,"\n")!=1){
 			hold[len-1]='\0';
 		}
 
