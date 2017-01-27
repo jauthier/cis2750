@@ -116,14 +116,13 @@ int checkStructVar (List *methodList, List * varList, char *structName){
     char structVarName[10];
     strcpy(structVarName,"sVar");
     while (holdVars != NULL){
-        Line *holdType = holdVars;
         if (isEqual(holdVars,"struct")==1)
             holdVars = holdVars->next;
         holdVars = holdVars->next;
         if (isEqual(holdVars,"*")==1)
             holdVars = holdVars->next;
 
-        holdMethod = methodList->head;
+        Line * holdMethod = methodList->head;
         while (holdMethod != NULL){
             if (isEqual(holdMethod,holdVars->data)){
                 char *newVar = malloc(sizeof(char)*(strlen(structVarName)+strlen(holdMethod->data)+3));
@@ -143,9 +142,9 @@ int checkStructVar (List *methodList, List * varList, char *structName){
         strcat(param,structName);
         strcat(param,"struct ");
         Line * parameters = createLine(param);
-        methodList = addParameters(methodList, parameters)
+        methodList = addParameters(methodList, parameters);
     }
-    return methodList;
+    return check;
 }    
 
 List * addParameters (List * methodList, Line *parameters){
@@ -199,7 +198,7 @@ List *makeConst (List *methodList, char *className){
         strcat(line1,hold->data);
         strcat(line1, " = ");
         strcat(line1,hold->data);
-        strcat(linee1, "    sVar->");
+        strcat(line1, "    sVar->");
         Line *line2 = createLine(line1);
         conList = addBack(conList,line2);
         hold = hold->next;
