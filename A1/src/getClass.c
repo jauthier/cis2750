@@ -1,31 +1,20 @@
 #include "getClass.h"
 
 void translate(List *tokenList){
-	printf("IN translate\n");
     Line *current = tokenList->head; /* the Line being looked at by while loop*/
     while (current != NULL){ /* while not at then end of the list*/
-        printf("%s: %d\n", current->data,isEqual(current,"class"));
         if (isEqual(current,"class") == 1){
-            printf("IN CLASS\n");
 
             Line *hold = current->next;
 
             /*pass through the whitespace and the name of the class*/
-            int checkWS = isWhiteSpace(hold->data);
-            int checkC = isComment(hold->data);
-            while (checkWS == 1 || checkC == 1){
-                hold = hold->next;
-                checkWS = isWhiteSpace(hold->data);
-                checkC = isComment(hold->data);
-            }
-            do {
-                hold = hold->next;
-                checkWS = isWhiteSpace(hold->data);
-                checkC = isComment(hold->data);
-            } while (checkWS == 1 || checkC == 1);
+            hold = whileWSC(hold);
+            hold = hold->next;
+            hold = whileWSC(hold);
 
             /*determine if this is a class or an instance of a class*/
             if (isEqual(hold, "{") == 1){
+                printf("here\n");
                 hold = hold->next;
                 int openBraces = 0;
                 while (strcmp(hold->data,"}") != 0 && openBraces != 0){ /* if hold is not a } and openBraces is not 0 then keep looking*/
@@ -40,6 +29,7 @@ void translate(List *tokenList){
                 hold->next = NULL;
                 printf("goind to make a struct\n");
                 /* send the List to a function that turns the class into a method*/
+                
                 List *structHead = classToStruct(current,end);
                 printf("list:\n");
                 printList(structHead);
