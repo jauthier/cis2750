@@ -17,7 +17,7 @@ int
 b
 ;
 
-    
+
     
 int
  
@@ -39,13 +39,14 @@ d
 printf
 (
 "%d\n"
-
+,
 b
 +
 c
 +
 d
 )
+;
 
     
 }
@@ -80,7 +81,7 @@ B
 myB
 ;
 
-    
+
     
 myB.add
 (
@@ -105,7 +106,7 @@ num
 printf
 (
 "The number is 2"
-
+)
 ;
 
     
@@ -115,13 +116,13 @@ else
 printf
 (
 "The number is %d"
-
+,
 num
 )
 ;
 
 
-     
+    
 return
  
 0

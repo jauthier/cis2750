@@ -44,27 +44,30 @@ int isComment (char *str) {
 
 List *addVar (List *list, Line *vars){
     int isStruct = 0;
-    if  (isEqual(vars, "struct")==1) {
+    if  (isEqual(vars, "struct")==1){
         isStruct = 1;
         list = addBack(list, createLine(vars->data));
         vars = vars->next;
-        vars = whileWSC(vars);/*find the name of the struct*/
+		vars = whileWSC(vars);/*find the name of the struct*/    
     }
-    Line *type = createLine(vars->data);
-    vars = vars->next;
+    
+	Line *type = createLine(vars->data);
+	list = addBack(list,type);
+    vars = vars->next;    
     while (isEqual(vars,";")!=1){
         if (isEqual(vars,",")==1){
             if (isStruct == 1){
                 list = addBack(list, createLine("struct"));
-                
             }
             list = addBack(list,createLine(type->data));
+			vars = vars->next;
         } else if (isWhiteSpace(vars->data)==1||isComment(vars->data)==1){
-            continue;
+            vars = vars->next;
         } else {
-            list = addBack(list, createLine(vars->data));
-        } 
-        vars = vars->next;
+            Line * newLine = createLine(vars->data);
+            list = addBack(list, newLine);
+			vars = vars->next;
+        }
     }
     return list;
 }

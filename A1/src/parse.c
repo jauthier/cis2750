@@ -26,9 +26,7 @@ List *parseFile (FILE *fp) {
 				fprintf(fWrite,"%c", c);
 				c = fgetc(fp);
 			}
-			fprintf(fWrite,"%c\n", c);
-			last = c;
-			c = fgetc(fp);
+			fprintf(fWrite,"%c", c); /*print the end quotation mark*/
 		} else if (c == '/') {
 			last = c;
 			c = fgetc(fp); /*check the next*/

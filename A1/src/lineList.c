@@ -6,7 +6,7 @@
 
 List * createList (){
     List *list = malloc(sizeof(List));
-    /*list->head == NULL;*/
+    list->head = NULL;
     return list;
 }
 
@@ -46,12 +46,12 @@ List * addFront (List * list, Line * toAdd){
 }
 
 List * addBack (List * list, Line * toAdd){
+    Line * temp = list->head; /* get the first Line of the list */
     
-    if (list->head == NULL){ /* if the list is empty */
-        list->head = toAdd;
-    } else {
-        Line * temp = list->head; /* get the first Line of the list */
-        while(temp->next != NULL){ /* while it is not the last Line of the list */
+    if (temp == NULL){ /* if the list is empty */
+		list->head = toAdd;
+    } else { 
+        while(temp->next != NULL){ /* while it is not the last Line of the list */	
             temp = temp->next; /* iterate through the list until it reaches the end */
         }
         temp->next = toAdd; /* add the Line to the end of the list */

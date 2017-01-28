@@ -16,23 +16,20 @@ void translate(List *tokenList){
             if (isEqual(hold, "{") == 1){
                 hold = hold->next;
                 int openBraces = 0;
-                while (isEqual(hold,"}") != 0 && openBraces != 0){ /* if hold is not a } and openBraces is not 0 then keep looking*/
-                    if (isEqual(hold,"{") == 0)
+                
+                while (isEqual(hold,"}") != 1 || openBraces != 0){ /* if hold is not a } and openBraces is not 0 then keep looking*/
+                    if (isEqual(hold,"{") == 1)
                         openBraces++; /* record if there is an open brace*/
-                    else if (isEqual(hold,"}") == 0)
+                    else if (isEqual(hold,"}") == 1)
                         openBraces--;
                     hold = hold->next;
                 }
                 /* once the close brace is found*/
                 Line *end = hold->next; /* save the Line that follows*/
                 hold->next = NULL;
-                printf("goind to make a struct\n");
                 /* send the List to a function that turns the class into a method*/
                 List *list = createList();
                 list->head = current;
-                printList(list);
-
-
                 
                 List *structHead = classToStruct(current,end);
                 printf("list:\n");
@@ -93,8 +90,8 @@ List *classToStruct (Line *class, Line *restOfList){
                 temp = temp->next;
                 temp = whileWSC(temp);
             }
-            if (isEqual(temp,";")==1 ||isEqual(temp,",")==1){ /*variable*/
-                variableList = addVar(variableList,hold); 
+            if (isEqual(temp,";")==1 ||isEqual(temp,",")==1){ /*variable*/                
+                variableList = addVar(variableList,hold);
                 while (isEqual(temp,";")!=1) {
                     temp = temp->next;
                 }
@@ -171,7 +168,7 @@ List *classToStruct (Line *class, Line *restOfList){
                 methodList = methodToFunction(methodList);/*turn the method into a function*/
                 /*add the function to the functionlist*/
                 funcToAdd = addBack(funcToAdd,methodList->head);
-
+			
                 /*make the function ptr*/
                 if (checkSV == 1) { /* parameters*/
                     char * param = malloc(sizeof(char)*(strlen(className)+strlen("sVar")+10));
@@ -197,7 +194,6 @@ List *classToStruct (Line *class, Line *restOfList){
                 hold = afterFunct;
             }
         } else {
-            printf("in else\n");
             last = hold;
             hold = hold->next;
         }
