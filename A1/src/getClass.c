@@ -54,7 +54,6 @@ void translate(List *tokenList){
                 temp = temp->next;
                 temp = whileWSC(temp);
             }
-            Line *name = temp;
             temp = temp->next;
             temp = whileWSC(temp);
 
