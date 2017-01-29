@@ -80,6 +80,7 @@ void translate(List *tokenList){
                 if (isEqual(temp,";")==1){ /*prototype*/
                     current = temp;
                 } else { /*function*/
+                    printf("function\n");
                     Line * ret = translateFunc(temp);
                     current = ret;
                 }
@@ -90,6 +91,7 @@ void translate(List *tokenList){
         }
         current = current->next; /* get the next*/
     }
+    printList(tokenList);
 }
 
 List *classToStruct (Line *class, Line *restOfList){
@@ -296,16 +298,21 @@ List * methodToFunction (List *list){
     return list;
 }
 
-Line * translateFunc (Line *start){
-    Line * temp = start;
+Line * translateFunc (Line *start){    
+    Line * temp = start->next;
     int openBraces = 0;
+    
     while (isEqual(temp,"}")!=1||openBraces!=0){
         if (isEqual(temp,"{")==1){
             openBraces++;
+        } else if (isEqual(temp,"}")==1){
+            openBraces --;        
         } else {
             if (isEqual(temp,"class")==1) {
                 int isPtr = 0;
-                temp = changeData(temp,malloc(sizeof(char)*strlen("struct")));
+                char * name = malloc(sizeof(char)*strlen("struct"));
+                strcpy(name,"struct");
+                temp = changeData(temp,name);
                 temp = temp->next;
                 temp = whileWSC(temp);
                 Line *className = temp;
@@ -322,10 +329,11 @@ Line * translateFunc (Line *start){
                 }
                 Line *hold = temp->next;
                 char * str1 = malloc(sizeof(char)*(strlen(className->data)+strlen("constructor\n")));
-                strcpy(str1,"constructor");
+                strcpy(str1,"\n    ");
                 strcat(str1,className->data);
-                strcat(str1,"\n");
+                strcat(str1,"constructor");
                 temp->next = createLine(str1);
+                temp = temp->next;
                 if (isPtr==1) {
                     char * str2 = malloc(sizeof(char)*strlen("("));
                     strcpy(str2,"(");
@@ -335,17 +343,20 @@ Line * translateFunc (Line *start){
                     strcpy(str2,"(&");
                     temp->next = createLine(str2);
                 }
+                temp = temp->next;
                 char *str3 = malloc(sizeof(char)*strlen(varName->data));
                 strcpy(str3,varName->data);
                 temp->next = createLine(str3);
+                temp = temp->next;
                 char *str4 = malloc(sizeof(char)*strlen(");\n"));
                 strcpy(str4,");\n");
                 temp->next = createLine(str4);
+                temp = temp->next;
                 temp->next = hold;
             }
-            openBraces--;
         }
         temp = temp->next;
     }
+    printf("at the end\n");
     return temp;
 }
