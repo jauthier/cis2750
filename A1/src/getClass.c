@@ -81,7 +81,7 @@ void translate(List *tokenList){
                 if (isEqual(temp,";")==1){ /*prototype*/
                     current = temp;
                 } else { /*function*/
-                    Line * 
+                    Line * ret = translateFunc(temp);
                 }
             }
 
@@ -297,7 +297,7 @@ List * methodToFunction (List *list){
 }
 
 Line * translateFunc (Line *start){
-    temp = start;
+    Line * temp = start;
     int openBraces = 0;
     while (isEqual(temp,"}")!=1||openBraces!=0){
         if (isEqual(temp,"{")==1){
@@ -348,5 +348,5 @@ Line * translateFunc (Line *start){
         }
         temp = temp->next;
     }
-
+    return temp;
 }
