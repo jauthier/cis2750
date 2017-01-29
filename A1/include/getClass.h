@@ -19,5 +19,6 @@ List *classToStruct (Line *class, Line *restOfList);
 
 List * methodToFunction (List *list);
 
+Line * translateFunct(Line * start);
 
 #endif

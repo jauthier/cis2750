@@ -317,7 +317,7 @@ Line * translateFunc (Line *start){
                     temp = temp->next;
                     temp = whileWSC(temp);
                 }
-                Line * varName = temp->data;
+                Line * varName = temp;
                 while (isEqual(temp,";")!=1){
                     temp = temp->next;
                 }
