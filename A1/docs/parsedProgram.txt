@@ -14,12 +14,18 @@ B
     
 int
  
+a
+;
+
+    
+int
+ 
 b
 ;
 
 
     
-int
+void
  
 add
 (
@@ -46,6 +52,69 @@ c
 +
 d
 )
+;
+
+    
+}
+
+
+    
+int
+ 
+add
+(
+)
+{
+
+        
+int
+ 
+d
+;
+
+		
+return
+ 
+b
++
+a
++
+d
+;
+
+    
+}
+
+    
+    
+char
+ 
+*
+character
+(
+)
+{
+
+        
+char
+ 
+*
+name
+;
+
+        
+strcpy
+(
+name
+,
+"Jessica"
+)
+;
+
+        
+return
+ 
+name
 ;
 
     

@@ -1,11 +1,23 @@
 #include <stdio.>
 
 class B {
+    int a;
     int b;
 
-    int add(int c){
+    void add(int c){
         int d;
         printf("%d\n",b+c+d);
+    }
+
+    int add(){
+        int d;
+		return b+a+d;
+    }
+    
+    char *character(){
+        char *name;
+        strcpy(name,"Jessica");
+        return name;
     }
 }
 

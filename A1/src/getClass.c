@@ -66,22 +66,20 @@ List *classToStruct (Line *class, Line *restOfList){
     hold = hold->next;
     /*go through the list, check each line*/ 
     while (hold != NULL) {
-        printf("%s\n", hold->data);
         if (isType(hold->data)==1||isEqual(hold,"struct")==1){ /*a variable or a method*/
-            printf("in something\n");
-            Line * temp =  ;
+            Line * temp =  hold;
             Line * methodName;
-            Line *afterType;
+            Line *type;
             /*get to the line after the name*/
             if (isEqual(temp,"struct")==1){
                 temp = temp->next;
                 temp = whileWSC(temp); /* will end up at the name of the struct*/
             }
-            afterType = temp;
+            type = temp;
             temp = temp->next;
             temp = whileWSC(temp); /* be *, { or the method/variable name*/
             if (isEqual(temp,"*")==1){
-                afterType = temp;
+                type = temp;
                 temp = temp->next;
                 temp = whileWSC(temp);
             }
@@ -90,7 +88,6 @@ List *classToStruct (Line *class, Line *restOfList){
                 temp = temp->next;
                 temp = whileWSC(temp);
             }
-
 
             if (isEqual(temp,";")==1 ||isEqual(temp,",")==1){ /*variable*/                
                 variableList = addVar(variableList,hold);
@@ -124,42 +121,44 @@ List *classToStruct (Line *class, Line *restOfList){
                 strcat(functionName,className);
                 methodName = changeData (methodName,functionName);
                 free(funcParam);
+                
                 /*save the method name to the list*/
                 Line *newMethod = createLine(functionName);
                 methodNameList = addBack(methodNameList,newMethod); 
+                
                 /*search for any other uses of the function to change the names*/
                 changeFuncNames(restOfList, className, methodName->data, functionName);
 
                 /*get the parameters of the method*/
-                while (isEqual(temp,"(")!=1){
-                    temp = temp->next;
-                }
-                paramList = addBack(paramList,createLine("("));
-                while (isEqual(temp,")")){
+                while (isEqual(temp,")")!=1){
                     Line * toAdd = createLine(temp->data);
                     paramList = addBack(paramList,toAdd);
+                    temp = temp->next;
                 }
                 paramList = addBack(paramList, createLine(")"));
-                printList(paramList);
 
                 /*find the end of the method so the whole thing can be removed from the struct*/
-                while (isEqual(temp,"}") != 0){
+                while (isEqual(temp,"}") != 1){
                     temp = temp->next;
                 }
                 Line *checkEnd = temp->next;
                 checkEnd = whileWSC(checkEnd);
                 if (isEqual(checkEnd,";")==1)
                     temp = checkEnd;
+                
                 /*save the Line after the }/; so it can be added back on after the function pointer is added*/
                 Line * afterFunct = temp->next;
-                temp->next = NULL;
-
+                Line *newLine1 = createLine("\n\n");
+                temp->next = newLine1;
+                
                 /*add the type to the method list, while also keeping it in the struct*/
                 List *methodList = createList();
                 Line *method = createLine(hold->data);
                 methodList = addBack(methodList,method); /* add the type*/
                 last = hold;
                 hold = hold->next;
+                
+                
                 while (hold != methodName) { 
                     Line * newLine = createLine(hold->data);
                     methodList = addBack(methodList,newLine);
@@ -171,6 +170,7 @@ List *classToStruct (Line *class, Line *restOfList){
                 /*check if the method uses any struct variables*/
                 int checkSV = checkStructVar(methodList,variableList,className);
                 methodList = methodToFunction(methodList);/*turn the method into a function*/
+                                
                 /*add the function to the functionlist*/
                 funcToAdd = addBack(funcToAdd,methodList->head);
 			
@@ -184,10 +184,10 @@ List *classToStruct (Line *class, Line *restOfList){
                     strcpy(new3," *");
                     char *new4 = malloc(sizeof(char)*strlen("sVar"));
                     strcpy(new4,"sVar");
-                    Line *line1 = createLine(line1,new1);
-                    Line *line2 = createLine(line2,new2);
-                    Line *line3 = createLine(line3,new3);
-                    Line *line4 = createLine(line4,new4);
+                    Line *line1 = createLine(new1);
+                    Line *line2 = createLine(new2);
+                    Line *line3 = createLine(new3);
+                    Line *line4 = createLine(new4);
                     line1->next = line2;
                     line2->next = line3;
                     line3->next = line4;
@@ -195,29 +195,29 @@ List *classToStruct (Line *class, Line *restOfList){
                 }
                 char *str1 = malloc(sizeof(char)*strlen(" (*"));
                 strcpy(str1," (*");
-                char *str1 = malloc(sizeof(char)*strlen(functionName));
+                char *str2 = malloc(sizeof(char)*strlen(functionName));
                 strcpy(str2,functionName);
-                char *str1 = malloc(sizeof(char)*strlen(")"));
+                char *str3 = malloc(sizeof(char)*strlen(")"));
                 strcpy(str3,")");
-                char *str1 = malloc(sizeof(char)*strlen(";\n"));
+                char *str4 = malloc(sizeof(char)*strlen(";\n"));
                 strcpy(str4,";\n");
-                Line *line5 = createLine(line5,str1);
-                Line *line6 = createLine(line6,str2);
-                Line *line7 = createLine(line7,str3);
-                Line *line8 = createLine(line8,str4);
+                Line *line5 = createLine(str1);
+                Line *line6 = createLine(str2);
+                Line *line7 = createLine(str3);
+                Line *line8 = createLine(str4);
                 line5->next = line6;
                 line6->next = line7;
                 line7->next = paramList->head;
 
 
-                afterType->next = line5; /* add the pointer bit to the struct*/
+                type->next = line5; /* add the pointer bit to the struct*/
                 Line *fnPtr = paramList->head; /*add the parameters to the struct*/
                 while (fnPtr->next != NULL){
                     fnPtr = fnPtr->next;
                 }
                 fnPtr->next = line8; /*add the rest of the struct back on*/
                 line8->next = afterFunct;
-                last->next = line5;
+                last->next = line5;                
                 hold = afterFunct;
             }
         } else {
@@ -225,8 +225,15 @@ List *classToStruct (Line *class, Line *restOfList){
             hold = hold->next;
         }
     }
+    /*create a constructor for the struct*/
+    List *constructor = createList();
+    constructor = makeConst(methodNameList,className);
+    funcToAdd = addBack(funcToAdd,constructor->head);
     List *finalList = createList();
     finalList = addBack(finalList,class);
+	Line *newLine = createLine("\n\n");
+	finalList = addBack(finalList,newLine);
+    finalList = addBack(finalList,funcToAdd->head);
     return finalList;
 }
 

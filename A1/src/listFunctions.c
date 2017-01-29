@@ -75,7 +75,7 @@ List *addVar (List *list, Line *vars){
 char *methodParameters (Line * line){
     int i = 0;
     line = line->next;
-    char hold[10];
+    char hold[50];
     while (isEqual(line, ")") != 1) {
         if (isType(line->data)==1){
             hold[i] = line->data[0];
@@ -83,7 +83,9 @@ char *methodParameters (Line * line){
         }
         line = line->next;
     }
-    char *toAdd = malloc(sizeof(char)*strlen(hold));
+    hold[i] = '\0';
+    char *toAdd = malloc(sizeof(char)*(int)strlen(hold));
+    strcpy(toAdd,hold);
     return toAdd;
 }
 
@@ -127,11 +129,12 @@ int checkStructVar (List *methodList, List * varList, char *structName){
 
         Line * holdMethod = methodList->head;
         while (holdMethod != NULL){
-            if (isEqual(holdMethod,holdVars->data)){
+            if (strcmp(holdMethod->data,holdVars->data)==0){
                 char *newVar = malloc(sizeof(char)*(strlen(structVarName)+strlen(holdMethod->data)+3));
-                strcpy(newVar,holdMethod->data);
+                strcpy(newVar,structVarName);
                 strcat(newVar,"->");
-                strcat(newVar,structVarName);
+                strcat(newVar,holdMethod->data);
+                holdMethod = changeData(holdMethod,newVar);
                 check = 1;
             }
             holdMethod = holdMethod->next;
@@ -140,10 +143,10 @@ int checkStructVar (List *methodList, List * varList, char *structName){
     }
     if (check == 1){
         char * param = malloc(sizeof(char)*(strlen(structName)+strlen(structVarName)+10));
-        strcpy(param,structVarName);
-        strcat(param," *");
+        strcpy(param,"struct ");
         strcat(param,structName);
-        strcat(param,"struct ");
+        strcat(param," *");
+        strcat(param,structVarName);
         Line * parameters = createLine(param);
         methodList = addParameters(methodList, parameters);
     }
@@ -179,12 +182,15 @@ List *makeConst (List *methodList, char *className){
     strcpy(type,"void ");
     Line *funcType = createLine(type);
     conList = addBack(conList,funcType);
-    char * name = malloc(sizeof(char)*(strlen(className)+strlen("constructor")+strlen("(struct ")));
-    strcpy(name, "(struct ");
-    strcat(name,className);
+    char * name = malloc(sizeof(char)*(strlen(className)+strlen("constructor")));
+    strcpy(name,className);
     strcat(name, "constructor");
     Line * funcName = createLine(name);
     conList = addBack(conList,funcName);
+    char *param = malloc(sizeof(char)*strlen("(struct "));
+    strcpy(param,"(struct ");
+    Line *paramLine = createLine(param);
+    conList = addBack(conList,paramLine);
     char *cName = malloc(sizeof(char)*strlen(className));
     strcpy(cName,className);
     Line *classN = createLine(cName);
@@ -197,16 +203,17 @@ List *makeConst (List *methodList, char *className){
     Line *hold = methodList->head;
     while (hold != NULL){
         char *line1 = malloc(sizeof(char)*(strlen("    sVar->")+(strlen(hold->data)*2)+5));
-        strcpy(line1, "\n");
+        strcpy(line1, "    sVar->");
         strcat(line1,hold->data);
         strcat(line1, " = ");
         strcat(line1,hold->data);
-        strcat(line1, "    sVar->");
+        strcat(line1, ";\n");
         Line *line2 = createLine(line1);
         conList = addBack(conList,line2);
         hold = hold->next;
     }
-    char *last = malloc(sizeof(char)*strlen("}\n"));
+    char *last = malloc(sizeof(char)*strlen("}\n\n"));
+    strcpy(last,"}\n\n");
     Line *last2 = createLine(last);
     conList = addBack(conList,last2);
     return conList;
