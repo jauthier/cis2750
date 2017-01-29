@@ -43,11 +43,50 @@ void translate(List *tokenList){
             }
         } else if (isType(current->data)==1||isEqual(current,"struct")==1){
             printf("type found\n");
+            Line *temp = current;
+            if (isEqual(current,"struct")==1){
+                temp = temp->next;
+                temp = whileWSC(temp); /*will bring us to the name of the struct*/
+            }
+            temp = temp->next;
+            temp = whileWSC(temp);
+            if (isEqual(temp,"*")==1){
+                temp = temp->next;
+                temp = whileWSC(temp);
+            }
+            Line *name = temp;
+            temp = temp->next;
+            temp = whileWSC(temp);
+
+            if (isEqual(temp,";")==1||isEqual(temp,",")==1){ /*global variable(s)*/
+                if (isEqual(temp,",")==1){
+                    temp = temp->next;
+                    while (isEqual(temp,";")!=1){
+                        temp = temp->next;
+                    }
+                }
+                current = temp;
+            } else { /*function or function prototype*/
+                temp = temp->next;
+                while (isEqual(temp,")")!=1){
+                    if (isEqual(temp,"class")==1){
+                        char *newStr = malloc(sizeof(char)*strlen("struct"));
+                        strcpy(newStr,"struct");
+                        temp = changeData(temp,newStr);
+                    }
+                    temp = temp->next;
+                }
+                temp = temp->next;
+                temp = whileWSC(temp);
+                if (isEqual(temp,";")==1){ /*prototype*/
+                    current = temp;
+                } else { /*function*/
+                    Line * 
+                }
+            }
+
             
             
-            
-        } else {
-            printf("not a class\n");
         }
         current = current->next; /* get the next*/
     }
@@ -255,4 +294,59 @@ List * methodToFunction (List *list){
         hold = hold->next;
     }
     return list;
+}
+
+Line * translateFunc (Line *start){
+    temp = start;
+    int openBraces = 0;
+    while (isEqual(temp,"}")!=1||openBraces!=0){
+        if (isEqual(temp,"{")==1){
+            openBraces++;
+        } else {
+            if (isEqual(temp,"class")==1) {
+                int isPtr = 0;
+                char * name = malloc(sizeof(char)*strlen("struct"));
+                temp = createData(temp,name);
+                temp = temp->next;
+                temp = whileWSC(temp);
+                Line *className = temp;
+                temp = temp->next;
+                temp = whileWSC(temp);
+                if (isEqual(temp,"*")==1){
+                    isPtr = 1;
+                    temp = temp->next;
+                    temp = whileWSC(temp);
+                }
+                Line * varName = temp->data;
+                while (isEqual(temp,";")!=1){
+                    temp = temp->next;
+                }
+                Line *hold = temp->next;
+                char * str1 = malloc(sizeof(char)*(strlen(className->data)+strlen("constructor\n")));
+                strcpy(str1,"constructor");
+                strcat(str1,className->data);
+                strcat(str1,"\n");
+                temp->next = createLine(str1);
+                if (isPtr==1) {
+                    char * str2 = malloc(sizeof(char)*strlen("("));
+                    strcpy(str2,"(");
+                    temp->next = createLine(str2);
+                } else {
+                    char * str2 = malloc(sizeof(char)*strlen("(&"));
+                    strcpy(str2,"(&");
+                    temp->next = createLine(str2);
+                }
+                char *str3 = malloc(sizeof(char)*strlen(varName));
+                strcpy(str3,varName);
+                temp->next = createLine(str3);
+                char *str4 = malloc(sizeof(char)*strlen(");\n"));
+                strcpy(str4,");\n");
+                temp->next = createLine(str4);
+                temp->next = hold;
+            }
+            openBraces--;
+        }
+        temp = temp->next;
+    }
+
 }
