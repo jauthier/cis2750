@@ -82,6 +82,7 @@ void translate(List *tokenList){
                     current = temp;
                 } else { /*function*/
                     Line * ret = translateFunc(temp);
+                    current = ret;
                 }
             }
 
@@ -305,8 +306,7 @@ Line * translateFunc (Line *start){
         } else {
             if (isEqual(temp,"class")==1) {
                 int isPtr = 0;
-                char * name = malloc(sizeof(char)*strlen("struct"));
-                temp = changeData(temp,name);
+                temp = changeData(temp,malloc(sizeof(char)*strlen("struct")));
                 temp = temp->next;
                 temp = whileWSC(temp);
                 Line *className = temp;
