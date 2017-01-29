@@ -336,8 +336,8 @@ Line * translateFunc (Line *start){
                     strcpy(str2,"(&");
                     temp->next = createLine(str2);
                 }
-                char *str3 = malloc(sizeof(char)*strlen(varName));
-                strcpy(str3,varName);
+                char *str3 = malloc(sizeof(char)*strlen(varName->data));
+                strcpy(str3,varName->data);
                 temp->next = createLine(str3);
                 char *str4 = malloc(sizeof(char)*strlen(");\n"));
                 strcpy(str4,");\n");
