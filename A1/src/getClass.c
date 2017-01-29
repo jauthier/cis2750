@@ -34,11 +34,18 @@ void translate(List *tokenList){
                 List *structHead = classToStruct(current,end);
                 printf("list:\n");
                 printList(structHead);
-                /*Line *structLast = getLast(structHead);*/
-
+                Line *structLast = getLast(structHead);
+                structLast->next = end;
+                current = structLast;
             } else {
+				
 
             }
+        } else if (isType(current->data)==1||isEqual(current,"struct")==1){
+            printf("type found\n");
+            
+            
+            
         } else {
             printf("not a class\n");
         }
