@@ -306,7 +306,7 @@ Line * translateFunc (Line *start){
             if (isEqual(temp,"class")==1) {
                 int isPtr = 0;
                 char * name = malloc(sizeof(char)*strlen("struct"));
-                temp = createData(temp,name);
+                temp = changeData(temp,name);
                 temp = temp->next;
                 temp = whileWSC(temp);
                 Line *className = temp;
