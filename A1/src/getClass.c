@@ -1,6 +1,6 @@
 #include "getClass.h"
 
-void translate(List *tokenList){
+void translate(List *tokenList, char *fileName){
     Line *current = tokenList->head; /* the Line being looked at by while loop*/
     while (current != NULL){ /* while not at then end of the list*/
         if (isEqual(current,"class") == 1){
@@ -13,7 +13,7 @@ void translate(List *tokenList){
             hold = whileWSC(hold);
 
             /*determine if this is a class or an instance of a class*/
-            if (isEqual(hold, "{") == 1){
+            if (isEqual(hold, "{") == 1){ /*class declaration*/
                 hold = hold->next;
                 int openBraces = 0;
                 
@@ -32,15 +32,23 @@ void translate(List *tokenList){
                 list->head = current;
                 
                 List *structHead = classToStruct(current,end);
-                printf("list:\n");
-                printList(structHead);
                 Line *structLast = getLast(structHead);
                 structLast->next = end;
                 current = structLast;
-            } else {
-				
-
+            } else { /*class variable*/
+                char * newName = malloc(sizeof(char)*strlen("struct"));
+                strcpy(newName,"struct");
+                current = changeData(current,newName);
+                while (isEqual(hold,";")==1){
+                    if (isEqual(hold, "class")==1){
+                        char * newStruct = malloc(sizeof(char)*strlen("struct"));
+                        strcpy(newStruct,"struct");
+                        hold = changeData(hold,newStruct);
+                    }
+                    hold = hold->next;
+                }
             }
+            current = hold;
         } else if (isType(current->data)==1||isEqual(current,"struct")==1){
             printf("type found\n");
             Line *temp = current;
@@ -84,12 +92,16 @@ void translate(List *tokenList){
                     Line * ret = translateFunc(temp);
                     current = ret;
                 }
-            }
-
-            
-            
+            }   
         }
         current = current->next; /* get the next*/
+    }
+
+    FILE * fp = fopen(fileName);
+    Line *holdToken = tokenList->head;
+    while (holdToken != NULL){
+        fprintf(fp, "%s\n", holdToken->data);
+        holdToken = holdToken->next;
     }
     printList(tokenList);
 }

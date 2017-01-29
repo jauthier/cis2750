@@ -15,10 +15,8 @@ int main(int argc, char *argv[]) {
 	} 	
 
 	FILE *fp = fopen(fileName,"r");
-	
 	List *list = parseFile(fp);
-	printList(list);
-	translate(list);
+	translate(list,fileName);
 
 	return 0;
 }
