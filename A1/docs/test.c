@@ -12,8 +12,7 @@ struct B{
     int (*addB)(struct B *sVar);
 
 
-}
-
+};
 int iiaddB(int a,int b){
     return a + b;
     }
@@ -41,7 +40,7 @@ int main(){
 
         myB.x = 3;
     myB.y = 4;
-        int sum = myB.addB(struct B *sVar);
+        int sum = myB.addB(&myB);
     sum = myB.iiaddB(a,b);
 	return 0;
 
