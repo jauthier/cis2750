@@ -210,15 +210,7 @@ List *classToStruct (Line *class, Line *restOfList){
                 checkEnd = whileWSC(checkEnd);
                 if (isEqual(checkEnd,";")==1){
                     temp = checkEnd;
-                } else {
-                    Line *afterTemp = temp->next;
-                    char *sc = malloc(sizeof(char)*strlen(";"));
-                    strcpy(sc,";");
-                    temp->next = createLine(sc);
-                    temp = temp->next;
-                    temp->next = afterTemp;
                 }
-                
                 /*save the Line after the }/; so it can be added back on after the function pointer is added*/
                 Line * afterFunct = temp->next;
                 Line *newLine1 = createLine("\n\n");
@@ -306,7 +298,7 @@ List *classToStruct (Line *class, Line *restOfList){
     funcToAdd = addBack(funcToAdd,constructor->head);
     List *finalList = createList();
     finalList = addBack(finalList,class);
-	Line *newLine = createLine("\n\n");
+	Line *newLine = createLine(";\n");
 	finalList = addBack(finalList,newLine);
     finalList = addBack(finalList,funcToAdd->head);
     return finalList;
