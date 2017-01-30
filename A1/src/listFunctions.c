@@ -134,7 +134,7 @@ void changeFuncNames (Line *list, char * className, char *oldName, char *newName
                                     strcpy(and,"&");
                                     toAdd = addBack(toAdd,createLine(and));
                                 }
-                                toAdd = addBack(toAdd,createLine(varName->data))
+                                toAdd = addBack(toAdd,createLine(varName->data));
 
                                 paramList = addParameters(paramList, toAdd)
                             }

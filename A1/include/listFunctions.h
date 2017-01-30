@@ -26,6 +26,8 @@ char *methodParameters (Line * line);
 
 void changeFuncNames (Line *list, char * className, char *oldName, char *newName, char *funcParam,int check);
 
+int isPtr(Line *type);
+
 int checkStructVar (List *methodList, List * varList, char *structName);
 
 List * addParameters (List * methodList, Line *parameters);
