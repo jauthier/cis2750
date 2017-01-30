@@ -68,7 +68,7 @@ List *parseFile (FILE *fp) {
 	char * outFile = malloc(sizeof(char)*strlen(fileName));
 	strcpy(outFile = strtok(fileName,"."));
 	strcat(outFile,".c");
-	
+	printf("%s\n", outFile);
 	fclose(fWrite);
 	List *list = fileToList(outFile);
 	return list;
