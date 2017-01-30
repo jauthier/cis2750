@@ -89,7 +89,7 @@ char *methodParameters (Line * line){
     return toAdd;
 }
 
-void changeFuncNames (Line *list, char * className, char *oldName, char *newName, char *funcParam,int check){
+void changeFuncNames (Line *list, char * className, char *oldName, char *newName, char *funcParam,int checkSV){
     /*search for the class name, thus we will get any names of the objects that were made*/
     Line *hold = list;
     Line *lastType;
@@ -127,7 +127,7 @@ void changeFuncNames (Line *list, char * className, char *oldName, char *newName
 							strcpy(name, newName);
 							nameHold = changeData(nameHold,name);
                             printf("check: %d",check);
-                            if (check == 1){
+                            if (checkSV == 1){
                                 List * paramList = createList();
                                 paramList->head = paramStart;
                                 List * toAdd = createList();
