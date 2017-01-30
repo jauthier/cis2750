@@ -67,8 +67,8 @@ List *parseFile (FILE *fp) {
 	}
 	char * outFile = malloc(sizeof(char)*strlen(fileName));
 	printf("here1\n");
-	char buffer[50] = strtok(fileName,".");
-	strcpy(outFile, buffer);
+	char * tok = strtok(fileName,".");
+	strcpy(outFile, tok);
 	strcat(outFile,".c");
 	printf("%s\n", outFile);
 	fclose(fWrite);
