@@ -236,7 +236,7 @@ List *classToStruct (Line *class, Line *restOfList){
                 int checkSV = checkStructVar(methodList,variableList,className);
                 methodList = methodToFunction(methodList);/*turn the method into a function*/
                 /*search for any other uses of the function to change the names*/
-                changeFuncNames(restOfList, className, oldName, methodName->data, char *funcParam, int check);
+                changeFuncNames(restOfList, className, oldName, methodName->data, funcParam, checkSV);
                 
                 /*add the function to the functionlist*/
                 funcToAdd = addBack(funcToAdd,methodList->head);
