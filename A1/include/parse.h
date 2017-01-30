@@ -17,7 +17,7 @@
 /*
 * Reads in a file and parses it, printing each token on a new line.
 */
-List *parseFile(FILE *fp);
+List *parseFile(FILE *fp, char *fName);
 
 /*
 * Sorts the character into one of three categories

@@ -6,7 +6,7 @@
 
 #include "parse.h"
 
-List *parseFile (FILE *fp) {
+List *parseFile (FILE *fp,char * fName) {
 
 	char c = fgetc(fp);
 	char last = ' ';
@@ -65,8 +65,8 @@ List *parseFile (FILE *fp) {
 		last = c;
 		c = fgetc(fp);
 	}
-	char * outFile = malloc(sizeof(char)*strlen(fileName));
-	char * tok = strtok(fileName,".");
+	char * outFile = malloc(sizeof(char)*strlen(fName));
+	char * tok = strtok(fName,".");
 	printf("%s\n",tok);
 	strcpy(outFile, tok);
 	printf("here1\n");
