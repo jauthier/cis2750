@@ -1,62 +1,63 @@
 
 #include
  
-<stdio.>
+<stdio
+.
+h>
+
+
+#include
+ 
+<string
+.
+h>
 
 
 
 class
  
 B
- 
 {
 
     
 int
  
-a
+x
 ;
 
     
 int
  
-b
+y
 ;
 
-
     
-void
+int
  
 add
 (
 int
  
-c
+a
+,
+int
+ 
+b
 )
 {
 
-        
-int
+    
+return
  
-d
-;
-
-        
-printf
-(
-"%d\n"
-,
+a
+ 
++
+ 
 b
-+
-c
-+
-d
-)
 ;
 
     
 }
-
 
     
 int
@@ -66,55 +67,12 @@ add
 )
 {
 
-        
-int
- 
-d
-;
-
-		
+    
 return
  
-b
+x
 +
-a
-+
-d
-;
-
-    
-}
-
-    
-    
-char
- 
-*
-character
-(
-)
-{
-
-        
-char
- 
-*
-name
-;
-
-        
-strcpy
-(
-name
-,
-"Jessica"
-)
-;
-
-        
-return
- 
-name
+y
 ;
 
     
@@ -122,6 +80,7 @@ name
 
 
 }
+
 
 
 
@@ -132,16 +91,32 @@ main
 )
 {
 
+
     
 int
  
-num
+a
+,
+b
+;
+
+    
+a
  
 =
  
 1
 ;
 
+    
+b
+ 
+=
+ 
+2
+;
+
+    
     
 class
  
@@ -150,48 +125,58 @@ B
 myB
 ;
 
-
     
-myB.add
-(
-num
-)
-;
-
-
     
-if
- 
-(
-num
+myB
+.
+x
  
 =
-=
  
-2
-)
-
-        
-printf
-(
-"The number is 2"
-)
+3
 ;
 
     
-else
+myB
+.
+y
+ 
+=
+ 
+4
+;
 
-        
-printf
+    
+    
+int
+ 
+sum
+ 
+=
+ 
+myB
+.
+add
 (
-"The number is %d"
+)
+;
+
+    
+sum
+ 
+=
+ 
+myB
+.
+add
+(
+a
 ,
-num
+b
 )
 ;
 
-
-    
+	
 return
  
 0

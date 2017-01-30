@@ -89,23 +89,36 @@ char *methodParameters (Line * line){
     return toAdd;
 }
 
-void changeFuncNames (Line *list, char * className, char *oldName, char *newName){
+void changeFuncNames (Line *list, char * className, char *oldName, char *newName, char *funcParam,int check){
     /*search for the class name, thus we will get any names of the objects that were made*/
-
     Line *hold = list;
-    while (hold != NULL){
+    while (hold != NULL){\
         if (isEqual(hold,className)==1){
             do {
                 hold = hold->next;
             } while(isWhiteSpace(hold->data)==1||isComment(hold->data)==1);
-            Line * temp = hold->next;
-            while (temp != NULL){
+            Line * temp = hold->next;\
+            while (temp != NULL){                
                 if (isEqual(temp,hold->data)==1){
-                    if (isEqual(temp->next, ".")==1&&isEqual(temp->next->next,oldName)==1){
-                        temp = temp->next->next;
-                        char *name = malloc(sizeof(char)*strlen(newName));
-                        strcpy(name,newName);
-                        temp = changeData(temp,name);
+					temp = temp->next;
+                    if (isEqual(temp, ".")==1&&isEqual(temp->next,oldName)==1){
+                        temp = temp->next;/*check the parameters*/
+                        Line * nameHold = temp;
+                        temp = temp->next;
+                        int check = 0;
+                        int len = strlen(funcParam);
+                        while (isEqual(temp,")")!=1){
+							
+							if (isWhiteSpace(temp->data)!=1&&isEqual(temp,",")!=1&&isEqual(temp,"(")!=1){
+								check++;
+							}
+							temp = temp->next;
+						}
+                        if (check == len){
+							char *name = malloc(sizeof(char)*strlen(newName));
+							strcpy(name, newName);
+							nameHold = changeData(nameHold,name);
+						}
                     }
                 }
                 temp = temp->next;

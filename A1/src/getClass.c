@@ -24,6 +24,11 @@ void translate(List *tokenList, char *fileName){
                         openBraces--;
                     hold = hold->next;
                 }
+                if (isEqual(hold,";")==1){
+                    hold = hold->next;
+                    hold = whileWSC(hold);
+                }
+                
                 /* once the close brace is found*/
                 Line *end = hold->next; /* save the Line that follows*/
                 hold->next = NULL;
@@ -50,7 +55,6 @@ void translate(List *tokenList, char *fileName){
             }
             current = hold;
         } else if (isType(current->data)==1||isEqual(current,"struct")==1){
-            printf("type found\n");
             Line *temp = current;
             if (isEqual(current,"struct")==1){
                 temp = temp->next;
@@ -97,13 +101,14 @@ void translate(List *tokenList, char *fileName){
         current = current->next; /* get the next*/
     }
 
-    FILE * fp = fopen(fileName);
+    printList(tokenList);
+    FILE * fp = fopen("docs/test.c", "w");
     Line *holdToken = tokenList->head;
     while (holdToken != NULL){
-        fprintf(fp, "%s\n", holdToken->data);
+        fprintf(fp, "%s", holdToken->data);
         holdToken = holdToken->next;
     }
-    printList(tokenList);
+    
 }
 
 List *classToStruct (Line *class, Line *restOfList){
@@ -174,21 +179,21 @@ List *classToStruct (Line *class, Line *restOfList){
             } else { /* method */
                 List *paramList = createList();
                 /*change the name of the method*/
+                char * oldName = malloc(sizeof(char)*strlen(methodName->data));
+                strcpy(oldName,methodName->data);
                 char *funcParam = methodParameters(temp); /*get the letters to add to the name*/
                 char * functionName = malloc(sizeof(char) *(strlen(className)+strlen(methodName->data)+strlen(funcParam)));
                 strcpy(functionName,funcParam);
                 strcat(functionName,methodName->data);
                 strcat(functionName,className);
                 methodName = changeData (methodName,functionName);
-                free(funcParam);
+                
                 
                 /*save the method name to the list*/
                 Line *newMethod = createLine(functionName);
                 methodNameList = addBack(methodNameList,newMethod); 
                 
-                /*search for any other uses of the function to change the names*/
-                changeFuncNames(restOfList, className, methodName->data, functionName);
-
+                
                 /*get the parameters of the method*/
                 while (isEqual(temp,")")!=1){
                     Line * toAdd = createLine(temp->data);
@@ -196,7 +201,7 @@ List *classToStruct (Line *class, Line *restOfList){
                     temp = temp->next;
                 }
                 paramList = addBack(paramList, createLine(")"));
-
+                
                 /*find the end of the method so the whole thing can be removed from the struct*/
                 while (isEqual(temp,"}") != 1){
                     temp = temp->next;
@@ -230,7 +235,9 @@ List *classToStruct (Line *class, Line *restOfList){
                 /*check if the method uses any struct variables*/
                 int checkSV = checkStructVar(methodList,variableList,className);
                 methodList = methodToFunction(methodList);/*turn the method into a function*/
-                                
+                /*search for any other uses of the function to change the names*/
+                changeFuncNames(restOfList, className, oldName, methodName->data, funcParam, int check);
+                
                 /*add the function to the functionlist*/
                 funcToAdd = addBack(funcToAdd,methodList->head);
 			

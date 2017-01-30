@@ -13,7 +13,7 @@
 #include "lineList.h"
 #include "listFunctions.h"
 
-void translate (List *tokenList);
+void translate (List *tokenList, char *fileName);
 
 List *classToStruct (Line *class, Line *restOfList);
 
