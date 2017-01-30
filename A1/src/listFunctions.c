@@ -92,19 +92,25 @@ char *methodParameters (Line * line){
 void changeFuncNames (Line *list, char * className, char *oldName, char *newName, char *funcParam,int check){
     /*search for the class name, thus we will get any names of the objects that were made*/
     Line *hold = list;
-    while (hold != NULL){\
+    while (hold != NULL){
         if (isEqual(hold,className)==1){
             do {
                 hold = hold->next;
             } while(isWhiteSpace(hold->data)==1||isComment(hold->data)==1);
-            Line * temp = hold->next;\
-            while (temp != NULL){                
+            Line * temp = hold->next;
+            while (temp != NULL){
+                if (isType(temp->data)==1)
+                    Line *lastType = temp;
                 if (isEqual(temp,hold->data)==1){
+                    Line *varName = createLine(hold->data);
 					temp = temp->next;
+                    temp = whileWSC(temp);
                     if (isEqual(temp, ".")==1&&isEqual(temp->next,oldName)==1){
                         temp = temp->next;/*check the parameters*/
                         Line * nameHold = temp;
                         temp = temp->next;
+                        temp = whileWSC(temp);
+                        Line *paramStart = temp;
                         int check = 0;
                         int len = strlen(funcParam);
                         while (isEqual(temp,")")!=1){
@@ -118,6 +124,20 @@ void changeFuncNames (Line *list, char * className, char *oldName, char *newName
 							char *name = malloc(sizeof(char)*strlen(newName));
 							strcpy(name, newName);
 							nameHold = changeData(nameHold,name);
+                            if (check == 1){
+                                List * paramList = createList();
+                                paramList->head = paramStart;
+                                List * toAdd = createList();
+
+                                if (isPtr(lastType)==0){
+                                    char * and = malloc(sizeof(char)*strlen("&"));
+                                    strcpy(and,"&");
+                                    toAdd = addBack(toAdd,createLine(and));
+                                }
+                                toAdd = addBack(toAdd,createLine(varName->data))
+
+                                paramList = addParameters(paramList, toAdd)
+                            }
 						}
                     }
                 }
@@ -126,6 +146,14 @@ void changeFuncNames (Line *list, char * className, char *oldName, char *newName
         }
         hold = hold->next;
     }
+}
+
+int isPtr(Line * type){
+    type = type->next;
+    type = whileWSC(type);
+    if (isEqual(type,"*")==1)
+        return 1;
+    return 0;
 }
 
 int checkStructVar (List *methodList, List * varList, char *structName){

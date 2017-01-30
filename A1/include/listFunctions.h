@@ -24,7 +24,7 @@ List *addVar (List *list, Line *vars);
 
 char *methodParameters (Line * line);
 
-void changeFuncNames (Line *list, char * className, char *oldName, char *newName, char *funcParam);
+void changeFuncNames (Line *list, char * className, char *oldName, char *newName, char *funcParam,int check);
 
 int checkStructVar (List *methodList, List * varList, char *structName);
 
