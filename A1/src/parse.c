@@ -65,9 +65,11 @@ List *parseFile (FILE *fp) {
 		last = c;
 		c = fgetc(fp);
 	}
+	char *outFile = strtok(fileName,".");
+	strcat(outFile,".c");
 	
 	fclose(fWrite);
-	List *list = fileToList(fileName);
+	List *list = fileToList(outFile);
 	return list;
 }
 

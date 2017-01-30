@@ -102,7 +102,7 @@ void translate(List *tokenList, char *fileName){
     }
 
     printList(tokenList);
-    FILE * fp = fopen("docs/test.c", "w");
+    FILE * fp = fopen(fileName, "w");
     Line *holdToken = tokenList->head;
     while (holdToken != NULL){
         fprintf(fp, "%s", holdToken->data);
