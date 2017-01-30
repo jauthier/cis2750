@@ -126,7 +126,6 @@ void changeFuncNames (Line *list, char * className, char *oldName, char *newName
 							char *name = malloc(sizeof(char)*strlen(newName));
 							strcpy(name, newName);
 							nameHold = changeData(nameHold,name);
-                            printf("check: %d",check);
                             if (checkSV == 1){
                                 List * paramList = createList();
                                 paramList->head = paramStart;

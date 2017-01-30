@@ -92,7 +92,7 @@ void translate(List *tokenList, char *fileName){
                 if (isEqual(temp,";")==1){ /*prototype*/
                     current = temp;
                 } else { /*function*/
-                    printf("function\n");
+                    
                     Line * ret = translateFunc(temp);
                     current = ret;
                 }
@@ -208,8 +208,16 @@ List *classToStruct (Line *class, Line *restOfList){
                 }
                 Line *checkEnd = temp->next;
                 checkEnd = whileWSC(checkEnd);
-                if (isEqual(checkEnd,";")==1)
+                if (isEqual(checkEnd,";")==1){
                     temp = checkEnd;
+                } else {
+                    Line *afterTemp = temp->next;
+                    char *sc = malloc(sizeof(char)*strlen(";"));
+                    strcpy(sc,";");
+                    temp->next = createLine(sc);
+                    temp = temp->next;
+                    temp->next = afterTemp;
+                }
                 
                 /*save the Line after the }/; so it can be added back on after the function pointer is added*/
                 Line * afterFunct = temp->next;
@@ -376,6 +384,5 @@ Line * translateFunc (Line *start){
         }
         temp = temp->next;
     }
-    printf("at the end\n");
     return temp;
 }
