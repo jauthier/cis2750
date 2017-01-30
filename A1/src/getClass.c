@@ -101,7 +101,6 @@ void translate(List *tokenList, char *fileName){
         current = current->next; /* get the next*/
     }
 
-    printList(tokenList);
     FILE * fp = fopen(fileName, "w");
     Line *holdToken = tokenList->head;
     while (holdToken != NULL){
