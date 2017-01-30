@@ -108,7 +108,7 @@ void translate(List *tokenList, char *fileName){
         fprintf(fp, "%s", holdToken->data);
         holdToken = holdToken->next;
     }
-    
+    destroyList(tokenList);
 }
 
 List *classToStruct (Line *class, Line *restOfList){
@@ -298,7 +298,7 @@ List *classToStruct (Line *class, Line *restOfList){
     funcToAdd = addBack(funcToAdd,constructor->head);
     List *finalList = createList();
     finalList = addBack(finalList,class);
-	Line *newLine = createLine(";\n");
+	Line *newLine = createLine(";\n\n");
 	finalList = addBack(finalList,newLine);
     finalList = addBack(finalList,funcToAdd->head);
     return finalList;
