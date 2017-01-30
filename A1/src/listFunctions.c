@@ -92,6 +92,7 @@ char *methodParameters (Line * line){
 void changeFuncNames (Line *list, char * className, char *oldName, char *newName, char *funcParam,int check){
     /*search for the class name, thus we will get any names of the objects that were made*/
     Line *hold = list;
+    Line *lastType;
     while (hold != NULL){
         if (isEqual(hold,className)==1){
             do {
@@ -99,8 +100,9 @@ void changeFuncNames (Line *list, char * className, char *oldName, char *newName
             } while(isWhiteSpace(hold->data)==1||isComment(hold->data)==1);
             Line * temp = hold->next;
             while (temp != NULL){
-                if (isType(temp->data)==1)
-                    Line *lastType = temp;
+                if (isType(temp->data)==1){
+                    lastType = temp;
+                }
                 if (isEqual(temp,hold->data)==1){
                     Line *varName = createLine(hold->data);
 					temp = temp->next;
@@ -136,7 +138,7 @@ void changeFuncNames (Line *list, char * className, char *oldName, char *newName
                                 }
                                 toAdd = addBack(toAdd,createLine(varName->data));
 
-                                paramList = addParameters(paramList, toAdd)
+                                paramList = addParameters(paramList, toAdd->head);
                             }
 						}
                     }
