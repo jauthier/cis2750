@@ -1,3 +1,9 @@
+/*
+* getClass.c
+* Jessica Authier
+* 2017/01/29
+*/
+
 #include "getClass.h"
 
 void translate(List *tokenList, char *fileName){
