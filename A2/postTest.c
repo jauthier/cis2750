@@ -1,6 +1,7 @@
 // post.c  
-
-
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
 int main (int argc, char *argv[]){
 	// take in user name
@@ -8,14 +9,14 @@ int main (int argc, char *argv[]){
 
     if (argc == 1){
         printf("Please enter your username.\n");
-        exit(0);
+        exit;
     } else {
         int i;
         strcpy(buffer,argv[1]);
         for (i=2;i<argc;i++){
             //put all strings into one
             strcat(buffer, " ");
-            strcat(buffer, argv[i])
+            strcat(buffer, argv[i]);
         }
 
         printf("%s\n",buffer);
@@ -31,5 +32,5 @@ int main (int argc, char *argv[]){
     // if it does exist get that file
     //if it doesn't then make a file for it
 
-
+    return 0;
 }
