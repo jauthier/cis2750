@@ -85,6 +85,7 @@ void peConstructor(struct PostEntry *pe){
 int main (){
     printf("initalize struct\n");
     struct PostEntry *pe;
+    pe = malloc(sizeof(PostEntry));
     printf("call constructor\n");
     peConstructor(pe);
     /*char * text = pe->readInput();
