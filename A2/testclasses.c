@@ -3,23 +3,22 @@
 #include <stdlib.h>
 #include <time.h>
 
-struct userPost {
+typedef struct userPost {
     char * username;
     char * streamname;
     char * date;
     char * text;
-};
+}userPost;
 
 struct PostEntry {
     char * (*readInput)();
+    userPost * (*formatEntry)(char * username, char * streamname, char * text);
     char * (*getTimeData)();
-    struct userPost * (*formatEntry)(char * username, char * streamname, char * text);
-    
     void (*submitPost)();
 };
 
-struct userPost * createUserPost (char *username,char *streamname, char *date, char *text){
-    struct userPost * newUP = malloc(sizeof(struct userPost));
+userPost * createUserPost (char *username,char *streamname, char *date, char *text){
+    userPost * newUP = malloc(sizeof(userPost));
     newUP->username = username;
     newUP->streamname = streamname;
     newUP->date = date;
@@ -53,19 +52,21 @@ char * getTimeData (){
     return date;
 }
 
-struct userPost * formatEntry (char * username, char * streamname, char * text){
+userPost * formatEntry (char * username, char * streamname, char * text){
         char * date = getTimeData();
-        struct userPost * newPost = createUserPost(username, streamname, date, text);
+        userPost * newPost = createUserPost(username, streamname, date, text);
         return newPost;
 }
 
 
-void submitPost (struct userPost *up){
+void submitPost (userPost *up){
         printf("in sub post\n");
 }
 
 void peConstructor(struct PostEntry * pe){
+    printf("in constructor\n");
     pe->readInput = readInput;
+
     pe->formatEntry = formatEntry;
     pe->getTimeData = getTimeData;
     pe->submitPost = submitPost;
