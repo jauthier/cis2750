@@ -39,21 +39,22 @@ char * readInput (){
         return text;
     }
 
-struct userPost * formatEntry (char * username, char * streamname, char * text){
-        char * date = getTimeData();
-        struct userPost * newPost = createUserPost(username, streamname, date, text);
-        return newPost;
-}
-
 char * getTimeData (){
     char * date  = malloc(sizeof(char)*strlen("feb. 7, 2017"));
     strcpy(date,"feb. 7, 2017");
     return date;
 }
 
-    void submitPost (struct userPost *up){
+struct userPost * formatEntry (char * username, char * streamname, char * text){
+        char * date = getTimeData();
+        struct userPost * newPost = createUserPost(username, streamname, date, text);
+        return newPost;
+}
+
+
+void submitPost (struct userPost *up){
         printf("in sub post\n");
-    }
+}
 
 void peConstructor(struct PostEntry * pe){
     pe->readInput = readInput;
