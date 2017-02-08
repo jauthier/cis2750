@@ -64,12 +64,12 @@ void submitPost (userPost *up){
 }
 
 void peConstructor(struct PostEntry * pe){
-    printf("in constructor\n");
-    pe->readInput = readInput;
+    pe->readInput = &readInput;
 
-    pe->formatEntry = formatEntry;
-    pe->getTimeData = getTimeData;
-    pe->submitPost = submitPost;
+    printf("in constructor\n");
+    pe->formatEntry = &formatEntry;
+    pe->getTimeData = &getTimeData;
+    pe->submitPost = &submitPost;
 }
 
 
