@@ -11,7 +11,7 @@ typedef struct userPost {
 }userPost;
 
 struct PostEntry {
-    char * (*readInput)();
+    char * (* readInput)();
     userPost * (*formatEntry)(char * username, char * streamname, char * text);
     char * (*getTimeData)();
     void (*submitPost)();
@@ -64,9 +64,9 @@ void submitPost (userPost *up){
 }
 
 void peConstructor(struct PostEntry *pe){
-    pe->readInput = readInput;
-
     printf("in constructor\n");
+    pe.readInput = readInput;
+    printf("first\n");
     pe->formatEntry = &formatEntry;
     pe->getTimeData = &getTimeData;
     pe->submitPost = &submitPost;
