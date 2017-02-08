@@ -3,6 +3,11 @@
 #include <stdlib.h>
 #include <time.h>
 
+char * readInput ();
+userPost * createUserPost (char *username,char *streamname, char *date, char *text);
+char * getTimeData ();
+void submitPost (userPost *up);
+
 typedef struct userPost {
     char * username;
     char * streamname;
@@ -65,7 +70,7 @@ void submitPost (userPost *up){
 
 void peConstructor(struct PostEntry *pe){
     printf("in constructor\n");
-    pe->readInput = *readInput;
+    pe->readInput() = readInput;
     printf("first\n");
     pe->formatEntry = &formatEntry;
     pe->getTimeData = &getTimeData;
