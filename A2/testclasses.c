@@ -73,6 +73,7 @@ int main (){
     peConstructor(pe);
     char * text = pe->readInput();
     printf("%s\n", text);
+    char * date = getTimeData();
 
 
     return 0;
