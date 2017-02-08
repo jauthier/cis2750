@@ -21,16 +21,43 @@ int main (int argc, char *argv[]){
 
         printf("%s\n",buffer);
     }
+    char * username = malloc(sizeof(char)*strlen(buffer));
+    strcpy(username,buffer);
 
-    //check if the user has permission to post on the stream
+    /* get the stream*/
+    printf("stream: ");
+    char stream[100];
+    fgets(stream, 100, stdin);
 
-    //if the don't then send an error message and exit
+    /*check if the stream exists and the user has permission to post on the stream*/
+    char * streamFile = malloc(sizeof(char)*(strlen(stream)+strlen("StreamUsers")));
+    strcpy(streamFile,stream);
+    strcat(streamFile,"StreamUsers");
+
+    FILE * sufp = fopen(streamFile,"r");
+    int checkSU = checkStreamUsers(sufp,username);
+    if (checkSU == 0)
+        return 0;
 
 
-    //if they do, check if the file exists for the stream
 
-    // if it does exist get that file
-    //if it doesn't then make a file for it
+    
 
+    return 0;
+}
+
+int checkStreamUsers (FILE *sufp, char *username){
+
+    if (sufp == NULL){
+        printf("The stream you wish to access does not exist!\n");
+        return 0;
+    }
+
+    char userLine[210];
+    while (fgets(userLine,210,sufp) != NULL){
+        if (strstr(userLine,userName) != NULL)
+            return 1;
+    }
+    printf("You do not have permission to post to this stream!\n");
     return 0;
 }
