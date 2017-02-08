@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <time.h>
 
 struct userPost {
     char * username;
@@ -41,7 +42,8 @@ char * readInput (){
 
 char * getTimeData (){
     time_t getTime = time (NULL);
-
+    if (ctime(&getTime)==NULL)
+        printf("null\n");
 
     char * date  = malloc(sizeof(char)*strlen(ctime(&getTime)));
     strcpy(date, ctime(&getTime));
