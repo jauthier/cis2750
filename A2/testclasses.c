@@ -41,12 +41,14 @@ char * readInput (){
     }
 
 char * getTimeData (){
+    printf("in getTimeData\n");
     time_t getTime = time (NULL);
     if (ctime(&getTime)==NULL)
         printf("null\n");
-
+    printf("%s\n", ctime(&getTime));
     char * date  = malloc(sizeof(char)*strlen(ctime(&getTime)));
     strcpy(date, ctime(&getTime));
+
     return date;
 }
 
