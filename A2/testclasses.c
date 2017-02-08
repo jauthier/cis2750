@@ -73,13 +73,14 @@ void peConstructor(struct PostEntry * pe){
 
 
 int main (){
-    
+    printf("initalize struct\n");
     struct PostEntry *pe;
+    printf("call constructor\n");
     peConstructor(pe);
     /*char * text = pe->readInput();
     printf("%s\n", text);*/
 
-
+    printf("call getTimeData\n");
     char * date = getTimeData();
     printf("%s\n", date);
 
