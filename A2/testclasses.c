@@ -63,8 +63,8 @@ void submitPost (userPost *up){
         printf("in sub post\n");
 }
 
-void peConstructor(struct PostEntry * pe){
-    pe->readInput = &readInput;
+void peConstructor(struct PostEntry *pe){
+    pe->readInput = readInput;
 
     printf("in constructor\n");
     pe->formatEntry = &formatEntry;
