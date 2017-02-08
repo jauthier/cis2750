@@ -74,6 +74,7 @@ int main (){
     char * text = pe->readInput();
     printf("%s\n", text);
     char * date = getTimeData();
+    printf("%s\n", date);
 
 
     return 0;
