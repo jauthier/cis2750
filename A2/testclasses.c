@@ -40,8 +40,11 @@ char * readInput (){
     }
 
 char * getTimeData (){
-    char * date  = malloc(sizeof(char)*strlen("feb. 7, 2017"));
-    strcpy(date,"feb. 7, 2017");
+    time_t getTime = time (NULL);
+
+
+    char * date  = malloc(sizeof(char)*strlen(ctime(&getTime)));
+    strcpy(date, ctime(&getTime));
     return date;
 }
 
@@ -66,8 +69,11 @@ void peConstructor(struct PostEntry * pe){
 
 int main (){
     
-    struct PostEntry pe;
-    peConstructor(&pe);
+    struct PostEntry *pe;
+    peConstructor(pe);
+    char * text = pe->readInput();
+    printf("%s\n", text);
+
 
     return 0;
 }
