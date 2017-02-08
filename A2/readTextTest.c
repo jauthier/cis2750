@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+char * readInput();
+
 int main (int argc, char *argv[]){
 	
     char * test = readInput();
