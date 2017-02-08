@@ -12,8 +12,9 @@ struct userPost {
 
 struct PostEntry {
     char * (*readInput)();
-    struct userPost * (*formatEntry)(char * username, char * streamname, char * text);
     char * (*getTimeData)();
+    struct userPost * (*formatEntry)(char * username, char * streamname, char * text);
+    
     void (*submitPost)();
 };
 
@@ -75,8 +76,10 @@ int main (){
     
     struct PostEntry *pe;
     peConstructor(pe);
-    char * text = pe->readInput();
-    printf("%s\n", text);
+    /*char * text = pe->readInput();
+    printf("%s\n", text);*/
+
+
     char * date = getTimeData();
     printf("%s\n", date);
 
