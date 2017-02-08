@@ -3,11 +3,6 @@
 #include <stdlib.h>
 #include <time.h>
 
-char * readInput ();
-userPost * createUserPost (char *username,char *streamname, char *date, char *text);
-char * getTimeData ();
-void submitPost (userPost *up);
-
 typedef struct userPost {
     char * username;
     char * streamname;
@@ -21,6 +16,15 @@ struct PostEntry {
     char * (*getTimeData)();
     void (*submitPost)();
 };
+
+char * readInput ();
+userPost * createUserPost (char *username,char *streamname, char *date, char *text);
+char * getTimeData ();
+void submitPost (userPost *up);
+
+
+
+
 
 userPost * createUserPost (char *username,char *streamname, char *date, char *text){
     userPost * newUP = malloc(sizeof(userPost));
