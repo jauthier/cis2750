@@ -15,7 +15,7 @@ int main (int argc, char *argv[]){
     
     char * file1 = malloc(sizeof(char)*strlen("data_1.txt"));
     char * file2 = malloc(sizeof(char)*strlen("data_2.txt"));
-    strcpy(file1,"data_1.txt");
+    strcpy(file1,"data_3.txt");
     strcpy(file2,"data_2.txt");
     FILE * fp1 = fopen(file1,"r");
     if (fp1 == NULL) {
@@ -44,9 +44,7 @@ int main (int argc, char *argv[]){
     printf("Brute force:\nNumber of inversions: %d\nTime: %d:%d\n", num, end.time - start.time, end.millitm - start.millitm);
 
     ftime (&start);
-    printf("before second count\n");
     num = countInvMergesort(A, i+1);
-    printf("aftersecond count\n");
     ftime (&end);
     printf("Divide and Conquer:\nNumber of inversions: %d\nTime: %d:%d\n", num, end.time - start.time, end.millitm - start.millitm);
     return 0;
