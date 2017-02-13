@@ -39,17 +39,17 @@ int main (int argc, char *argv[]){
 
     struct timeb *t;
     ftime (t);
-    int start1 = t.millitm;
+    int start1 = t->millitm;
     countInversions(A, i+1);
     ftime (t);
-    int end1 = t.millitm;
+    int end1 = t->millitm;
     printf("Brute force: %d\n", end1-start1);
 
     ftime (t);
-    int start2 = t.millitm;
+    int start2 = t->millitm;
     countInvMergesort(A, i+1);
     ftime (t);
-    int end2 = t.millitm;
+    int end2 = t->millitm;
     printf("Divide and conquer: %d\n", end2-start2);
 
     return 0;
