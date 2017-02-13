@@ -27,7 +27,9 @@ int main (int argc, char *argv[]){
     char buffer[60];
     char * temp;
     int i = 0;
+    printf("before file\n");
     while (fgets(buffer, 60, fp1) != NULL){
+        printf("in file\n");
         char * token; 
         token = strtok(buffer," \n");
         while (token != NULL){
@@ -40,14 +42,18 @@ int main (int argc, char *argv[]){
     struct timeb *t;
     ftime (t);
     int start1 = t->millitm;
+    printf("before first count\n");
     countInversions(A, i+1);
+    printf("afterfirst count\n");
     ftime (t);
     int end1 = t->millitm;
     printf("Brute force: %d\n", end1-start1);
 
     ftime (t);
     int start2 = t->millitm;
+    printf("before second count\n");
     countInvMergesort(A, i+1);
+    printf("aftersecond count\n");
     ftime (t);
     int end2 = t->millitm;
     printf("Divide and conquer: %d\n", end2-start2);
