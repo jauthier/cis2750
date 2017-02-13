@@ -9,7 +9,7 @@
 #include <sys/time.h>
 #include <sys/timeb.h>
 #include <string.h>
-#include "1_3.c"
+#include "1_3.h"
 
 int main (int argc, char *argv[]){
     

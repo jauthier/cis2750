@@ -4,8 +4,7 @@
     0849720
     2017/02/13
 */
-#include <stdio.h>
-#include <stdlib.h>
+#include "1_3.h"
 
 int countInversions (int * A, int n){
     int count = 0;
