@@ -7,10 +7,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int countInversions (int * A, int n);
-int countInvMergesort (int *A, int n);
-int merge(int * B, int * C, int * A, int p, int q);
-
 int countInversions (int * A, int n){
     int count = 0;
     int i =0;
