@@ -43,7 +43,7 @@ int main (int argc, char *argv[]){
     printf("here1\n");
     ftime (t);
     printf("here2\n");
-    int start1 = t->millitm;
+    int start1 = (int)t->millitm;
     printf("before first count\n");
     countInversions(A, i+1);
     printf("afterfirst count\n");
