@@ -34,8 +34,10 @@ Point ** convexHull (Point **points, int n, Point **hull){
         int p = 0;
         i = 1;
         for (i=1;i<n;i++){
-            if (orientation(hold,points[i],points[p]) == 2)
+            if (orientation(hold,points[i],points[p]) == 2){
+            	printf("ccw\n");
                 p = i;
+            }
             hold = points[p];
             j++;
         }
