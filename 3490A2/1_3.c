@@ -9,10 +9,10 @@
 int countInversions (int * A, int n){
     int count = 0;
     int i = 0;
-    for (i=0;i<n-1;i++){
+    for (i=0;i<(n-1);i++){
         int j = i+1;
         for (j=i+1;j<n;j++){
-            if (A[i]<A[j])
+            if (A[i]>A[j])
                 count ++;
         }
     }
