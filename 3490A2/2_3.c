@@ -25,9 +25,11 @@ Point ** convexHull (Point **points, int n, Point **hull){
         if (left->x > points[i]->x)
             left = points[i];
     }
+    printf("got left most\n");
     Point *hold = left;
     int j = 0;
     do {
+    	printf("in loop\n");
         hull[j] = hold;
         int p = 0;
         i = 1;
