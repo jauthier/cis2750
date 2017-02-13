@@ -31,7 +31,7 @@ Point ** convexHull (Point **points, int n, Point **hull){
     do {
     	printf("in loop\n");
 
-        hull[1] = hold;
+        hull[j] = hold;
         printf("here\n");
         int p = 0;
         i = 1;
@@ -41,8 +41,8 @@ Point ** convexHull (Point **points, int n, Point **hull){
                 p = i;
             }
             hold = points[p];
-            j++;
         }
+        j++;
     } while (hold != left);
     return hull;
 }
