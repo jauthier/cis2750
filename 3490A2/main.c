@@ -27,7 +27,6 @@ int main (int argc, char *argv[]){
     char buffer[60];
     char * temp;
     int i = 0;
-    printf("before file\n");
     while (fgets(buffer, 60, fp1) != NULL){
         char * token; 
         token = strtok(buffer," \n");
@@ -37,21 +36,18 @@ int main (int argc, char *argv[]){
             i++;
         }
     }
-    printf("after file\n");
 
     struct timeb start, end;
     ftime (&start);
-    printf("before first count\n");
-    countInversions(A, i+1);
-    printf("afterfirst count\n");
+    int num = countInversions(A, i+1);
     ftime (&end);
-    printf("Brute force: %d:%d\n", end.time - start.time, end.millitm - start.millitm);
+    printf("Brute force:\nNumber of inversions: %d\nTime: %d:%d\n", num, end.time - start.time, end.millitm - start.millitm);
 
     ftime (&start);
     printf("before second count\n");
-    countInvMergesort(A, i+1);
+    num = countInvMergesort(A, i+1);
     printf("aftersecond count\n");
     ftime (&end);
-    printf("Divide and Conquer: %d:%d\n", end.time - start.time, end.millitm - start.millitm);
+    printf("Divide and Conquer:\nNumber of inversions: %d\nTime: %d:%d\n", num, end.time - start.time, end.millitm - start.millitm);
     return 0;
 }
