@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/time.h>
+#include <sys/timeb.h>
 #include <string.h>
 #include "1_3.c"
 
@@ -24,12 +25,13 @@ int main (int argc, char *argv[]){
 
     int A[50000];
     char buffer[60];
+    char * temp;
     int i = 0;
     while (fgets(buffer, 60, fp1) != NULL){
         char * token; 
         token = strtok(buffer," \n");
         while (token != NULL){
-            A[i] = strtol(token);
+            A[i] = strtol(token,&temp,10);
             token = strtok(NULL, " \n");
             i++;
         }
@@ -41,7 +43,14 @@ int main (int argc, char *argv[]){
     countInversions(A, i+1);
     ftime (t);
     int end1 = t.millitm;
-    printf("%d\n", end1-start1);
+    printf("Brute force: %d\n", end1-start1);
+
+    ftime (t);
+    int start2 = t.millitm;
+    countInvMergesort(A, i+1);
+    ftime (t);
+    int end2 = t.millitm;
+    printf("Divide and conquer: %d\n", end2-start2);
 
     return 0;
 }
