@@ -18,7 +18,7 @@ int orientation (Point *p, Point *q, Point *r){
 }
 
 Point ** convexHull (Point **points, int n){
-    Point *hull[n] = malloc(sizeof(Point)*n);
+    Point *hull = malloc(sizeof(Point)*n);
 
     int i = 1;
     Point *left = points[0];
