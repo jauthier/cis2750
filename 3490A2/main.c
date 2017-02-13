@@ -27,7 +27,6 @@ int main (int argc, char *argv[]){
     char buffer[70];
     char * temp;
     int i = 0;
-    printf("before file\n");
     while (fgets(buffer, 70, fp1) != NULL){
         char * token; 
         token = strtok(buffer," \n");
@@ -41,7 +40,9 @@ int main (int argc, char *argv[]){
     printf("after file\n");
 
     struct timeb *t;
+    printf("here1\n");
     ftime (t);
+    printf("here2\n");
     int start1 = t->millitm;
     printf("before first count\n");
     countInversions(A, i+1);
