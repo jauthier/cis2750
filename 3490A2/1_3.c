@@ -1,0 +1,81 @@
+/*
+    1_3.c
+    Jessica Authier
+    0849720
+    2017/02/13
+*/
+#include <stdio.h>
+#include <stdlib.h>
+
+int countInversions (int * A, int n);
+int countInvMergesort (int *A, int n);
+int merge(int * B, int * C, int * A, int p, int q);
+
+int countInversions (int * A, int n){
+    int count = 0;
+    int i =0;
+    for (i=0;i<len-1,i++){
+        int j = 0;
+        for (j=0;j<len;j++){
+            if (A[i]<A[j])
+                count ++;
+        }
+    }
+    return count;
+}
+
+int countInvMergesort (int *A, int n){
+    int count = 0;
+    if (n > 1){
+        //make a new Array of size n/2
+        int B[n/2] = malloc(sizeof(int)*(n/2));
+        int i = 0;
+        for (i=0;i<(n/2);1++){
+            B[i] = A[i];
+        }
+        int C[n/2] = malloc(sizeof(int)*(n-(n/2)));
+        int j = 0;
+        for (i=(n/2);i<n;i++){
+            C[j] = A[i];
+            j++;
+        }
+        count = countInvMergesort(B, n/2);
+        count = count + countInvMergesort(C, n-(n/2));
+        count = count + merge(B, C, A, n/2, n-(n/2));
+    }
+    return count;
+}
+
+int merge(int * B, int * C, int * A, int p, int q){
+
+    int i = 0;
+    int j = 0;
+    int k = 0;
+    int count = 0;
+
+    while (i < p && j < q){
+        if (B[i]<= C[j]){
+            A[k] = B[i];
+            i++;
+        } else {
+            A[K] = C[j];
+            j++;
+            count ++;
+        }
+        k++;
+    }
+    if (i == p){
+        while (j < q){
+            A[k] = C[j];
+            k++;
+            j++;
+        }
+    } else {
+        while (i < p){
+            A[k] = B[i];
+            k++;
+            i++;
+        }
+    }
+    return count;
+}
