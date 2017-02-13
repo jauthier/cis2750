@@ -38,7 +38,7 @@ int main (int argc, char *argv[]){
     }
     printf("after file\n");
 
-    time_t t;
+    time_t *t;
     printf("here1\n");
     time (t);
     printf("here2\n");
