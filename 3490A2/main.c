@@ -39,19 +39,19 @@ int main (int argc, char *argv[]){
     }
     printf("after file\n");
 
-    struct timeb *start, *end;
-    ftime (start);
+    struct timeb start, end;
+    ftime (&start);
     printf("before first count\n");
     countInversions(A, i+1);
     printf("afterfirst count\n");
-    ftime (end);
-    printf("Brute force: %d:%d\n", end->time - start->time,end->millitm - start->millitm);
+    ftime (&end);
+    printf("Brute force: %d:%d\n", end.time - start.time, end.millitm - start.millitm);
 
-    ftime (start);
+    ftime (&start);
     printf("before second count\n");
     countInvMergesort(A, i+1);
     printf("aftersecond count\n");
-    ftime (end);
-    printf("Divide and Conquer: %d:%d\n", end->time - start->time,end->millitm - start->millitm);
+    ftime (&end);
+    printf("Divide and Conquer: %d:%d\n", end.time - start.time, end.millitm - start.millitm);
     return 0;
 }
