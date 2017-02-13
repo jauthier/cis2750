@@ -5,19 +5,8 @@
 	2017/02/13
 */
 
-#include <stdio.h>
-#include <stdlib.h>
+#include "2_3.h"
 
-typedef struct Point {
-    float x, y;
-} Point;
-
-int orientation (Point p, Point q, Point r);
-Point ** convexHull (Points *points[], int n);
-Point ** convexHullDaC (Points ** points, int n);
-Points ** merge (Points ** l, Points ** r, int lenL, int lenR);
-
-/*2.3*/
 int orientation (Point p, Point q, Point r){
     int val = (q.y - p.y)*(r.x - q.x)-(q.x - p.x)*(r.y - q.y);
     if (val == 0)
@@ -53,6 +42,7 @@ Point ** convexHull (Points *points[], int n){
     return hull;
 }
 
+/*
 Point ** convexHullDaC (Points ** points, int n){
     if (n <= 3)
         return points;
@@ -97,3 +87,4 @@ Point ** convexHullDaC (Points ** points, int n){
 Points ** merge (Points ** l, Points ** r, int lenL, int lenR){
 
 }
+*/
