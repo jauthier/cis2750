@@ -6,7 +6,8 @@
 */
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
+#include <sys/time.h>
+#include <sys/timeb.h>
 #include <string.h>
 #include "1_3.h"
 
@@ -22,11 +23,12 @@ int main (int argc, char *argv[]){
         return 0;
     }
 
-    int A[50002];
-    char buffer[70];
+    int A[50000];
+    char buffer[60];
     char * temp;
     int i = 0;
-    while (fgets(buffer, 70, fp1) != NULL){
+    printf("before file\n");
+    while (fgets(buffer, 60, fp1) != NULL){
         char * token; 
         token = strtok(buffer," \n");
         while (token != NULL){
@@ -34,30 +36,22 @@ int main (int argc, char *argv[]){
             token = strtok(NULL, " \n");
             i++;
         }
-
     }
     printf("after file\n");
 
-    time_t *t;
-    printf("here1\n");
-    time (t);
-    printf("here2\n");
-    int start1 = (int)t;
+    struct timeb *start, *end;
+    ftime (start);
     printf("before first count\n");
     countInversions(A, i+1);
     printf("afterfirst count\n");
-    time (t);
-    int end1 = (int)t;
-    printf("Brute force: %d\n", end1-start1);
+    ftime (end);
+    printf("Brute force: %d:%d\n", end->time - start->time,end->millitm - start->millitm);
 
-    time (t);
-    int start2 = (int)t;
+    ftime (start);
     printf("before second count\n");
     countInvMergesort(A, i+1);
     printf("aftersecond count\n");
-    time (t);
-    int end2 = (int)t;
-    printf("Divide and conquer: %d\n", end2-start2);
-
+    ftime (end);
+    printf("Divide and Conquer: %d:%d\n", end->time - start->time,end->millitm - start->millitm);
     return 0;
 }
