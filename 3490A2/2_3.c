@@ -17,7 +17,7 @@ int orientation (Point p, Point q, Point r){
         return 1;
 }
 
-Point ** convexHull (Points *points[], int n){
+Point ** convexHull (Point **points, int n){
     Point *hull[n];
 
     int i = 1;
