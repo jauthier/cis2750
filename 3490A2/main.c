@@ -71,7 +71,7 @@ int main (int argc, char *argv[]){
     fclose(fp2);
     printf("\n2.3\n\n");
     ftime (&start);
-    Point **hull = convexHull(pArray, i);
+    Point **hull = convexHull(pArray, i, hull);
     ftime (&end);
     printf("Brute force:\nTime: %d:%d\n", num, end.time - start.time, end.millitm - start.millitm);
 

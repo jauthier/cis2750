@@ -13,6 +13,6 @@ typedef struct Point {
 } Point;
 
 int orientation (Point *p, Point *q, Point *r);
-Point ** convexHull (Point *points[], int n);
+Point ** convexHull (Point **points, int n, Point ** hull);
 //Point ** convexHullDaC (Points ** points, int n);
 //Points ** merge (Points ** l, Points ** r, int lenL, int lenR);
