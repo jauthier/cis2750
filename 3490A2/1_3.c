@@ -58,7 +58,7 @@ int merge(int * B, int * C, int * A, int p, int q){
             A[k] = B[i];
             i++;
         } else {
-            A[K] = C[j];
+            A[k] = C[j];
             j++;
             count ++;
         }
