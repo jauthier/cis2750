@@ -37,7 +37,7 @@ int main (int argc, char *argv[]){
         }
     }
 
-    struct timeb t;
+    struct timeb *t;
     ftime (t);
     int start1 = t.millitm;
     countInversions(A, i+1);
