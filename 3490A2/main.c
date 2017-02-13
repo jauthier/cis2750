@@ -6,8 +6,7 @@
 */
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/time.h>
-#include <sys/timeb.h>
+#include <time.h>
 #include <string.h>
 #include "1_3.h"
 
@@ -39,25 +38,25 @@ int main (int argc, char *argv[]){
     }
     printf("after file\n");
 
-    struct timeb *t;
+    time_t t;
     printf("here1\n");
-    ftime (t);
+    time (t);
     printf("here2\n");
-    int start1 = (int)t->millitm;
+    int start1 = (int)t;
     printf("before first count\n");
     countInversions(A, i+1);
     printf("afterfirst count\n");
-    ftime (t);
-    int end1 = t->millitm;
+    time (t);
+    int end1 = (int)t;
     printf("Brute force: %d\n", end1-start1);
 
-    ftime (t);
-    int start2 = t->millitm;
+    time (t);
+    int start2 = (int)t;
     printf("before second count\n");
     countInvMergesort(A, i+1);
     printf("aftersecond count\n");
-    ftime (t);
-    int end2 = t->millitm;
+    time (t);
+    int end2 = (int)t;
     printf("Divide and conquer: %d\n", end2-start2);
 
     return 0;
