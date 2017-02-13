@@ -33,7 +33,7 @@ Point ** convexHull (Point **points, int n){
         int p = 0;
         i = 1;
         for (i=1;i<n;i++){
-            if (orientation(hold,points[i],points[p]) == 2)
+            if (orientation(*hold,points[i],points[p]) == 2)
                 p = i;
             hold = points[p];
             j++;
