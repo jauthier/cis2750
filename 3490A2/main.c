@@ -23,13 +23,12 @@ int main (int argc, char *argv[]){
         return 0;
     }
 
-    int A[50000];
-    char buffer[60];
+    int A[50002];
+    char buffer[70];
     char * temp;
     int i = 0;
     printf("before file\n");
-    while (fgets(buffer, 60, fp1) != NULL){
-        printf("in file\n");
+    while (fgets(buffer, 70, fp1) != NULL){
         char * token; 
         token = strtok(buffer," \n");
         while (token != NULL){
@@ -37,7 +36,9 @@ int main (int argc, char *argv[]){
             token = strtok(NULL, " \n");
             i++;
         }
+
     }
+    printf("after file\n");
 
     struct timeb *t;
     ftime (t);
