@@ -10,11 +10,8 @@ int countInversions (int * A, int n){
     int count = 0;
     int i = 0;
     for (i=0;i<(n-1);i++){
-        printf("i: %d\n", n);
         int j;
         for (j=i+1;j<n;j++){
-            printf("j: %d\n", j);
-            printf("A[i]: %d, A[j]: %d\n", A[i],A[j]);
             if (A[i]>A[j])
                 count ++;
         }

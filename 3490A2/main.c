@@ -39,12 +39,12 @@ int main (int argc, char *argv[]){
 
     struct timeb start, end;
     ftime (&start);
-    int num = countInversions(A, i+1);
+    int num = countInversions(A, i);
     ftime (&end);
     printf("Brute force:\nNumber of inversions: %d\nTime: %d:%d\n", num, end.time - start.time, end.millitm - start.millitm);
 
     ftime (&start);
-    num = countInvMergesort(A, i+1);
+    num = countInvMergesort(A, i);
     ftime (&end);
     printf("Divide and Conquer:\nNumber of inversions: %d\nTime: %d:%d\n", num, end.time - start.time, end.millitm - start.millitm);
     return 0;
