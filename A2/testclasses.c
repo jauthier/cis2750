@@ -90,6 +90,7 @@ int main (int argc, char *argv[]){
     strcpy(streamFile,"messages/");
     strcat(streamFile,stream);
     strcat(streamFile,"StreamUsers.txt");
+    printf("file: %s\n", streamFile);
     /*check username and stream*/
     FILE * sufp = fopen(streamFile,"r");
     int checkSU = checkStreamUsers(sufp,username);
