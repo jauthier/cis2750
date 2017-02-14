@@ -69,11 +69,13 @@ int main (int argc, char *argv){
         exit(0);
     } else {
         int i;
-        strcpy(buffer,argv[1]);
+        char *un = argv[1];
+        strcpy(buffer,un);
         for (i=2;i<argc;i++){
             /*put all strings into one*/
             strcat(buffer, " ");
-            strcat(buffer, argv[i]);
+            un = argv[i];
+            strcat(buffer, un);
         }
     }
     char * username = malloc(sizeof(char)*strlen(buffer));
