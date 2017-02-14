@@ -112,7 +112,7 @@ printf("global var\n");
         }
         current = current->next; /* get the next*/
     }
-
+printf("done translate\n");
     FILE * fp = fopen(fileName, "w");
     Line *holdToken = tokenList->head;
     while (holdToken != NULL){

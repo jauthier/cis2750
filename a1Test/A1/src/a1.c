@@ -16,7 +16,8 @@ int main(int argc, char *argv[]) {
 	FILE *fp = fopen(fileName,"r");
 	List *list = parseFile(fp,fileName);
 printf("after parse\n");
-	translate(list,fileName);
+
+	translate(list,"test.c");
 printf("after translate");
 	return 0;
 }
