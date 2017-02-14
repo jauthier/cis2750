@@ -84,6 +84,7 @@ int main (int argc, char *argv[]){
     char streamHold[100];
     fgets(streamHold, 100, stdin);
     char * stream = malloc(sizeof(char)*strlen(streamHold));
+    strcpy(stream, streamHold);
 
     /*check if the stream exists and the user has permission to post on the stream*/
     char * streamFile = malloc(sizeof(char)*(strlen("messages/")+strlen(stream)+strlen("StreamUsers.txt")));
