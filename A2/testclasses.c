@@ -13,7 +13,7 @@ struct PostEntry {
 
 char * readInput ();
 char * getTimeData ();
-struct userPost * formatEntry (char * username, char * streamname, char * text);
+userPost * formatEntry (char * username, char * streamname, char * text);
 void submitPost (userPost *up);
 int checkStreamUsers (FILE *sufp, char *username);
 
@@ -38,7 +38,7 @@ char * getTimeData (){
     return date;
 }
 
-struct userPost * formatEntry (char * username, char * streamname, char * text){
+userPost * formatEntry (char * username, char * streamname, char * text){
         char * date = getTimeData();
         userPost * newPost = createUserPost(username, streamname, date, text);
         return newPost;
@@ -60,7 +60,7 @@ void peConstructor(struct PostEntry *pe){
 }
 
 
-int main (){
+int main (int argc, char *argv){
     /* take in user name*/
     char buffer[200];
 
@@ -96,7 +96,7 @@ int main (){
         exit(0);
     
     struct PostEntry * pe;
-    pe = malloc(sizeof(class PostEntry));        
+    pe = malloc(sizeof(struct PostEntry));        
     /*get the post text*/
     char * text = pe->readInput();
     /*format the post into a UserPost struct*/
