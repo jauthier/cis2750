@@ -8,12 +8,13 @@
 #include <stdlib.h>
 #include <string.h>
 
-struct userPost {
+typedef struct userPost {
     char * username;
     char * streamname;
     char * date;
     char * text;
-};
+}userPost;
+
 /*
     Creates and returns a userPost structure.
 */

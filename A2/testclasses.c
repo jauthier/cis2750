@@ -4,13 +4,6 @@
 #include <time.h>
 #include "streamLib.h"
 
-typedef struct userPost {
-    char * username;
-    char * streamname;
-    char * date;
-    char * text;
-}userPost;
-
 struct PostEntry {
     char * (* readInput)();
     userPost * (*formatEntry)(char * username, char * streamname, char * text);
@@ -20,7 +13,7 @@ struct PostEntry {
 
 char * readInput ();
 char * getTimeData ();
-userPost * formatEntry (char * username, char * streamname, char * text);
+struct userPost * formatEntry (char * username, char * streamname, char * text);
 void submitPost (userPost *up);
 int checkStreamUsers (FILE *sufp, char *username);
 
@@ -45,13 +38,13 @@ char * getTimeData (){
     return date;
 }
 
-userPost * formatEntry (char * username, char * streamname, char * text){
+struct userPost * formatEntry (char * username, char * streamname, char * text){
         char * date = getTimeData();
         userPost * newPost = createUserPost(username, streamname, date, text);
         return newPost;
 }
 
-void submitPost (userPost *up){
+void submitPost (struct userPost *up){
 
     int end = updateStream(up);
     updateStreamData(up, end);

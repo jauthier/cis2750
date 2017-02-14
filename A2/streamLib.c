@@ -6,8 +6,8 @@
 
 #include "streamLib.h"
 
-struct userPost * createUserPost (char *username,char *streamname, char *date, char *text){
-    struct userPost * newUP = malloc(sizeof(struct userPost));
+userPost * createUserPost (char *username,char *streamname, char *date, char *text){
+    userPost * newUP = malloc(sizeof(userPost));
     newUP->username = username;
     newUP->streamname = streamname;
     newUP->date = date;
@@ -15,7 +15,7 @@ struct userPost * createUserPost (char *username,char *streamname, char *date, c
     return newUP;
 }
 
-void destroyUserPost(struct userPost *toDestroy){
+void destroyUserPost(userPost *toDestroy){
     free(toDestroy->username);
     free(toDestroy->streamname);
     free(toDestroy->date);
@@ -23,7 +23,7 @@ void destroyUserPost(struct userPost *toDestroy){
     free(toDestroy);
 }
 
-int updateStream(struct userPost *up){
+int updateStream(userPost *up){
     /*find the stream file*/
     char * streamFile = malloc(sizeof(char)*(strlen("stream.txt")+strlen(up->streamname)));
     strcpy(streamFile,up->streamname);
@@ -46,7 +46,7 @@ int updateStream(struct userPost *up){
     return numLines;
 }
 
-void updateStreamData(struct userPost * up, int end){
+void updateStreamData(userPost * up, int end){
     /*find the streamData file*/
     char * streamDataFile = malloc(sizeof(char)*(strlen("streamData.txt")+strlen(up->streamname)));
     strcpy(streamDataFile,up->streamname);
