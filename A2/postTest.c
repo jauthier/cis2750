@@ -2,9 +2,46 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <time.h>
+
+int checkStreamUsers (FILE *sufp, char *username);
+
+class PostEntry(){
+
+    char * readInput (){
+        char buffer[100];
+        char *hold = malloc(sizeof(char)*1000);
+        printf("Enter text: ");
+        if (fgets(buffer, 100, stdin) != NULL){
+            strcpy(hold, buffer);
+            while (fgets(buffer, 100, stdin) != NULL){
+                strcat(hold, buffer);
+            }
+        }
+        char *text = malloc(sizeof(char)*strlen(hold));
+        return text;
+    }
+
+    struct userPost * formatEntry (char * username, char * streamname, char * text){
+        char * date = getTimeData();
+        struct userPost * newPost = createUserPost(username, streamname, date, text);
+        return newPost;
+    }
+
+    char * getTimeData (){
+        time_t getTime = time (NULL);
+        char * date  = malloc(sizeof(char)*strlen(ctime(&getTime)));
+        strcpy(date, ctime(&getTime));
+        return date;
+    }
+
+    void submitPost (struct userPost *up){
+
+    }
+};
 
 int main (int argc, char *argv[]){
-	// take in user name
+	/* take in user name*/
     char buffer[200];
 
     if (argc == 1){
@@ -14,20 +51,19 @@ int main (int argc, char *argv[]){
         int i;
         strcpy(buffer,argv[1]);
         for (i=2;i<argc;i++){
-            //put all strings into one
+            /*put all strings into one*/
             strcat(buffer, " ");
             strcat(buffer, argv[i]);
         }
-
-        printf("%s\n",buffer);
     }
     char * username = malloc(sizeof(char)*strlen(buffer));
     strcpy(username,buffer);
 
     /* get the stream*/
     printf("stream: ");
-    char stream[100];
-    fgets(stream, 100, stdin);
+    char streamHold[100];
+    fgets(streamHold, 100, stdin);
+    char * stream = malloc(sizeof(char)*strlen(streamHold));
 
     /*check if the stream exists and the user has permission to post on the stream*/
     char * streamFile = malloc(sizeof(char)*(strlen(stream)+strlen("StreamUsers")));
@@ -39,9 +75,11 @@ int main (int argc, char *argv[]){
     if (checkSU == 0)
         return 0;
 
+    class PostEntry * pe;
+    pe = malloc(sizeof(class PostEntry));        
+    char * text = pe->readInput();
 
 
-    
 
     return 0;
 }

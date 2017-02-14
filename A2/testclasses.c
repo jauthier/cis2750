@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <time.h>
+#include "streamLib.h"
 
 typedef struct userPost {
     char * username;
@@ -22,10 +23,6 @@ userPost * createUserPost (char *username,char *streamname, char *date, char *te
 char * getTimeData ();
 void submitPost (userPost *up);
 
-
-
-
-
 userPost * createUserPost (char *username,char *streamname, char *date, char *text){
     userPost * newUP = malloc(sizeof(userPost));
     newUP->username = username;
@@ -36,28 +33,23 @@ userPost * createUserPost (char *username,char *streamname, char *date, char *te
 }
 
 char * readInput (){
-        char buffer[100];
-        char *hold = malloc(sizeof(char)*1000);
-        printf("Enter text: ");
-        if (fgets(buffer, 100, stdin) != NULL){
-            strcpy(hold, buffer);
-            while (fgets(buffer, 100, stdin) != NULL){
-                strcat(hold, buffer);
-            }
+    char buffer[100];
+    char *hold = malloc(sizeof(char)*1000);
+    printf("Enter text: ");
+    if (fgets(buffer, 100, stdin) != NULL){
+        strcpy(hold, buffer);
+        while (fgets(buffer, 100, stdin) != NULL){
+            strcat(hold, buffer);
         }
-        char *text = malloc(sizeof(char)*strlen(hold));
-        return text;
     }
+    char *text = malloc(sizeof(char)*strlen(hold));
+    return text;
+}
 
 char * getTimeData (){
-    printf("in getTimeData\n");
     time_t getTime = time (NULL);
-    if (ctime(&getTime)==NULL)
-        printf("null\n");
-    printf("%s\n", ctime(&getTime));
     char * date  = malloc(sizeof(char)*strlen(ctime(&getTime)));
     strcpy(date, ctime(&getTime));
-
     return date;
 }
 
@@ -67,9 +59,10 @@ userPost * formatEntry (char * username, char * streamname, char * text){
         return newPost;
 }
 
-
 void submitPost (userPost *up){
-        printf("in sub post\n");
+
+    int end = updateStream(up);
+    updateStreamData(up, end);
 }
 
 void peConstructor(struct PostEntry *pe){
@@ -83,19 +76,64 @@ void peConstructor(struct PostEntry *pe){
 
 
 int main (){
-    printf("initalize struct\n");
-    struct PostEntry *pe;
-    pe = malloc(sizeof(struct PostEntry));
-    printf("call constructor\n");
-    peConstructor(pe);
-    /*char * text = pe->readInput();
-    printf("%s\n", text);*/
+    /* take in user name*/
+    char buffer[200];
 
-    printf("call getTimeData\n");
-    char * date = getTimeData();
-    printf("%s\n", date);
+    if (argc == 1){
+        printf("Please enter your username.\n");
+        exit(0);
+    } else {
+        int i;
+        strcpy(buffer,argv[1]);
+        for (i=2;i<argc;i++){
+            /*put all strings into one*/
+            strcat(buffer, " ");
+            strcat(buffer, argv[i]);
+        }
+    }
+    char * username = malloc(sizeof(char)*strlen(buffer));
+    strcpy(username,buffer);
+
+    /* get the stream*/
+    printf("stream: ");
+    char streamHold[100];
+    fgets(streamHold, 100, stdin);
+    char * stream = malloc(sizeof(char)*strlen(streamHold));
+
+    /*check if the stream exists and the user has permission to post on the stream*/
+    char * streamFile = malloc(sizeof(char)*(strlen(stream)+strlen("StreamUsers")));
+    strcpy(streamFile,stream);
+    strcat(streamFile,"StreamUsers");
+    /*check username and stream*/
+    FILE * sufp = fopen(streamFile,"r");
+    int checkSU = checkStreamUsers(sufp,username);
+    if (checkSU == 0)
+        exit(0);
+    
+    struct PostEntry * pe;
+    pe = malloc(sizeof(class PostEntry));        
+    /*get the post text*/
+    char * text = pe->readInput();
+    /*format the post into a UserPost struct*/
+    userPost * newPost = formatEntry(username, stream, text);
 
 
+    return 0;
+}
+
+int checkStreamUsers (FILE *sufp, char *username){
+
+    if (sufp == NULL){
+        printf("The stream you wish to access does not exist!\n");
+        return 0;
+    }
+
+    char userLine[210];
+    while (fgets(userLine,210,sufp) != NULL){
+        if (strstr(userLine,userName) != NULL)
+            return 1;
+    }
+    printf("You do not have permission to post to this stream!\n");
     return 0;
 }
 

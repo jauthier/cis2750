@@ -11,6 +11,12 @@ int main (int argc, char *argv[]){
     return 0;	
 }
 
+/*
+    For getting the users post. 
+    Reads the users text in line by line and
+    stops when the user enters ctrl-d.
+    Returns the post.
+*/
 char * readInput (){
     char buffer[100];
     char *hold = malloc(sizeof(char)*1000);
