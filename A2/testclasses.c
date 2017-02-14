@@ -19,18 +19,10 @@ struct PostEntry {
 };
 
 char * readInput ();
-userPost * createUserPost (char *username,char *streamname, char *date, char *text);
 char * getTimeData ();
+userPost * formatEntry (char * username, char * streamname, char * text);
 void submitPost (userPost *up);
-
-userPost * createUserPost (char *username,char *streamname, char *date, char *text){
-    userPost * newUP = malloc(sizeof(userPost));
-    newUP->username = username;
-    newUP->streamname = streamname;
-    newUP->date = date;
-    newUP->text = text;
-    return newUP;
-}
+int checkStreamUsers (FILE *sufp, char *username);
 
 char * readInput (){
     char buffer[100];
@@ -130,7 +122,7 @@ int checkStreamUsers (FILE *sufp, char *username){
 
     char userLine[210];
     while (fgets(userLine,210,sufp) != NULL){
-        if (strstr(userLine,userName) != NULL)
+        if (strstr(userLine,username) != NULL)
             return 1;
     }
     printf("You do not have permission to post to this stream!\n");
