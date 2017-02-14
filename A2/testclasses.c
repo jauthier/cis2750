@@ -86,9 +86,10 @@ int main (int argc, char *argv[]){
     char * stream = malloc(sizeof(char)*strlen(streamHold));
 
     /*check if the stream exists and the user has permission to post on the stream*/
-    char * streamFile = malloc(sizeof(char)*(strlen(stream)+strlen("StreamUsers")));
-    strcpy(streamFile,stream);
-    strcat(streamFile,"StreamUsers");
+    char * streamFile = malloc(sizeof(char)*(strlen("messages/")+strlen(stream)+strlen("StreamUsers.txt")));
+    strcpy(streamFile,"messages/");
+    strcat(streamFile,stream);
+    strcat(streamFile,"StreamUsers.txt");
     /*check username and stream*/
     FILE * sufp = fopen(streamFile,"r");
     int checkSU = checkStreamUsers(sufp,username);
