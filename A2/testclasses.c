@@ -60,7 +60,7 @@ void peConstructor(struct PostEntry *pe){
 }
 
 
-int main (int argc, char *argv){
+int main (int argc, char *argv[]){
     /* take in user name*/
     char buffer[200];
 
@@ -69,13 +69,11 @@ int main (int argc, char *argv){
         exit(0);
     } else {
         int i;
-        char *un = argv[1];
-        strcpy(buffer,un);
+        strcpy(buffer,argv[1]);
         for (i=2;i<argc;i++){
             /*put all strings into one*/
             strcat(buffer, " ");
-            un = argv[i];
-            strcat(buffer, un);
+            strcat(buffer, argv[i]);
         }
     }
     char * username = malloc(sizeof(char)*strlen(buffer));
