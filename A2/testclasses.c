@@ -102,7 +102,8 @@ int main (int argc, char *argv[]){
     peConstructor(pe);
     /*get the post text*/
     char * text = pe->readInput();
-
+    
+    printf("%s\n", text);
     /*format the post into a UserPost struct*/
     userPost * newPost = formatEntry(username, stream, text);
     printf("%s\n%s\n%s\n",newPost->username, newPost->streamname, newPost->text);
