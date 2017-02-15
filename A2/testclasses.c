@@ -101,9 +101,8 @@ int main (int argc, char *argv[]){
     int checkSU = checkStreamUsers(sufp,username);
     if (checkSU == 0)
         exit(0);
-    struct PostEntry * pe;
+    struct PostEntry * pe = malloc(sizeof(struct PostEntry));
     peConstructor(pe);
-    pe = malloc(sizeof(struct PostEntry));   
     /*get the post text*/
     char * text = pe->readInput();
 
