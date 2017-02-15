@@ -26,8 +26,9 @@ void destroyUserPost(userPost *toDestroy){
 int updateStream(userPost *up){
     printf("in updateStream\n");
     /*find the stream file*/
-    char * streamFile = malloc(sizeof(char)*(strlen("stream.txt")+strlen(up->streamname)));
-    strcpy(streamFile,up->streamname);
+    char * streamFile = malloc(sizeof(char)*(strlen("messages/")+strlen("stream.txt")+strlen(up->streamname)));
+    strcpy(streamFile,"messages/");
+    strcat(streamFile,up->streamname);
     strcat(streamFile,"Stream.txt");
     printf("file: %s\n", streamFile);
     FILE * fp = fopen(streamFile,"a+");
@@ -50,8 +51,9 @@ int updateStream(userPost *up){
 
 void updateStreamData(userPost * up, int end){
     /*find the streamData file*/
-    char * streamDataFile = malloc(sizeof(char)*(strlen("streamData.txt")+strlen(up->streamname)));
-    strcpy(streamDataFile,up->streamname);
+    char * streamDataFile = malloc(sizeof(char)*(strlen("messages/")+strlen("streamData.txt")+strlen(up->streamname)));
+    strcpy(streamDataFile,"messages/");
+    strcat(streamDataFile,up->streamname);
     strcat(streamDataFile,"StreamData.txt");
     FILE * fp = fopen(streamDataFile,"a");
 
