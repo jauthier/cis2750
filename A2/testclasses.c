@@ -53,11 +53,11 @@ void submitPost (struct userPost *up){
 
 void peConstructor(struct PostEntry *pe){
     printf("in constructor\n");
-    pe->readInput = &readInput;
+    pe->readInput = readInput;
     printf("first\n");
-    pe->formatEntry = &formatEntry;
-    pe->getTimeData = &getTimeData;
-    pe->submitPost = &submitPost;
+    pe->formatEntry = formatEntry;
+    pe->getTimeData = getTimeData;
+    pe->submitPost = submitPost;
 }
 
 
