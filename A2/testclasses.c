@@ -18,6 +18,7 @@ void submitPost (userPost *up);
 int checkStreamUsers (FILE *sufp, char *username);
 
 char * readInput (){
+    printf("in read input\n");
     char buffer[100];
     char *hold = malloc(sizeof(char)*1000);
     printf("Enter text: ");
@@ -100,10 +101,8 @@ int main (int argc, char *argv[]){
     int checkSU = checkStreamUsers(sufp,username);
     if (checkSU == 0)
         exit(0);
-    printf("here\n");
     struct PostEntry * pe;
     pe = malloc(sizeof(struct PostEntry));   
-    printf("here2\n");     
     /*get the post text*/
     char * text = pe->readInput();
 
