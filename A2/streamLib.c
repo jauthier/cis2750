@@ -56,3 +56,4 @@ void updateStreamData(userPost * up, int end){
     /*add the number to the ned of the file*/
     fprintf(fp, "%d\n", end);
 }
+

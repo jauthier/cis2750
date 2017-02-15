@@ -83,7 +83,11 @@ int main (int argc, char *argv[]){
     printf("stream: ");
     char streamHold[100];
     fgets(streamHold, 100, stdin);
-    char * stream = malloc(sizeof(char)*strlen(streamHold));
+    /*get rid of the newline*/
+    int len = strlen(streamHold);
+    streamHold[len-1] = '\0';
+
+    char * stream = malloc(sizeof(char)*len);
     strcpy(stream, streamHold);
 
     /*check if the stream exists and the user has permission to post on the stream*/
