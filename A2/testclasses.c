@@ -27,8 +27,10 @@ char * readInput (){
             strcat(hold, buffer);
         }
     }
-    printf("TEXT: %s\n", hold);
+    
     char *text = malloc(sizeof(char)*strlen(hold));
+    strcpy(text, hold);
+    printf("TEXT: %s\n", text);
     return text;
 }
 
