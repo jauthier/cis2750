@@ -95,17 +95,18 @@ int main (int argc, char *argv[]){
     strcpy(streamFile,"messages/");
     strcat(streamFile,stream);
     strcat(streamFile,"StreamUsers.txt");
-    printf("file: %s\n", streamFile);
     /*check username and stream*/
     FILE * sufp = fopen(streamFile,"r");
     int checkSU = checkStreamUsers(sufp,username);
     if (checkSU == 0)
         exit(0);
-    
+    printf("here\n");
     struct PostEntry * pe;
-    pe = malloc(sizeof(struct PostEntry));        
+    pe = malloc(sizeof(struct PostEntry));   
+    printf("here2\n");     
     /*get the post text*/
     char * text = pe->readInput();
+
     /*format the post into a UserPost struct*/
     userPost * newPost = formatEntry(username, stream, text);
 
