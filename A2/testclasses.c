@@ -30,7 +30,6 @@ char * readInput (){
     
     char *text = malloc(sizeof(char)*strlen(hold));
     strcpy(text, hold);
-    printf("TEXT: %s\n", text);
     return text;
 }
 
@@ -106,11 +105,9 @@ int main (int argc, char *argv[]){
     /*get the post text*/
     char * text = pe->readInput();
 
-    printf("%s\n", text);
     /*format the post into a UserPost struct*/
-    userPost * newPost = formatEntry(username, stream, text);
-    printf("%s\n%s\n%s\n",newPost->username, newPost->streamname, newPost->text);
-    submitPost(newPost);
+    userPost * newPost = pe->formatEntry(username, stream, text);
+    pe->submitPost(newPost);
     return 0;
 }
 
