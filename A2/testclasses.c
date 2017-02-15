@@ -102,6 +102,7 @@ int main (int argc, char *argv[]){
     if (checkSU == 0)
         exit(0);
     struct PostEntry * pe;
+    peConstructor(pe);
     pe = malloc(sizeof(struct PostEntry));   
     /*get the post text*/
     char * text = pe->readInput();
