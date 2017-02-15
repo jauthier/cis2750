@@ -18,7 +18,6 @@ void submitPost (userPost *up);
 int checkStreamUsers (FILE *sufp, char *username);
 
 char * readInput (){
-    printf("in read input\n");
     char buffer[100];
     char *hold = malloc(sizeof(char)*1000);
     printf("Enter text: ");
@@ -52,9 +51,7 @@ void submitPost (struct userPost *up){
 }
 
 void peConstructor(struct PostEntry *pe){
-    printf("in constructor\n");
     pe->readInput = readInput;
-    printf("first\n");
     pe->formatEntry = formatEntry;
     pe->getTimeData = getTimeData;
     pe->submitPost = submitPost;
@@ -108,8 +105,7 @@ int main (int argc, char *argv[]){
 
     /*format the post into a UserPost struct*/
     userPost * newPost = formatEntry(username, stream, text);
-
-
+    submitPost(newPost);
     return 0;
 }
 
