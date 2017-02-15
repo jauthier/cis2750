@@ -27,6 +27,7 @@ char * readInput (){
             strcat(hold, buffer);
         }
     }
+    printf("TEXT: %s\n", hold);
     char *text = malloc(sizeof(char)*strlen(hold));
     return text;
 }
@@ -102,7 +103,7 @@ int main (int argc, char *argv[]){
     peConstructor(pe);
     /*get the post text*/
     char * text = pe->readInput();
-    
+
     printf("%s\n", text);
     /*format the post into a UserPost struct*/
     userPost * newPost = formatEntry(username, stream, text);
