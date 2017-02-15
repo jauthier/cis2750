@@ -105,7 +105,7 @@ int main (int argc, char *argv[]){
 
     /*format the post into a UserPost struct*/
     userPost * newPost = formatEntry(username, stream, text);
-    printf("%s\n%s\n%s\n",newPost->username, newPost->stream, newPost->text);
+    printf("%s\n%s\n%s\n",newPost->username, newPost->streamname, newPost->text);
     submitPost(newPost);
     return 0;
 }
