@@ -75,8 +75,8 @@ int main (int argc, char *argv[]){
     if (checkSU == 0)
         return 0;
 
-    struct PostEntry * pe;
-    pe = malloc(sizeof(struct PostEntry));        
+    class PostEntry * pe;
+    pe = malloc(sizeof(class PostEntry));        
     char * text = pe->readInput();
 
 

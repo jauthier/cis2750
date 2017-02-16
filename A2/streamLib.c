@@ -35,7 +35,7 @@ int updateStream(userPost *up){
     
     /*add the post to the file*/
     fprintf(fp, "Sender: %s\n", up->username);
-    fprintf(fp, "Date: %s\n", up->date);
+    fprintf(fp, "Date: %s", up->date);
     fprintf(fp, "%s\n", up->text);
     
     /*find the end*/
@@ -46,6 +46,7 @@ int updateStream(userPost *up){
         if (c=='\n')
             numLines ++;
     }
+    free(streamFile);
     return numLines;
 }
 
@@ -56,8 +57,93 @@ void updateStreamData(userPost * up, int end){
     strcat(streamDataFile,up->streamname);
     strcat(streamDataFile,"StreamData.txt");
     FILE * fp = fopen(streamDataFile,"a");
-
+ 
     /*add the number to the ned of the file*/
     fprintf(fp, "%d\n", end);
+    free(streamDataFile);
 }
 
+void addUser(char *username, char *list){
+    /*tokenize the stream  list*/
+    char * token = strtok(list," ,\n");
+    while (token != NULL){
+        /*get the name of the file*/
+        char * streamFile = malloc(sizeof(char)*(strlen("messages/")+strlen(token)+strlen("StreamUsers.txt")));
+        strcpy(streamFile,"messages/");
+        strcat(streamFile,token);
+        strcat(streamFile,"StreamUsers.txt");
+
+        /*check the file exists*/
+        FILE *fpTest = fopen(streamFile, "r");
+        if (fpTest == NULL){
+            makeStreamFiles(token);
+        } else {
+            /*check if the username is already in the file*/
+
+        }
+        fclose(fpTest);
+        /*open the file and add the user*/
+        FILE * fp = fopen(streamFile, "a");
+        fprintf(fp, "%s 0\n", username);
+        fclose(fp);
+        free(streamFile);
+        token = strtok(NULL, " ,\n");
+    }
+}
+
+void removeUser(char *username, char *list){
+    /*tokenize the stream  list*/
+    char * token = strtok(list," ,\n");
+    while (token != NULL){
+        /*get the name of the file*/
+        char * streamFile = malloc(sizeof(char)*(strlen("messages/")+strlen(token)+strlen("StreamUsers.txt")));
+        strcpy(streamFile,"messages/");
+        strcat(streamFile,token);
+        strcat(streamFile,"StreamUsers.txt");
+
+        /*open the file*/
+        FILE *fp = fopen(streamFile,"r+");
+        if (fp == NULL) /*if the file doesn't exist then there is no need to remove the user*/
+            return 0;
+
+        writeFile(streamFile,username);
+        token = strtok(NULL, " ,\n");
+    }
+
+}
+
+void makeStreamFiles(char *stream){
+    
+    /*make stream file*/
+    char * streamFile = malloc(sizeof(char)*(strlen("messages/")+strlen(token)+strlen("Stream.txt")));
+    strcpy(streamFile,"messages/");
+    strcat(streamFile,stream);
+    strcat(streamFile,"Stream.txt");
+    FILE * fp1 = fopen(streamFile,"w");
+    fclose(fp1);
+
+    /*make streamData file*/
+    char * streamDataFile = malloc(sizeof(char)*(strlen("messages/")+strlen(token)+strlen("StreamData.txt")));
+    strcpy(streamDataFile,"messages/");
+    strcat(streamDataFile,stream);
+    strcat(streamDataFile,"StreamData.txt");
+    FILE * fp2 = fopen(streamDataFile,"w");
+    fclose(fp2);
+}
+
+void writeFile(char * fileName, char * username){
+    char tempFile[] = "temp.txt";
+    FILE * fpIn = fopen(tempFile,"w");
+    FILE * fpOut = fopen(fileName,"r");
+    char line[100]; 
+    while (!feof(fpOut)){   
+        fgets(line,100,fpOut);
+        if (strstr(line, username)==NULL){
+            fprintf(fpIn, "%s\n", line);
+        }
+    }
+    fclose(fpOut);
+    remove(fileName);
+    rename(tempFile,fileName);
+    fclose(fpIn);
+}

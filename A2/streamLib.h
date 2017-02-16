@@ -42,9 +42,13 @@ void updateStreamData(struct userPost * up, int end);
 /*
 
 */
-void addUSer(char *username, char *list);
+void addUser(char *username, char *list);
 
 /*
 
 */
 void removeUser(char *username, char *list);
+
+void makeStreamFiles(char *stream);
+
+void writeFile(char * fileName, char * username);
