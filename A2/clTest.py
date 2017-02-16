@@ -4,8 +4,8 @@ import sys
 
 #get command line agruments
 userName = ""
-numArg = len(sys.argv)
-for i in range (1,numArg-1)
+numArg = len(sys.argv)-1
+for i in range (1,numArg)
     userName = "%s %s"% (userName, sys.argv[i])
 
 print userName
