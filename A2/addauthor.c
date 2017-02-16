@@ -20,7 +20,7 @@ int main (int argc, char * argv[]){
     char buffer[200];
     /*the user wants to remove a username*/
     printf("%s\n", argv[1]);
-    if (strcmp(argv[1],"-r")==1){
+    if (strcmp(argv[1],"-r")==0){
         check = 1;
         i++;
     }
@@ -44,6 +44,7 @@ int main (int argc, char * argv[]){
     strcpy(streams,streamHold);
 
     if (check == 1)
+        printf("before removeUser\n");
         removeUser(username,streams);
     else 
         addUser(username, streams);
