@@ -74,19 +74,29 @@ void addUser(char *username, char *list){
         strcat(streamFile,token);
         strcat(streamFile,"StreamUsers.txt");
 
+
         /*check the file exists*/
+        int check = 0;
         FILE *fpTest = fopen(streamFile, "r");
         if (fpTest == NULL){
             makeStreamFiles(token);
         } else {
             /*check if the username is already in the file*/
-
+            char line[100];
+            while (!feof(fpTest)){   
+                fgets(line,100,fpOut);
+                if (strstr(line, username)==NULL){
+                    check = 1;
+                }
+            }
         }
         fclose(fpTest);
         /*open the file and add the user*/
-        FILE * fp = fopen(streamFile, "a");
-        fprintf(fp, "%s 0\n", username);
-        fclose(fp);
+        if (check == 0){
+            FILE * fp = fopen(streamFile, "a");
+            fprintf(fp, "%s 0\n", username);
+            fclose(fp);
+        }
         free(streamFile);
         token = strtok(NULL, " ,\n");
     }
@@ -110,7 +120,7 @@ void removeUser(char *username, char *list){
         writeFile(streamFile,username);
         token = strtok(NULL, " ,\n");
     }
-
+    free(streamFile);
 }
 
 void makeStreamFiles(char *stream){
@@ -130,6 +140,8 @@ void makeStreamFiles(char *stream){
     strcat(streamDataFile,"StreamData.txt");
     FILE * fp2 = fopen(streamDataFile,"w");
     fclose(fp2);
+    free(streamFile);
+    free(streamDataFile);
 }
 
 void writeFile(char * fileName, char * username){
