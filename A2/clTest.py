@@ -23,7 +23,11 @@ for line in file_1:
 userStreams = []
 for stream in allSList:
 	fileName = "messages/%sStreamUsers.txt"%stream
-	print(fileName)
+	f = open(fileName,"r")
+	if stream in f.read():
+		userStreams.append("%s"%stream)
+
+print (userStreams)
 
 
 
