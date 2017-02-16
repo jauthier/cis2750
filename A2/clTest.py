@@ -26,9 +26,10 @@ for stream in allSList:
 	f = open(fileName,"r")
 	if userName in f.read():
 		userStreams.append("%s"%stream)
-
-print (userStreams)
-
+f.close()
+for stream in userStreams:
+	print (stream +" ", end='');
+print("all");
 
 
 
