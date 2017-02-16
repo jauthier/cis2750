@@ -68,19 +68,15 @@ void addUser(char *username, char *list){
     char * token = strtok(list," ,\n");
     while (token != NULL){
         /*get the name of the file*/
-        printf("in add file\n");
         char * streamFile = malloc(sizeof(char)*(strlen("messages/")+strlen(token)+strlen("StreamUsers.txt")));
         strcpy(streamFile,"messages/");
         strcat(streamFile,token);
         strcat(streamFile,"StreamUsers.txt");
 
-printf("after file name is made\n");
         /*check the file exists*/
         int check = 0;
         FILE *fpTest = fopen(streamFile, "r");
-        printf("after file is open\n");
         if (fpTest == NULL){
-            printf("new stream\n");
             makeStreamFiles(token);
         } else {
             /*check if the username is already in the file*/
@@ -107,6 +103,7 @@ printf("after file name is made\n");
 
 void removeUser(char *username, char *list){
     /*tokenize the stream  list*/
+    printf("in removeUser\n");
     char * token = strtok(list," ,\n");
     while (token != NULL){
         /*get the name of the file*/
@@ -114,12 +111,12 @@ void removeUser(char *username, char *list){
         strcpy(streamFile,"messages/");
         strcat(streamFile,token);
         strcat(streamFile,"StreamUsers.txt");
-
+printf("File: %s\n", streamFile);
         /*open the file*/
         FILE *fp = fopen(streamFile,"r+");
         if (fp == NULL) /*if the file doesn't exist then there is no need to remove the user*/
             return;
-
+printf("before writeFile\n");
         writeFile(streamFile,username);
         token = strtok(NULL, " ,\n");
         free(streamFile);
@@ -155,10 +152,13 @@ void writeFile(char * fileName, char * username){
     FILE * fpIn = fopen(tempFile,"w");
     FILE * fpOut = fopen(fileName,"r");
     char line[100]; 
-    while (!feof(fpOut)){   
+
+    while (!feof(fpOut)){
         fgets(line,100,fpOut);
         if (strstr(line, username)==NULL){
             fprintf(fpIn, "%s\n", line);
+        } else {
+            printf("found the username\n");
         }
     }
     fclose(fpOut);
