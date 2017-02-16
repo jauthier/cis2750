@@ -84,7 +84,7 @@ void addUser(char *username, char *list){
             /*check if the username is already in the file*/
             char line[100];
             while (!feof(fpTest)){   
-                fgets(line,100,fpOut);
+                fgets(line,100,fpTest);
                 if (strstr(line, username)==NULL){
                     check = 1;
                 }
@@ -119,8 +119,8 @@ void removeUser(char *username, char *list){
 
         writeFile(streamFile,username);
         token = strtok(NULL, " ,\n");
+        free(streamFile);
     }
-    free(streamFile);
 }
 
 void makeStreamFiles(char *stream){
