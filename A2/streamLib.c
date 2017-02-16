@@ -92,7 +92,9 @@ printf("after file name is made\n");
                 }
             }
         }
+        printf("before closing the file\n");
         fclose(fpTest);
+        printf("after closing the file\n");
         /*open the file and add the user*/
         if (check == 0){
             FILE * fp = fopen(streamFile, "a");
@@ -146,6 +148,7 @@ void makeStreamFiles(char *stream){
     fclose(fp2);
     free(streamFile);
     free(streamDataFile);
+    printf("end of makeStreamFiles\n");
 }
 
 void writeFile(char * fileName, char * username){
