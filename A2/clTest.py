@@ -27,10 +27,16 @@ for stream in allSList:
 	if userName in f.read():
 		userStreams.append("%s"%stream)
 f.close()
+
+#print out the options
+print("Which stream would you like to view?");
 for stream in userStreams:
 	print (stream +" ", end='');
 print("all");
 
+#get the users choice
+choice = input();
+print(choice);
 
 
 #open a file
