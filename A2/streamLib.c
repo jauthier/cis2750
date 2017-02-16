@@ -68,6 +68,7 @@ void addUser(char *username, char *list){
     char * token = strtok(list," ,\n");
     while (token != NULL){
         /*get the name of the file*/
+        printf("in add file\n");
         char * streamFile = malloc(sizeof(char)*(strlen("messages/")+strlen(token)+strlen("StreamUsers.txt")));
         strcpy(streamFile,"messages/");
         strcat(streamFile,token);
@@ -82,7 +83,6 @@ void addUser(char *username, char *list){
 
         }
         fclose(fpTest);
-        printf("in add file\n");
         /*open the file and add the user*/
         FILE * fp = fopen(streamFile, "a");
         fprintf(fp, "%s 0\n", username);
