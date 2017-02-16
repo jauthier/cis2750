@@ -82,6 +82,7 @@ void addUser(char *username, char *list){
 
         }
         fclose(fpTest);
+        printf("in add file\n");
         /*open the file and add the user*/
         FILE * fp = fopen(streamFile, "a");
         fprintf(fp, "%s 0\n", username);
