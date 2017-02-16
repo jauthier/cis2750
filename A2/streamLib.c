@@ -104,7 +104,7 @@ void removeUser(char *username, char *list){
         /*open the file*/
         FILE *fp = fopen(streamFile,"r+");
         if (fp == NULL) /*if the file doesn't exist then there is no need to remove the user*/
-            return 0;
+            return;
 
         writeFile(streamFile,username);
         token = strtok(NULL, " ,\n");
@@ -115,7 +115,7 @@ void removeUser(char *username, char *list){
 void makeStreamFiles(char *stream){
     
     /*make stream file*/
-    char * streamFile = malloc(sizeof(char)*(strlen("messages/")+strlen(token)+strlen("Stream.txt")));
+    char * streamFile = malloc(sizeof(char)*(strlen("messages/")+strlen(stream)+strlen("Stream.txt")));
     strcpy(streamFile,"messages/");
     strcat(streamFile,stream);
     strcat(streamFile,"Stream.txt");
@@ -123,7 +123,7 @@ void makeStreamFiles(char *stream){
     fclose(fp1);
 
     /*make streamData file*/
-    char * streamDataFile = malloc(sizeof(char)*(strlen("messages/")+strlen(token)+strlen("StreamData.txt")));
+    char * streamDataFile = malloc(sizeof(char)*(strlen("messages/")+strlen(stream)+strlen("StreamData.txt")));
     strcpy(streamDataFile,"messages/");
     strcat(streamDataFile,stream);
     strcat(streamDataFile,"StreamData.txt");
