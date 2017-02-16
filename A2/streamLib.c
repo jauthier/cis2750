@@ -155,10 +155,9 @@ void writeFile(char * fileName, char * username){
 
     while (!feof(fpOut)){
         fgets(line,100,fpOut);
+        printf("%s\n", line);
         if (strstr(line, username)==NULL){
-            fprintf(fpIn, "%s\n", line);
-        } else {
-            printf("found the username\n");
+            fprintf(fpIn, "%s", line);
         }
     }
     fclose(fpOut);
