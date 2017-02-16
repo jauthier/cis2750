@@ -74,11 +74,13 @@ void addUser(char *username, char *list){
         strcat(streamFile,token);
         strcat(streamFile,"StreamUsers.txt");
 
-
+printf("after file name is made\n");
         /*check the file exists*/
         int check = 0;
         FILE *fpTest = fopen(streamFile, "r");
+        printf("after file is open\n");
         if (fpTest == NULL){
+            printf("new stream\n");
             makeStreamFiles(token);
         } else {
             /*check if the username is already in the file*/
@@ -124,12 +126,13 @@ void removeUser(char *username, char *list){
 }
 
 void makeStreamFiles(char *stream){
-    
+    printf("in makeStreamFiles\n");
     /*make stream file*/
     char * streamFile = malloc(sizeof(char)*(strlen("messages/")+strlen(stream)+strlen("Stream.txt")));
     strcpy(streamFile,"messages/");
     strcat(streamFile,stream);
     strcat(streamFile,"Stream.txt");
+    printf("before opening file 1\n");
     FILE * fp1 = fopen(streamFile,"w");
     fclose(fp1);
 
@@ -138,6 +141,7 @@ void makeStreamFiles(char *stream){
     strcpy(streamDataFile,"messages/");
     strcat(streamDataFile,stream);
     strcat(streamDataFile,"StreamData.txt");
+    printf("before opening file 2\n");
     FILE * fp2 = fopen(streamDataFile,"w");
     fclose(fp2);
     free(streamFile);
