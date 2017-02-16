@@ -152,13 +152,13 @@ void writeFile(char * fileName, char * username){
     FILE * fpIn = fopen(tempFile,"w");
     FILE * fpOut = fopen(fileName,"r");
     char line[100]; 
-
+    fgets(line,100,fpOut);
     while (!feof(fpOut)){
-        fgets(line,100,fpOut);
         printf("%s\n", line);
         if (strstr(line, username)==NULL){
             fprintf(fpIn, "%s", line);
         }
+        fgets(line,100,fpOut);
     }
     fclose(fpOut);
     remove(fileName);
