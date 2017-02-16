@@ -19,6 +19,7 @@ int main (int argc, char * argv[]){
     int check = 0;
     char buffer[200];
     /*the user wants to remove a username*/
+    printf("%s\n", argv[1]);
     if (strcmp(argv[1],"-r")==1){
         check = 1;
         i++;
