@@ -17,7 +17,8 @@ allSFile = "messages/allStreams.txt"
 file_1 = open(allSFile,"r")
 allSList = []
 for line in file_1:
-	allSList.append("%s"%line,end='')
+	line = line.rstrip('\n')
+	allSList.append("%s"%line)
 print(allSList)
 
 #open a file
