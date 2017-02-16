@@ -91,10 +91,9 @@ printf("after file name is made\n");
                     check = 1;
                 }
             }
+            fclose(fpTest);
         }
-        printf("before closing the file\n");
-        fclose(fpTest);
-        printf("after closing the file\n");
+
         /*open the file and add the user*/
         if (check == 0){
             FILE * fp = fopen(streamFile, "a");
