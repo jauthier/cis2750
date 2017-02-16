@@ -1,5 +1,5 @@
 jauthier 0
 bob 0
-jess 0
 luke 0
 josh 0
+jess 0
