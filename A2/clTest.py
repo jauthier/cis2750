@@ -11,7 +11,7 @@ if numArg >= 2:
 for i in range (2, numArg):
 	userName = "%s %s" % (userName, sys.argv[i])
 
-print userName
+print (userName)
 
 
 #open a file
