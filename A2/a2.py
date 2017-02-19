@@ -32,23 +32,24 @@ def streamFileToList(streamFile, dataFile, stream):
 	# read in the stream file and put the posts in a list
 	fpStream = open(streamFile,"r")
 	streamFileList = fpStream.readlines()
-	print(streamFileList)
 	postStart = 0
 	count  = 0
 	streamList = []
 	# make a dict for each post
 	for i in range(0,numPosts):
-		print(i) 
+		print(i)
 		postList = {}
 		postEnd = int(dataList[i]) #get the last line of the post
 		line = "Stream: %s\n"%stream
 		postList.update({count:line})
 		count += 1
 		for j in range(postStart,postEnd):
+
 			postList.update({count : streamFileList[j]})
 			count += 1
 		streamList.append(postList)
 		postStart = postEnd + 1
+		print(streamList)
 	return streamList
 
 def getStream(streamList):
