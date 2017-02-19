@@ -45,7 +45,6 @@ def getStream(streamList):
 				if userName in str:
 					parse = str.split(":")
 					lastPostRead = parse[1].split(' ')[1]
-					print(lastPostRead)
 					lastPostRead = lastPostRead.split('\n')[0]
 					lastPRList.append(int(lastPostRead))
 
@@ -171,7 +170,8 @@ def redoKeys(listOfDicts):
 		newDict = {}
 		l = len(post)
 		for i in range(0,l):
-			newDict.update({count : post.values()[i]})
+			temp = post.values()[i]
+			newDict.update({count : temp})
 			count += 1
 		newList.append(newDict)
 	return newList
