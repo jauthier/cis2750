@@ -12,16 +12,14 @@ def printPosts(postList, topPos, lastPost):
 	currentPost = int(lastPost)
 	post = postList[currentPost]
 	# display what you can of the post
-	for i in range(topPos, topPos+21):
-		if i in post: # make sure the key is in the dict
-			print(post[i])
-		else:
-			if currentPost + 1 < numPosts:
-				currentPost += 1
-				post = postList[currentPost]
+	print(topPos)
+	for post in postList:
+		for i in range(topPos, topPos+21):
+			if i in post: # make sure the key is in the dict
 				print(post[i])
 			else:
 				break
+
 	print("U-Up    D-Down    O-Order Toggle    M-Mark All    C-Check new    S-New Stream")
 
 def streamFileToList(streamFile, dataFile, stream):
@@ -38,7 +36,8 @@ def streamFileToList(streamFile, dataFile, stream):
 	count  = 0
 	streamList = []
 	# make a dict for each post
-	for i in range(numPosts): 
+	for i in range(0,numPosts):
+		print(i) 
 		postList = {}
 		postEnd = int(dataList[i]) #get the last line of the post
 		line = "Stream: %s\n"%stream
