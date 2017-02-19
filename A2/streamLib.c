@@ -31,16 +31,17 @@ int updateStream(userPost *up){
     strcat(streamFile,up->streamname);
     strcat(streamFile,"Stream.txt");
     printf("file: %s\n", streamFile);
-    FILE * fp = fopen(streamFile,"a+");
+    FILE * fp = fopen(streamFile,"a");
     
     /*add the post to the file*/
     fprintf(fp, "Sender: %s\n", up->username);
     fprintf(fp, "Date: %s", up->date);
     fprintf(fp, "%s\n", up->text);
-    
+    fclose(fp);
     /*find the end*/
     int numLines = 0;
     char c;
+    fp = fopen(streamFile,"r");
     while (!feof(fp)){
         c = fgetc(fp);
         if (c=='\n')
@@ -78,6 +79,9 @@ void addUser(char *username, char *list){
         FILE *fpTest = fopen(streamFile, "r");
         if (fpTest == NULL){
             makeStreamFiles(token);
+            FILE * fp1 = fopen("messages/allStreams.txt","a");
+            fprintf(fp1, "%s\n", token);
+            fclose(fp1);
         } else {
             /*check if the username is already in the file*/
             char line[100];
