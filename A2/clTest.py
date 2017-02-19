@@ -132,6 +132,7 @@ def combineStreams(listOfList, dataList):
 			cpList.append(list2[int(dataList[i])])	
 		list1 = mergeTwoList(list1, list2)
 	
+	print(list1)
 	newList = redoKeys(list1)
 	print(newList)
 	topPos = getTopPos(newList, cpList)
