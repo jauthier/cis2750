@@ -13,7 +13,6 @@ def getStream(streamList):
 	print("all");
 	#get the users choice
 	choice = input().rstrip('\n')
-	choice = getStream(userStreams)
 	postList = []
 
 	#make the postList
