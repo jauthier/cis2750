@@ -44,7 +44,7 @@ def streamFileToList(streamFile, dataFile, stream):
 		postList.update({count:line})
 		count += 1
 		for j in range(postStart,postEnd):
-
+			print("here")
 			postList.update({count : streamFileList[j]})
 			count += 1
 		streamList.append(postList)
