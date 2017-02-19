@@ -4,6 +4,19 @@ import sys
 import os
 
 
+def updateFile(stream, userName):
+	fileName = "messages/%sStreamUsers.txt"%stream
+	tempFile = "messages/temp.txt"
+	file = open(fileName, "r")
+	temp = open(tempFile,"w")
+	for line in file:
+		hold = line.split(' ')
+		if userName in line:
+			temp.write("%s %d"%hold[0],(int(hold[1])+1))
+		else:
+			temp.write(line)
+	remove(fileName)
+	move(tempFile, fileName)
 
 def getStream(streamList):
 	os.system('clear')
@@ -13,25 +26,30 @@ def getStream(streamList):
 	print("all");
 	#get the users choice
 	choice = input().rstrip('\n')
-	postList = []
+	postList = [] # a list of all the posts
+	lastPRList = [] # a list of the users current pos in each stream file they are viewing
 
 	#make the postList
 	if choice != "all":
-		#make a list of lists
-		listOfList = []
-		dataList = []
-		for s in userStreams:
+		listOfList = [] # a list of lists
+		for s in streamList:
+			# file names for the stream
 			streamFile = "messages/%sStream.txt"%s
 			dataFile = "messages/%sStreamData.txt"%s 
 			usersFile = "messages/%sStreamUsers.txt"%s
+			# add the stream list to the list of lists
 			listOfList.append(streamFileToList(streamFile,dataFile,s))
+			#get the last post the user read
 			f = open(usersFile, "r")
 			for str in f:
 				if userName in str:
-					parse = str.split(" ")
-					lastPostRead = parse[1]
-			dataList.append(lastPostRead)
-		postList = combineStreams(listOfList, dataList)
+					parse = str.split(":")
+					lastPostRead = parse[1].split(' ')[0]
+					lastPRList.append(lastPostRead)
+
+		hold = combineStreams(listOfList, lastPRList)
+		postList = hold[0]
+		topPos = hold[1]
 
 	else:
 		#open the streamUsers file and get the users location
@@ -41,13 +59,15 @@ def getStream(streamList):
 			if userName in str:
 				parse = str.split(" ")
 				lastPostRead = parse[1]
+				lastPRList.append(lastPostRead)
+
 		streamFile = "messages/%sStream.txt"%choice
 		dataFile = "messages/%sStreamData.txt"%choice
 		postList = streamFileToList(streamFile, dataFile, choice)
 		topPos = open(dataFile).readlines()[lastPostRead-1] + 1
 
-		rList = [postList, topPos, lastPostRead, choice]
-		return rList
+	rList = [postList, topPos, lastPRList, choice]
+	return rList
 
 def printPosts(postList, topPos, lastPost):
 	#clear and print
@@ -95,14 +115,26 @@ def streamFileToList(streamFile, dataFile, stream):
 		postStart = postEnd + 1
 	return streamList
 
-def combineStreams(listOfList):
+def combineStreams(listOfList, dataList):
 	#combine the first two
 	list1 = listOfList[0]
+	numPosts = len(list1)
+	cpList = []
+	if numPosts > int(dataList[0]): #the user hasn't read all the posts
+		cpList.append(list1[int(dataList[0])]) #get the current post of the first stream
 	l = len(listOfList)
+
 	for i in range(1, l):
 		list2 = listOfList[i]
+		numPosts = len(list2)
+		if numPost > int(dataList[i]):
+			cpList.append(list2[int(dataList[i])])	
 		list1 = mergeTwoList(list1, list2)
-	return redoKeys(list1)
+	
+	newList = redoKeys(list1)
+	topPos = getTopPos(newList, cpList)
+	final = [newList, topPos]
+	return final
 
 def mergeTwoList(list1, list2):
 	newList = []
@@ -141,6 +173,29 @@ def redoKeys(listOfDicts):
 			count += 1
 		newList.append(newDict)
 	return newList
+
+def getTopPos(postList, cpList):
+	numPosts = len(postList)
+	# if the user has read everything
+	if len(cpList) == 0:
+		return postList[numPosts -1].keys()[0]
+
+	#find the earliest post from cpList
+	cp1 = cpList[0]
+
+	for i in range(1,len(cpList)):
+		cp2 = cpList[i]
+		if compareDate(cp1[2], cp2[2]) == 1:
+			cp1 = cp2
+	#find cp1 in the postList
+	for p in postList:
+		val = p.values()
+		if val[0] == cp1[0]:
+			if val[1] == cp1[1]:
+				if val[2] ==  cp1[2]:
+					return p.keys()[0]
+	return postList[numPosts -1].keys()[0]
+
 
 # return 0 if date1 is before date2
 def compareDates(date1, date2):
@@ -240,10 +295,13 @@ if __name__ == "__main__":
 	#check each streamUser file
 	userStreams = []
 	for stream in allSList:
-		fileName = "messages/%sStreamUsers.txt"%stream
-		f = open(fileName,"r")
+		usersFile = "messages/%sStreamUsers.txt"%stream
+		streamFile = "messages/%sStream.txt"%stream
+		f = open(usersFile,"r")
+		sf = open(streamFile, "r").readlines()
 		if userName in f.read():
-			userStreams.append("%s"%stream)
+			if len(sf) != 0: #if the stream is empty it wont be added
+				userStreams.append("%s"%stream)
 	f.close()
 	
 	rList = getStream(userStreams)

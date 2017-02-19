@@ -93,7 +93,7 @@ void addUser(char *username, char *list){
         /*open the file and add the user*/
         if (check == 0){
             FILE * fp = fopen(streamFile, "a");
-            fprintf(fp, "%s 0\n", username);
+            fprintf(fp, "%s: 0\n", username);
             fclose(fp);
         }
         free(streamFile);
