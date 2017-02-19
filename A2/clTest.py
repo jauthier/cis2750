@@ -191,7 +191,9 @@ def getTopPos(postList, cpList):
 			cp1 = cp2
 	#find cp1 in the postList
 	for p in postList:
+		print("%d"%len(p))
 		val = list(p.values())
+		print("%d"%len(val))
 		if val[0] == cp1[0]:
 			if val[1] == cp1[1]:
 				if val[2] ==  cp1[2]:
