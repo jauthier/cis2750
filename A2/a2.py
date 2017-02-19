@@ -14,6 +14,7 @@ def printPosts(postList, topPos, lastPost):
 	# display what you can of the post
 	print(topPos)
 	for post in postList:
+		print(post)
 		for i in range(topPos, topPos+21):
 			if i in post: # make sure the key is in the dict
 				print(post[i])
