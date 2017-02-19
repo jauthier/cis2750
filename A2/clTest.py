@@ -30,7 +30,7 @@ def getStream(streamList):
 	lastPRList = [] # a list of the users current pos in each stream file they are viewing
 
 	#make the postList
-	if choice != "all":
+	if choice == "all":
 		listOfList = [] # a list of lists
 		for s in streamList:
 			# file names for the stream
