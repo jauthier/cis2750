@@ -25,7 +25,7 @@ def getStream(streamList):
 			dataFile = "messages/%sStreamData.txt"%s 
 			usersFile = "messages/%sStreamUsers.txt"%s
 			listOfList.append(streamFileToList(streamFile,dataFile,s))
-			f = open(fn, "r")
+			f = open(usersFile, "r")
 			for str in f:
 				if userName in str:
 					parse = str.split(" ")
