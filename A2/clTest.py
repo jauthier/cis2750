@@ -91,7 +91,7 @@ def streamFileToList(streamFile, dataFile, stream):
 			postList.update({count : streamFileList[j]})
 			count += 1
 		streamList.append(postList)
-		postStart = postEnd + 1
+		postStart = int(postEnd) + 1
 	return streamList
 
 def combineStreams(listOfList):
