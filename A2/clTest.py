@@ -77,7 +77,7 @@ def printPosts(postList, topPos, lastPost):
 	# display 22 lines of the posts and a line of controls
 	numPosts = len(postList)
 	#start with lastpost + 1
-	currentPost = lastPost + 1
+	currentPost = int(lastPost) + 1
 	post = postList[currentPost]
 	# display what you can of the post
 	for i in range(topPos, topPos+21):
