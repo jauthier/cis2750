@@ -171,7 +171,7 @@ def mergeTwoList(list1, list2):
 	i = 0
 	j = 0
 
-	while i < l1 && j < l2:
+	while i < l1 and j < l2:
 		if compareDates(list1[i][2], list2[j][2]) == 1:
 			#post1 was posted before post2
 			newList.append(list1[i])
