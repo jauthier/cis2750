@@ -90,7 +90,7 @@ def streamFileToList(streamFile, dataFile, stream):
 		for j in range(postStart,int(postEnd)):
 			postList.update({count : streamFileList[j]})
 			count += 1
-		streamList[i] = postList
+		streamList.append(postList)
 		postStart = postEnd + 1
 	return streamList
 
