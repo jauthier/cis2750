@@ -78,17 +78,19 @@ def printPosts(postList, topPos, lastPost):
 	# display 22 lines of the posts and a line of controls
 	numPosts = len(postList)
 	#start with lastpost + 1
-	currentPost = int(lastPost) + 1
+	currentPost = int(lastPost)
 	post = postList[currentPost]
 	# display what you can of the post
 	for i in range(topPos, topPos+21):
 		if i in post: # make sure the key is in the dict
 			print(post[i])
 		else:
-			currentPost += 1
-			post = postList[currentPost]
-			print(post[i])
-
+			if currentPost + 1 < numPosts:
+				currentPost += 1
+				post = postList[currentPost]
+				print(post[i])
+			else:
+				break
 	print("Up Arrow    Down Arrow    O-Order Toggle    M-Mark All    C-Check new    S-New Stream")
 
 
