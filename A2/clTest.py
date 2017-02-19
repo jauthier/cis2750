@@ -87,7 +87,7 @@ def streamFileToList(streamFile, dataFile, stream):
 		line = "Stream: %s\n"%stream
 		postList.update({count:line})
 		count += 1
-		for j in range(postStart,postEnd):
+		for j in range(postStart,int(postEnd)):
 			postList.update({count : streamFileList[j]})
 			count += 1
 		streamList[i] = postList
