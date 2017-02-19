@@ -22,7 +22,7 @@ def printPosts(postList, topPos, lastPost):
 				print(post[i])
 			else:
 				break
-	print("Up Arrow    Down Arrow    O-Order Toggle    M-Mark All    C-Check new    S-New Stream")
+	print("U-Up    D-Down    O-Order Toggle    M-Mark All    C-Check new    S-New Stream")
 
 def streamFileToList(streamFile, dataFile, stream):
 	# get the number of entries and where they end
@@ -33,6 +33,7 @@ def streamFileToList(streamFile, dataFile, stream):
 	# read in the stream file and put the posts in a list
 	fpStream = open(streamFile,"r")
 	streamFileList = fpStream.readlines()
+	print(streamFileList)
 	postStart = 0
 	count  = 0
 	streamList = []
@@ -158,10 +159,10 @@ if __name__ == "__main__":
 	printPosts(postList, topPos, lastPostRead)
 	uI = input().rstrip('\n')
 	while uI != "q":
-		if uI == "^[[A": #up arrow
+		if uI == "U": #up arrow
 			topPos = topPos - 1
 			printPosts(postList,topPos, lastPostRead)
-		elif uI == "^[[B": #down arrow
+		elif uI == "D": #down arrow
 			topPos = topPos + 1
 			printPosts(postList,topPos, lastPostRead)
 		elif uI == "O": #sort by author
