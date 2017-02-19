@@ -146,10 +146,10 @@ def streamFileToList(streamFile, dataFile, stream):
 		postList = {}
 		postEnd = dataList[i]
 		line = "Stream: %s\n"%stream
-		postList.update(count:line)
+		postList.update({count:line})
 		count += 1
 		for j in range(postStart,postEnd):
-			postList.update(count : streamFileList[j])
+			postList.update({count : streamFileList[j]})
 			count += 1
 		streamList[i] = postList
 		postStart = postEnd + 1
@@ -197,7 +197,7 @@ def redoKeys(listOfDicts):
 		newDict = {}
 		l = len(post)
 		for i in range(0,l):
-			newDict.update(count : post.values()[i])
+			newDict.update({count : post.values()[i]})
 			count += 1
 		newList.append(newDict)
 	return newList
