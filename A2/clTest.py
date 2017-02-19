@@ -3,68 +3,7 @@
 import sys
 import os
 
-if __name__ == "__main__":
-	#get command line agruments
 
-	userName = ""
-	numArg = int(len(sys.argv))
-	if numArg >= 2:
-		userName = "%s" % (sys.argv[1])
-
-	for i in range (2, numArg):
-		userName = "%s %s" % (userName, sys.argv[i])
-
-	#puts all the streams into a list
-	allSFile = "messages/allStreams.txt"
-	file_1 = open(allSFile,"r")
-	allSList = []
-	for line in file_1:
-		line = line.rstrip('\n')
-		allSList.append("%s"%line)
-	file_1.close()
-
-	#check each streamUser file
-	userStreams = []
-	for stream in allSList:
-		fileName = "messages/%sStreamUsers.txt"%stream
-		f = open(fileName,"r")
-		if userName in f.read():
-			userStreams.append("%s"%stream)
-	f.close()
-	
-	rList = getStream(userStreams)
-	postList = rList[0]
-	topPos = rList[1]
-	lastPostRead = rList[2]
-	choice = rList[3]
-
-	printPosts(postList, topPos, lastPostRead)
-	uI = input().rstrip('\n')
-	while uI != "q":
-		if uI == "^[[A": #up arrow
-			topPos = topPos - 1
-			printPosts(postList,topPos, lastPostRead)
-		elif uI == "^[[B": #down arrow
-			topPos = topPos + 1
-			printPosts(postList,topPos, lastPostRead)
-		elif uI == "O": #sort by author
-			print("O")
-		elif uI == "M": #mark all as read
-			#update file(s)
-			print("M")
-		elif uI == "C": #check for new messages
-			print("C")
-		elif uI == "S": # let user select a new stream
-			print("S")
-			hold = getStream(userStreams)
-			postList = hold[0]
-			topPos = hold[1]
-			lastPostRead = hold[2]
-			printPosts(postList, topPos, lastPostRead)
-
-		uI = input().rstrip('\n')
-
-	#done
 
 def getStream(streamList):
 	os.system('clear')
@@ -277,3 +216,66 @@ def compareInts(num1, num2):
 		return 2
 	else:
 		return 0
+
+if __name__ == "__main__":
+	#get command line agruments
+
+	userName = ""
+	numArg = int(len(sys.argv))
+	if numArg >= 2:
+		userName = "%s" % (sys.argv[1])
+
+	for i in range (2, numArg):
+		userName = "%s %s" % (userName, sys.argv[i])
+
+	#puts all the streams into a list
+	allSFile = "messages/allStreams.txt"
+	file_1 = open(allSFile,"r")
+	allSList = []
+	for line in file_1:
+		line = line.rstrip('\n')
+		allSList.append("%s"%line)
+	file_1.close()
+
+	#check each streamUser file
+	userStreams = []
+	for stream in allSList:
+		fileName = "messages/%sStreamUsers.txt"%stream
+		f = open(fileName,"r")
+		if userName in f.read():
+			userStreams.append("%s"%stream)
+	f.close()
+	
+	rList = getStream(userStreams)
+	postList = rList[0]
+	topPos = rList[1]
+	lastPostRead = rList[2]
+	choice = rList[3]
+
+	printPosts(postList, topPos, lastPostRead)
+	uI = input().rstrip('\n')
+	while uI != "q":
+		if uI == "^[[A": #up arrow
+			topPos = topPos - 1
+			printPosts(postList,topPos, lastPostRead)
+		elif uI == "^[[B": #down arrow
+			topPos = topPos + 1
+			printPosts(postList,topPos, lastPostRead)
+		elif uI == "O": #sort by author
+			print("O")
+		elif uI == "M": #mark all as read
+			#update file(s)
+			print("M")
+		elif uI == "C": #check for new messages
+			print("C")
+		elif uI == "S": # let user select a new stream
+			print("S")
+			hold = getStream(userStreams)
+			postList = hold[0]
+			topPos = hold[1]
+			lastPostRead = hold[2]
+			printPosts(postList, topPos, lastPostRead)
+
+		uI = input().rstrip('\n')
+
+	#done
