@@ -28,7 +28,7 @@ def streamFileToList(streamFile, dataFile, stream):
 	fpData = open(dataFile,"r")
 	dataList = fpData.readlines()
 	numPosts = len(dataList)
-
+	print(dataList)
 	# read in the stream file and put the posts in a list
 	fpStream = open(streamFile,"r")
 	streamFileList = fpStream.readlines()
