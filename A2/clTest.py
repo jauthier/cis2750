@@ -74,8 +74,6 @@ def streamFileToList(streamFile, dataFile, stream):
 	fpData = open(dataFile,"r")
 	dataList = fpData.readlines()
 	numPosts = len(dataList)
-	if numPosts == len(streamFileList):
-		print("equal")
 
 	# read in the stream file and put the posts in a list
 	fpStream = open(streamFile,"r")
@@ -83,17 +81,18 @@ def streamFileToList(streamFile, dataFile, stream):
 	postStart = 0
 	count  = 0
 	streamList = []
-	for i in range(len(streamFileList)):
+	# make a dict for each post
+	for i in range(numPosts): 
 		postList = {}
-		postEnd = dataList[i]
+		postEnd = int(dataList[i]) #get the last line of the post
 		line = "Stream: %s\n"%stream
 		postList.update({count:line})
 		count += 1
-		for j in range(postStart,int(postEnd)):
+		for j in range(postStart,postEnd):
 			postList.update({count : streamFileList[j]})
 			count += 1
 		streamList.append(postList)
-		postStart = int(postEnd) + 1
+		postStart = postEnd + 1
 	return streamList
 
 def combineStreams(listOfList):
