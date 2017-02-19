@@ -6,6 +6,7 @@ import os
 if __name__ == "__main__":
 	#get command line agruments
 
+	userName = ""
 	numArg = int(len(sys.argv))
 	if numArg >= 2:
 		userName = "%s" % (sys.argv[1])
