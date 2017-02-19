@@ -87,7 +87,7 @@ void addUser(char *username, char *list){
             char line[100];
             while (!feof(fpTest)){   
                 fgets(line,100,fpTest);
-                if (strstr(line, username)==NULL){
+                if (strstr(line, username)!=NULL){
                     check = 1;
                 }
             }
