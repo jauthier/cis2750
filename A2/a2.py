@@ -27,12 +27,12 @@ def printPosts(postList, topPos, lastPost):
 def streamFileToList(streamFile, dataFile, stream):
 	# get the number of entries and where they end
 	fpData = open(dataFile,"r")
-	dataList = fpData.read()
+	dataList = fpData.readlines()
 	numPosts = len(dataList)
 
 	# read in the stream file and put the posts in a list
 	fpStream = open(streamFile,"r")
-	streamFileList = fpStream.read()
+	streamFileList = fpStream.readlines()
 	postStart = 0
 	count  = 0
 	streamList = []
@@ -108,7 +108,7 @@ def getStream(streamList):
 		streamFile = "messages/%sStream.txt"%choice
 		dataFile = "messages/%sStreamData.txt"%choice
 		postList = streamFileToList(streamFile, dataFile, choice)
-		hold = open(dataFile).read()[int(lastPostRead)-1]
+		hold = open(dataFile).readlines()[int(lastPostRead)-1]
 		topPos =  int(hold) + 1
 
 	rList = [postList, topPos, lastPostRead, choice]
