@@ -138,8 +138,8 @@ int checkStreamUsers (FILE *sufp, char *username){
 
 char * formatDate (char * date){
     /*will be in the form: dayOfWeek month day time year*/
-    char *token = strtok(date," "); /*that will get the day of the week*/
-    char *month = strtok(NULL, " ");
+    char *month = strtok(date," "); /*that will get the day of the week*/
+    month = strtok(NULL, " ");
     char *day = strtok(NULL, " ");
     char * time = strtok(NULL, " ");
     char *year = strtok(NULL, " ");
