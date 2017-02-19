@@ -1,3 +1,9 @@
+/*
+    testclasses.c
+    Author: Jessica Authier
+    2017/02/19
+*/
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -16,6 +22,7 @@ char * getTimeData ();
 userPost * formatEntry (char * username, char * streamname, char * text);
 void submitPost (userPost *up);
 int checkStreamUsers (FILE *sufp, char *username);
+char * formatDate (char * date);
 
 char * readInput (){
     char buffer[100];
@@ -37,7 +44,9 @@ char * getTimeData (){
     time_t getTime = time (NULL);
     char * date  = malloc(sizeof(char)*strlen(ctime(&getTime)));
     strcpy(date, ctime(&getTime));
-    return date;
+    char *finalDate = formatDate(date);
+    free(date);
+    return finalDate;
 }
 
 userPost * formatEntry (char * username, char * streamname, char * text){
@@ -126,4 +135,26 @@ int checkStreamUsers (FILE *sufp, char *username){
     printf("You do not have permission to post to this stream!\n");
     return 0;
 }
+
+char * formatDate (char * date){
+    /*will be in the form: dayOfWeek month day time year*/
+    char *token = strtok(date," "); /*that will get the day of the week*/
+    char *month = strtok(NULL, " ");
+    char *day = strtok(NULL, " ");
+    char * time = strtok(NULL, " ");
+    char *year = strtok(NULL, " ");
+
+    char *finalDate = malloc(sizeof(char)*(strlen(month)+strlen(day)+strlen(year)+strlen(time)+strlen(" ,   \n")));
+    strcpy(finalDate, month);
+    strcat(finalDate," ");
+    strcat(finalDate,day);
+    strcat(finalDate,", ");
+    strcat(finalDate,year);
+    strcat(finalDate," ");
+    strcat(finalDate,time);
+    strcat(finalDate,"\n");
+    return finalDate;
+}   
+
+
 

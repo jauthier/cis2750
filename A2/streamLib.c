@@ -103,7 +103,6 @@ void addUser(char *username, char *list){
 
 void removeUser(char *username, char *list){
     /*tokenize the stream  list*/
-    printf("in removeUser\n");
     char * token = strtok(list," ,\n");
     while (token != NULL){
         /*get the name of the file*/
@@ -111,12 +110,10 @@ void removeUser(char *username, char *list){
         strcpy(streamFile,"messages/");
         strcat(streamFile,token);
         strcat(streamFile,"StreamUsers.txt");
-printf("File: %s\n", streamFile);
         /*open the file*/
         FILE *fp = fopen(streamFile,"r+");
         if (fp == NULL) /*if the file doesn't exist then there is no need to remove the user*/
             return;
-printf("before writeFile\n");
         writeFile(streamFile,username);
         token = strtok(NULL, " ,\n");
         free(streamFile);
@@ -124,13 +121,11 @@ printf("before writeFile\n");
 }
 
 void makeStreamFiles(char *stream){
-    printf("in makeStreamFiles\n");
     /*make stream file*/
     char * streamFile = malloc(sizeof(char)*(strlen("messages/")+strlen(stream)+strlen("Stream.txt")));
     strcpy(streamFile,"messages/");
     strcat(streamFile,stream);
     strcat(streamFile,"Stream.txt");
-    printf("before opening file 1\n");
     FILE * fp1 = fopen(streamFile,"w");
     fclose(fp1);
 
@@ -139,12 +134,10 @@ void makeStreamFiles(char *stream){
     strcpy(streamDataFile,"messages/");
     strcat(streamDataFile,stream);
     strcat(streamDataFile,"StreamData.txt");
-    printf("before opening file 2\n");
     FILE * fp2 = fopen(streamDataFile,"w");
     fclose(fp2);
     free(streamFile);
     free(streamDataFile);
-    printf("end of makeStreamFiles\n");
 }
 
 void writeFile(char * fileName, char * username){
