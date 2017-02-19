@@ -133,7 +133,9 @@ def combineStreams(listOfList, dataList):
 		list1 = mergeTwoList(list1, list2)
 	
 	newList = redoKeys(list1)
+	print(newList)
 	topPos = getTopPos(newList, cpList)
+	
 	final = [newList, topPos]
 	return final
 
