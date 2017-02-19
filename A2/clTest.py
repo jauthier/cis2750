@@ -51,6 +51,8 @@ def getStream(streamList):
 		hold = combineStreams(listOfList, lastPRList)
 		postList = hold[0]
 		topPos = hold[1]
+		lastPostRead = hold[2]
+
 
 	else:
 		#open the streamUsers file and get the users location
@@ -60,7 +62,6 @@ def getStream(streamList):
 			if userName in str:
 				parse = str.split(" ")
 				lastPostRead = parse[1]
-				lastPRList.append(lastPostRead)
 
 		streamFile = "messages/%sStream.txt"%choice
 		dataFile = "messages/%sStreamData.txt"%choice
@@ -68,7 +69,7 @@ def getStream(streamList):
 		hold = open(dataFile).readlines()[int(lastPostRead)-1]
 		topPos =  int(hold) + 1
 
-	rList = [postList, topPos, lastPRList, choice]
+	rList = [postList, topPos, lastPostRead, choice]
 	return rList
 
 def printPosts(postList, topPos, lastPost):
@@ -136,9 +137,11 @@ def combineStreams(listOfList, dataList):
 	print(list1)
 	newList = redoKeys(list1)
 	print(newList)
-	topPos = getTopPos(newList, cpList)
+	temp = getTopPos(newList, cpList)
+	topPos = temp[0]
+	lastPost = temp[1]
 	
-	final = [newList, topPos]
+	final = [newList, topPos,lastPost]
 	return final
 
 def mergeTwoList(list1, list2):
@@ -184,7 +187,7 @@ def getTopPos(postList, cpList):
 	numPosts = len(postList)
 	# if the user has read everything
 	if len(cpList) == 0:
-		return postList[numPosts -1].keys()[0]
+		return [postList[numPosts -1].keys()[0],numPosts -1]
 
 	#find the earliest post from cpList
 	cp1 = cpList[0]
@@ -194,6 +197,7 @@ def getTopPos(postList, cpList):
 		if compareDate(cp1[2], cp2[2]) == 1:
 			cp1 = cp2
 	#find cp1 in the postList
+	count = 1
 	for p in postList:
 		print("%d"%len(p))
 		val = list(p.values())
@@ -201,8 +205,10 @@ def getTopPos(postList, cpList):
 		if val[0] == cp1[0]:
 			if val[1] == cp1[1]:
 				if val[2] ==  cp1[2]:
-					return p.keys()[0]
-	return postList[numPosts -1].keys()[0]
+					return [p.keys()[0], 1]
+		count += 1
+
+	return [postList[numPosts -1].keys()[0],numPosts -1]
 
 
 # return 0 if date1 is before date2
