@@ -74,6 +74,8 @@ def streamFileToList(streamFile, dataFile, stream):
 	fpData = open(dataFile,"r")
 	dataList = fpData.readlines()
 	numPosts = len(dataList)
+	if numPosts == len(streamFileList):
+		print("equal")
 
 	# read in the stream file and put the posts in a list
 	fpStream = open(streamFile,"r")
