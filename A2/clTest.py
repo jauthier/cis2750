@@ -170,8 +170,8 @@ def redoKeys(listOfDicts):
 		newDict = {}
 		l = len(post)
 		for i in range(0,l):
-			temp = post.values()[i]
-			newDict.update({count : temp})
+			temp = post.values()
+			newDict.update({count : temp[i]})
 			count += 1
 		newList.append(newDict)
 	return newList
