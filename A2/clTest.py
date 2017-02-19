@@ -45,6 +45,7 @@ def getStream(streamList):
 				if userName in str:
 					parse = str.split(":")
 					lastPostRead = parse[1].split(' ')[0]
+					lastPostRead = lastPostRead.split('\n')[0]
 					lastPRList.append(int(lastPostRead))
 
 		hold = combineStreams(listOfList, lastPRList)
