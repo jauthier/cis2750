@@ -65,7 +65,7 @@ def getStream(streamList):
 		streamFile = "messages/%sStream.txt"%choice
 		dataFile = "messages/%sStreamData.txt"%choice
 		postList = streamFileToList(streamFile, dataFile, choice)
-		topPos = open(dataFile).readlines()[lastPostRead-1] + 1
+		topPos = open(dataFile).readlines()[int(lastPostRead)-1] + 1
 
 	rList = [postList, topPos, lastPRList, choice]
 	return rList
