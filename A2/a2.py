@@ -62,11 +62,11 @@ def getStream(streamList):
 		#get the users choice
 		choice = input().rstrip('\n')
 		if choice == "all":
-			count = 1
+			check = 1
 		else:
 			for line in streamList:
 				if choice == line:
-					count = 1
+					check = 1
 
 	postList = [] # a list of all the posts
 	lastPRList = [] # a list of the users current pos in each stream file they are viewing
