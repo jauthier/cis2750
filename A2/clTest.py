@@ -31,56 +31,35 @@ if __name__ == "__main__":
 			userStreams.append("%s"%stream)
 	f.close()
 	
-	choice = getStream(userStreams)
-	postList = []
+	rList = getStream(userStreams)
+	postList = rList[0]
+	topPos = rList[1]
+	lastPostRead = rList[2]
+	choice = rList[3]
 
-	#show the posts
-	if choice != "all":
-		print("all")
-		#get the last post they saw with the earliest date
-		#order the posts in order of date
-
-		#make a list of lists
-		listOfList = []
-		for s in userStreams:
-			streamFile = "messages/%sStream.txt"%s
-			dataFile = "messages/%sStreamData.txt"%s 
-			listOfList.append(streamFileToList(streamFile,dataFile,s))
-
-		postList = combineStreams(listOfList)
-
-
-	else:
-		#open the streamUsers file and get the users location
-		fn = "messages/%sStreamUsers.txt"%choice
-		f = open(fn, "r")
-		for str in f:
-			if userName in str:
-				parse = str.split(" ")
-				lastPostRead = parse[1]
-		streamFile = "messages/%sStream.txt"%choice
-		dataFile = "messages/%sStreamData.txt"%choice
-		postList = streamFileToList(streamFile, dataFile, choice)
-		topPos = open(dataFile).readlines()[lastPostRead-1] + 1
-	
-
-	printPosts(postList, topPos)
+	printPosts(postList, topPos, lastPostRead)
 	uI = input().rstrip('\n')
 	while uI != "q":
 		if uI == "^[[A": #up arrow
 			topPos = topPos - 1
-			printPosts(postList,topPos)
+			printPosts(postList,topPos, lastPostRead)
 		elif uI == "^[[B": #down arrow
 			topPos = topPos + 1
-			printPosts(postList,topPos)
+			printPosts(postList,topPos, lastPostRead)
 		elif uI == "O": #sort by author
-
+			print("O")
 		elif uI == "M": #mark all as read
-
+			#update file(s)
+			print("M")
 		elif uI == "C": #check for new messages
-
+			print("C")
 		elif uI == "S": # let user select a new stream
-			#get stream then redo if else bit above
+			print("S")
+			hold = getStream(userStreams)
+			postList = hold[0]
+			topPos = hold[1]
+			lastPostRead = hold[2]
+			printPosts(postList, topPos, lastPostRead)
 
 		uI = input().rstrip('\n')
 
@@ -94,7 +73,42 @@ def getStream(streamList):
 	print("all");
 	#get the users choice
 	choice = input().rstrip('\n')
-	return choice
+	choice = getStream(userStreams)
+	postList = []
+
+	#make the postList
+	if choice != "all":
+		#make a list of lists
+		listOfList = []
+		dataList = []
+		for s in userStreams:
+			streamFile = "messages/%sStream.txt"%s
+			dataFile = "messages/%sStreamData.txt"%s 
+			usersFile = "messages/%sStreamUsers.txt"%s
+			listOfList.append(streamFileToList(streamFile,dataFile,s))
+			f = open(fn, "r")
+			for str in f:
+				if userName in str:
+					parse = str.split(" ")
+					lastPostRead = parse[1]
+			dataList.append(lastPostRead)
+		postList = combineStreams(listOfList, dataList)
+
+	else:
+		#open the streamUsers file and get the users location
+		fn = "messages/%sStreamUsers.txt"%choice
+		f = open(fn, "r")
+		for str in f:
+			if userName in str:
+				parse = str.split(" ")
+				lastPostRead = parse[1]
+		streamFile = "messages/%sStream.txt"%choice
+		dataFile = "messages/%sStreamData.txt"%choice
+		postList = streamFileToList(streamFile, dataFile, choice)
+		topPos = open(dataFile).readlines()[lastPostRead-1] + 1
+
+		rList = [postList, topPos, lastPostRead, choice]
+		return rList
 
 def printPosts(postList, topPos, lastPost):
 	#clear and print
@@ -142,11 +156,51 @@ def streamFileToList(streamFile, dataFile, stream):
 	return streamList
 
 def combineStreams(listOfList):
-	#order posts by data
+	#combine the first two
+	list1 = listOfList[0]
+	l = len(listOfList)
+	for i in range(1, l):
+		list2 = listOfList[i]
+		list1 = mergeTwoList(list1, list2)
+	return redoKeys(list1)
 
+def mergeTwoList(list1, list2):
+	newList = []
+	l1 = len(list1)
+	l2 = len(list2)
+	i = 0
+	j = 0
 
+	while i < l1 && j < l2:
+		if compareDates(list1[i][2], list2[j][2]) == 1:
+			#post1 was posted before post2
+			newList.append(list1[i])
+			i += 1
+		else:
+			newList.append(list2[j])
+			j += 1
+	if i < l1: #list2 ran out first
+		while i < l1:
+			newList.append(list1[i])
+			i += 1
+	else: #list1 ran out first
+		while j < l2:
+			newList.append(list2[j])
+			j += 1
+	return newList
 
-
+def redoKeys(listOfDicts):
+	numPosts = len(listOfDicts)
+	count = 0
+	newList = []
+	for post in listOfDicts:
+		newDict = {}
+		l = len(post)
+		for i in range(0,l):
+			newDict.update(count : post.values()[i])
+			count += 1
+		newList.append(newDict)
+	return newList
 
 # return 0 if date1 is before date2
 def compareDates(date1, date2):
