@@ -45,7 +45,7 @@ def getStream(streamList):
 				if userName in str:
 					parse = str.split(":")
 					lastPostRead = parse[1].split(' ')[0]
-					lastPRList.append(lastPostRead)
+					lastPRList.append(int(lastPostRead))
 
 		hold = combineStreams(listOfList, lastPRList)
 		postList = hold[0]
@@ -120,8 +120,8 @@ def combineStreams(listOfList, dataList):
 	list1 = listOfList[0]
 	numPosts = len(list1)
 	cpList = []
-	if numPosts > int(dataList[0]): #the user hasn't read all the posts
-		cpList.append(list1[int(dataList[0])]) #get the current post of the first stream
+	if numPosts > int(dataList[0]):
+		cpList.append(list1[dataList[0]]) #get the current post of the first stream
 	l = len(listOfList)
 
 	for i in range(1, l):
