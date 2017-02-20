@@ -368,7 +368,7 @@ if __name__ == "__main__":
 		elif uI == "M": #mark all as read
 			#update file(s)
 			if choice != "all":
-				fp2 = open("messages/%sStreamData"%choice,"r")
+				fp2 = open("messages/%sStreamData.txt"%choice,"r")
 				l = len(fps2.readlines())
 				updateFile(choice,userName,l-int(lastPostRead))
 		elif uI == "C": #check for new messages
