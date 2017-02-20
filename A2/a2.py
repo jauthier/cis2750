@@ -36,9 +36,11 @@ def streamFileToList(streamFile, dataFile, stream):
 		postEnd = int(dataList[i]) #get the last line of the post
 		line = "Stream: %s\n"%stream
 		postList.update({count:line})
+		print(count)
 		count += 1
 		for j in range(postStart,postEnd):
 			postList.update({count : streamFileList[j]})
+			print(count)
 			count += 1
 		streamList.append(postList)
 		postStart = postEnd
