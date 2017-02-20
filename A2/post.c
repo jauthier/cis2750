@@ -142,7 +142,7 @@ char * formatDate (char * date){
     month = strtok(NULL, " ");
     char *day = strtok(NULL, " ");
     char * time = strtok(NULL, " ");
-    char *year = strtok(NULL, " ");
+    char *year = strtok(NULL, " \n");
 
     char *finalDate = malloc(sizeof(char)*(strlen(month)+strlen(day)+strlen(year)+strlen(time)+strlen(" ,   \n")));
     strcpy(finalDate, month);
