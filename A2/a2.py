@@ -344,7 +344,7 @@ if __name__ == "__main__":
 	topPos = int(rList[1])
 	lastPostRead = rList[2]
 	choice = rList[3]
-	lastLine = rList[4]
+	lastLine = int(rList[4])
 	if topPos < (lastLine - 23):
 		topPos = topPos - 22
 		if topPos < 0:
