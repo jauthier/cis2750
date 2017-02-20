@@ -116,7 +116,7 @@ def compareDates(date1, date2):
 			check = compareInts(int(h1[2].split(',')[0]), int(h2[2].split(',')[0]))
 			if check == 0:
 				#check time 
-				check = compareTime(d1[3], d2[3])
+				check = compareTime(d1[4], d2[4])
 	
 	if check == 1:
 		return 0

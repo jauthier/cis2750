@@ -24,13 +24,11 @@ void destroyUserPost(userPost *toDestroy){
 }
 
 int updateStream(userPost *up){
-    printf("in updateStream\n");
     /*find the stream file*/
     char * streamFile = malloc(sizeof(char)*(strlen("messages/")+strlen("stream.txt")+strlen(up->streamname)));
     strcpy(streamFile,"messages/");
     strcat(streamFile,up->streamname);
     strcat(streamFile,"Stream.txt");
-    printf("file: %s\n", streamFile);
     FILE * fp = fopen(streamFile,"a");
     
     /*add the post to the file*/
@@ -151,7 +149,6 @@ void writeFile(char * fileName, char * username){
     char line[100]; 
     fgets(line,100,fpOut);
     while (!feof(fpOut)){
-        printf("%s\n", line);
         if (strstr(line, username)==NULL){
             fprintf(fpIn, "%s", line);
         }
