@@ -11,7 +11,7 @@ def printPosts(postList, topPos, lastPost):
 		print(post)
 		l = len(post)
 		for i in post:
-			print("%s"%i.values())
+			print(i)
 			topPos += 1
 
 
