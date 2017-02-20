@@ -8,8 +8,9 @@ def printPosts(postList, topPos, lastPost):
 	os.system('clear')
 	# display 22 lines of the posts and a line of controls
 	for post in postList:
-		print(post)
+		print(post.keys())
 		l = len(post)
+
 		for i in post:
 			print(i)
 			topPos += 1
