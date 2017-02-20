@@ -19,6 +19,7 @@ def printPosts(postList, topPos, lastPost):
 				print(hold[i])
 			else:
 				break
+				
 
 	print("U-Up    D-Down    O-Order Toggle    M-Mark All    C-Check new    S-New Stream")
 
