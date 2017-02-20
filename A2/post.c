@@ -141,7 +141,7 @@ char * formatDate (char * date){
     char *month = strtok(date," "); /*that will get the day of the week*/
     month = strtok(NULL, " ");
     char *day = strtok(NULL, " ");
-    char * time = strtok(NULL, " ");
+    char * time = strtok(NULL, " \n");
     char *year = strtok(NULL, " \n");
 
     char *finalDate = malloc(sizeof(char)*(strlen(month)+strlen(day)+strlen(year)+strlen(time)+strlen(" ,   \n")));
