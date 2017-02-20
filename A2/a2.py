@@ -9,8 +9,7 @@ def printPosts(postList, topPos, lastPost):
 	# display 22 lines of the posts and a line of controls
 	count = int(topPos)
 	for post in postList:
-		print(post.keys())
-		l = len(post)
+q		l = len(post)
 
 		for i in post:
 			if count < int(topPos) + 22:
@@ -42,7 +41,7 @@ def streamFileToList(streamFile, dataFile, stream):
 			postList.update({count : streamFileList[j]})
 			count += 1
 		streamList.append(postList)
-		postStart = postEnd + 1
+		postStart = postEnd
 	
 	print(streamList)
 	return streamList
