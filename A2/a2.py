@@ -124,6 +124,8 @@ def compareDates(date1, date2):
 		return 1
 
 def compareTime(time1, time2):
+	print(time2)
+	print(time2)
 	t1 = time1.split(':')
 	t2 = time2.split(':')
 	# compare hour
