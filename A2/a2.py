@@ -13,7 +13,7 @@ def printPosts(postList, topPos, lastPost):
 		l = len(post)
 
 		for i in post:
-			if count < int(topPost) + 22:
+			if count < int(topPos) + 22:
 				print(post.get(i),end='')
 				count += 1
 			else:
