@@ -377,8 +377,9 @@ if __name__ == "__main__":
 		elif uI == "C": #check for new messages
 			if choice != "all":
 				fp2 = open("messages/%sStreamData.txt"%choice,"r")
-				l = len(fp2.readlines())
-				t = fp2.readlines()[l-2]
+				fileHold = fp2.readlines()
+				l = len(fileHold) - 2
+				t = fileHold[l]
 				num = int(t)+1
 				if num > topPos:
 					topPos = num
