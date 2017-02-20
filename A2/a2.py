@@ -3,7 +3,7 @@
 import sys
 import os
 
-def printPosts(postList, topPos):
+def printPosts(postList, topPos, lastPost):
 	#clear and print
 	os.system('clear')
 	# display 22 lines of the posts and a line of controls
@@ -39,7 +39,7 @@ def streamFileToList(streamFile, dataFile, stream):
 		count += 1
 		for j in range(postStart,postEnd):
 			postList.update({count : streamFileList[j]})
-			print(count)
+			count += 1
 		streamList.append(postList)
 		postStart = postEnd
 	
@@ -151,16 +151,15 @@ if __name__ == "__main__":
 	lastPostRead = rList[2]
 	choice = rList[3]
 
-	printPosts(postList, topPos)
+	printPosts(postList, topPos, lastPostRead)
 	uI = input().rstrip('\n')
 	while uI != "q":
 		if uI == "U": #up arrow
 			topPos = topPos - 1
-			printPosts(postList,topPos)
+			printPosts(postList,topPos, lastPostRead)
 		elif uI == "D": #down arrow
-			print("in down")
-			topPos += 1
-			printPosts(postList,topPos)
+			topPos = topPos + 1
+			printPosts(postList,topPos, lastPostRead)
 		elif uI == "O": #sort by author
 			print("O")
 		elif uI == "M": #mark all as read
