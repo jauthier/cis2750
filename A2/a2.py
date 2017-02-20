@@ -6,18 +6,12 @@ import os
 def printPosts(postList, topPos, lastPost):
 	#clear and print
 	os.system('clear')
-	print(postList)
 	# display 22 lines of the posts and a line of controls
-	numPosts = len(postList)
-	#start with lastpost + 1
-	currentPost = int(lastPost)
-	post = postList[currentPost]
-	# display what you can of the post
 	for post in postList:
 		print(post)
 		for i in range(topPos, topPos+21):
 			if i in post: # make sure the key is in the dict
-				print(post.get(i))
+				print("%s"%post.get(i))
 			else:
 				break
 
