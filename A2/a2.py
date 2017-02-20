@@ -15,12 +15,9 @@ def printPosts(postList, topPos, lastPost):
 	# display what you can of the post
 	for post in postList:
 		print(post)
-		count = 0;
-		hold = list(post.values())
 		for i in range(topPos, topPos+21):
 			if i in post: # make sure the key is in the dict
-				print(hold[count])
-				count += 1
+				print(post.get(i))
 			else:
 				break
 
