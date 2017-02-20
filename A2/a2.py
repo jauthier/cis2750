@@ -10,7 +10,7 @@ def printPosts(postList, topPos, lastPost):
 	for post in postList:
 		print(post)
 		for i in range(topPos, topPos+21):
-			if str(i) in post.keys(): # make sure the key is in the dict
+			if str(i) in post: # make sure the key is in the dict
 				print("%s"%post.get(i))
 			else:
 				break
