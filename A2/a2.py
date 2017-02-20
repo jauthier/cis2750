@@ -6,6 +6,7 @@ import os
 def printPosts(postList, topPos, lastPost):
 	#clear and print
 	os.system('clear')
+	print(postList)
 	# display 22 lines of the posts and a line of controls
 	numPosts = len(postList)
 	#start with lastpost + 1
