@@ -342,7 +342,7 @@ if __name__ == "__main__":
 	lastLine = rList[4]
 
 	moreRead = printPosts(postList, topPos, lastPostRead)
-	if moreRead > 0 and choice  "all":
+	if moreRead > 0 and choice != "all":
 		updateFile(choice, userName, moreRead)
 	uI = input().rstrip('\n')
 	while uI != "q":
@@ -350,13 +350,13 @@ if __name__ == "__main__":
 			if topPos - 1 != 0:
 				topPos = topPos - 1
 			moreRead = printPosts(postList,topPos, lastPostRead)
-			if moreRead > 0 and choice = "all":
+			if moreRead > 0 and choice != "all":
 				updateFile(choice, userName, moreRead)
 		elif uI == "D": #down arrow
 			if topPos + 1 < lastLine - 23:
 				topPos = topPos + 1
 			moreRead = printPosts(postList,topPos, lastPostRead)
-			if moreRead > 0 and choice = "all":
+			if moreRead > 0 and choice != "all":
 				updateFile(choice, userName, moreRead)
 		elif uI == "O": #sort by author
 			print("O")
