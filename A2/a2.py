@@ -103,8 +103,8 @@ def compareDates(date1, date2):
 	d2 = date2.split(':')[1]
 	h1 = d1.split(' ')
 	h2 = d2.split(' ')
-	t1 = "%s:%s:%s"%h1[4], d1[2], d1[3]
-	t2 = "%s:%s:%s"%h2[4], d2[2], d2[3]
+	t1 = "%s:%s:%s"%(h1[4], d1[2], d1[3])
+	t2 = "%s:%s:%s"%(h2[4], d2[2], d2[3])
 	#compare year
 	check = compareInts(int(h1[3]), int(h2[3]))
 	if check == 0:
