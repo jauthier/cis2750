@@ -341,7 +341,7 @@ if __name__ == "__main__":
 	
 	rList = getStream(userStreams)
 	postList = rList[0]
-	topPos = rList[1]
+	topPos = int(rList[1])
 	lastPostRead = rList[2]
 	choice = rList[3]
 	lastLine = rList[4]
