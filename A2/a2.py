@@ -7,13 +7,13 @@ def printPosts(postList, topPos, lastPost):
 	#clear and print
 	os.system('clear')
 	# display 22 lines of the posts and a line of controls
-	count = topPos
+	count = int(topPos)
 	for post in postList:
 		print(post.keys())
 		l = len(post)
 
 		for i in post:
-			if count < topPost + 22:
+			if count < int(topPost) + 22:
 				print(post.get(i),end='')
 				count += 1
 			else:
