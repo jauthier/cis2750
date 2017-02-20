@@ -183,8 +183,8 @@ def updateFile(stream, userName,inc):
 			temp.write("%s %d"%(hold[0],(int(hold[1])+inc)))
 		else:
 			temp.write(line)
-	remove(fileName)
-	move(tempFile, fileName)
+	os.remove(fileName)
+	os.move(tempFile, fileName)
 
 def printPosts(postList, topPos, lastPost):
 	#clear and print
