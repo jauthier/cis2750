@@ -345,7 +345,10 @@ if __name__ == "__main__":
 	lastPostRead = rList[2]
 	choice = rList[3]
 	lastLine = rList[4]
-
+	if topPos < (lastLine - 23):
+		topPos = topPos - 22
+		if topPos < 0:
+			topPos = 0
 	moreRead = printPosts(postList, topPos, lastPostRead)
 	if moreRead > 0 and choice != "all":
 		updateFile(choice, userName, moreRead)
