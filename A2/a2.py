@@ -15,7 +15,7 @@ def combineStreams(listOfList, dataList):
 	for i in range(1, l):
 		list2 = listOfList[i]
 		numPosts = len(list2)
-		if numPost > int(dataList[i]):
+		if numPosts > int(dataList[i]):
 			cpList.append(list2[int(dataList[i])])	
 		list1 = mergeTwoList(list1, list2)
 	
