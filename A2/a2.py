@@ -105,7 +105,7 @@ def getStream(streamList):
 		streamFile = "messages/%sStream.txt"%choice
 		dataFile = "messages/%sStreamData.txt"%choice
 		postList = streamFileToList(streamFile, dataFile, choice)
-		if lastPostRead == 0:
+		if int(lastPostRead) == 0:
 			topPos = 0
 		else:
 			hold = open(dataFile).readlines()[int(lastPostRead)-1]
