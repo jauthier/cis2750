@@ -10,8 +10,9 @@ def printPosts(postList, topPos, lastPost):
 	for post in postList:
 		print(post)
 		l = len(post)
-		for i in range(topPos, topPos+l):
-			print("%s"%post.get(str(i)))
+		for i in post:
+			print("%s"%i.values())
+			topPos += 1
 
 
 	print("U-Up    D-Down    O-Order Toggle    M-Mark All    C-Check new    S-New Stream")
