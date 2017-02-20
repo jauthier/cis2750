@@ -8,7 +8,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <time.h>
-#include "streamLib.h"
+#include "stream.h"
 
 struct PostEntry {
     char * (* readInput)();

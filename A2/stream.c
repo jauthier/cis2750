@@ -4,7 +4,7 @@
     Date Modified: 2017/02/14
 */
 
-#include "streamLib.h"
+#include "stream.h"
 
 userPost * createUserPost (char *username,char *streamname, char *date, char *text){
     userPost * newUP = malloc(sizeof(userPost));
