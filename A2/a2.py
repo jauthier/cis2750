@@ -9,11 +9,9 @@ def printPosts(postList, topPos, lastPost):
 	# display 22 lines of the posts and a line of controls
 	for post in postList:
 		print(post)
-		for i in range(topPos, topPos+21):
-			if str(i) in post: # make sure the key is in the dict
-				print("%s"%post.get(i))
-			else:
-				break
+		l = len(post)
+		for i in range(topPos, topPos+l):
+			print("%s"%post.get(i))
 
 
 	print("U-Up    D-Down    O-Order Toggle    M-Mark All    C-Check new    S-New Stream")
