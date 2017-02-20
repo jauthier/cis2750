@@ -378,7 +378,7 @@ if __name__ == "__main__":
 			if choice != "all":
 				fp2 = open("messages/%sStreamData.txt"%choice,"r")
 				l = len(fp2.readlines())
-				t = fp2.readlines[l-2]
+				t = fp2.readlines()[l-2]
 				num = int(t)+1
 				if num > topPos:
 					topPos = num
