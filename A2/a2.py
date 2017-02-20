@@ -6,8 +6,10 @@ import os
 def printPosts(postList, topPos, lastPost):
 	#clear and print
 	os.system('clear')
+
 	# display 22 lines of the posts and a line of controls
 	count = int(topPos)
+	print(count)
 	for post in postList:
 		l = len(post)
 
@@ -43,7 +45,6 @@ def streamFileToList(streamFile, dataFile, stream):
 		streamList.append(postList)
 		postStart = postEnd
 	
-	print(streamList)
 	return streamList
 
 def getStream(streamList):
