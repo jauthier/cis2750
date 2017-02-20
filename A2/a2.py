@@ -367,7 +367,10 @@ if __name__ == "__main__":
 			print("O")
 		elif uI == "M": #mark all as read
 			#update file(s)
-			print("M")
+			if choice != "all":
+				fp2 = open("messages/%sStreamData"%choice,"r")
+				l = len(fps2.readlines())
+				updateFile(choice,userName,l-int(lastPostRead))
 		elif uI == "C": #check for new messages
 			print("C")
 		elif uI == "S": # let user select a new stream
