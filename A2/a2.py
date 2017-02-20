@@ -9,7 +9,7 @@ def printPosts(postList, topPos, lastPost):
 	# display 22 lines of the posts and a line of controls
 	count = int(topPos)
 	for post in postList:
-q		l = len(post)
+		l = len(post)
 
 		for i in post:
 			if count < int(topPos) + 22:
