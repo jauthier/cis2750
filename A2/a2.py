@@ -375,7 +375,15 @@ if __name__ == "__main__":
 				l = len(fp2.readlines())
 				updateFile(choice,userName,l-int(lastPostRead))
 		elif uI == "C": #check for new messages
-			print("C")
+			if choice != "all":
+				fp2 = open("messages/%sStreamData.txt"%choice,"r")
+				l = len(fp2.readlines())
+				num = int(fp2.readlines[l-2])+1
+				if num > topPos:
+					topPos = num
+					printPosts(postList,topPos,lastPostRead)
+				else:
+					print("No new posts!")
 		elif uI == "S": # let user select a new stream
 			print("S")
 			hold = getStream(userStreams)
