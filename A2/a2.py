@@ -99,8 +99,8 @@ def getTopPos(postList, cpList):
 # return 0 if date1 is before date2
 def compareDates(date1, date2):
 	#check year first, then month then date then time
-	d1 = date1.split(':')
-	d2 = date2.split(':')
+	d1 = date1.split(':')[1]
+	d2 = date2.split(':')[1]
 	print(date1)
 	print(date2)
 	h1 = d1.split(' ')
