@@ -358,7 +358,7 @@ if __name__ == "__main__":
 			if moreRead > 0 and choice != "all":
 				updateFile(choice, userName, moreRead)
 		elif uI == "D": #down arrow
-			if topPos + 1 < lastLine - 23:
+			if (topPos + 1) < (lastLine - 23):
 				topPos = topPos + 1
 			moreRead = printPosts(postList,topPos, lastPostRead)
 			if moreRead > 0 and choice != "all":
@@ -369,7 +369,7 @@ if __name__ == "__main__":
 			#update file(s)
 			if choice != "all":
 				fp2 = open("messages/%sStreamData.txt"%choice,"r")
-				l = len(fps2.readlines())
+				l = len(fp2.readlines())
 				updateFile(choice,userName,l-int(lastPostRead))
 		elif uI == "C": #check for new messages
 			print("C")
