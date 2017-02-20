@@ -113,7 +113,7 @@ def compareDates(date1, date2):
 		check = compareInts(monthNum(h1[0]), monthNum(h2[0]))
 		if check == 0:
 			#check day
-			check = compareInts(int(h1[2]).split(',')[0], int(h2[2]).split(',')[0])
+			check = compareInts(int(h1[2].split(',')[0]), int(h2[2].split(',')[0]))
 			if check == 0:
 				#check time 
 				check = compareTime(d1[3], d2[3])
