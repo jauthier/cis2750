@@ -15,8 +15,6 @@ def printPosts(postList, topPos, lastPost):
 			if i >= int(topPos) and count < int(topPos)+22:
 				print(post.get(i),end='')
 				count += 1
-			else:
-				break
 	print("U-Up    D-Down    O-Order Toggle    M-Mark All    C-Check new    S-New Stream")
 
 def streamFileToList(streamFile, dataFile, stream):
