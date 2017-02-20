@@ -184,7 +184,7 @@ def updateFile(stream, userName,inc):
 		else:
 			temp.write(line)
 	os.remove(fileName)
-	move(tempFile, fileName)
+	os.rename(tempFile, fileName)
 
 def printPosts(postList, topPos, lastPost):
 	#clear and print
