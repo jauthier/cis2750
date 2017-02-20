@@ -107,13 +107,13 @@ def compareDates(date1, date2):
 	h2 = d2.split(' ')
 
 	#compare year
-	check = compareInts(int(h1[2]), int(h2[2]))
+	check = compareInts(int(h1[3]), int(h2[3]))
 	if check == 0:
 		#check month
 		check = compareInts(monthNum(h1[0]), monthNum(h2[0]))
 		if check == 0:
 			#check day
-			check = compareInts(int(h1[1]).split(',')[0], int(h2[1]).split(',')[0])
+			check = compareInts(int(h1[2]).split(',')[0], int(h2[2]).split(',')[0])
 			if check == 0:
 				#check time 
 				check = compareTime(d1[3], d2[3])
