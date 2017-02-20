@@ -180,7 +180,7 @@ def updateFile(stream, userName,inc):
 	for line in file:
 		hold = line.split(' ')
 		if userName in line:
-			temp.write("%s %d"%(hold[0],(int(hold[1])+inc)))
+			temp.write("%s %d\n"%(hold[0],(int(hold[1])+inc)))
 		else:
 			temp.write(line)
 	os.remove(fileName)
