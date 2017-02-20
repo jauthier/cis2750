@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "streamLib.h"
+#include "stream.h"
 
 int main (int argc, char * argv[]){
 
