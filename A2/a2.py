@@ -101,11 +101,10 @@ def compareDates(date1, date2):
 	#check year first, then month then date then time
 	d1 = date1.split(':')[1]
 	d2 = date2.split(':')[1]
-	
 	h1 = d1.split(' ')
 	h2 = d2.split(' ')
-	print(h1)
-	print(h2)
+	t1 = "%s:%s:%s"%h1[4], d1[2], d1[3]
+	t2 = "%s:%s:%s"%h2[4], d2[2], d2[3]
 	#compare year
 	check = compareInts(int(h1[3]), int(h2[3]))
 	if check == 0:
@@ -116,8 +115,7 @@ def compareDates(date1, date2):
 			check = compareInts(int(h1[2].split(',')[0]), int(h2[2].split(',')[0]))
 			if check == 0:
 				#check time 
-				print(d1[4])
-				check = compareTime(d1[4], d2[4])
+				check = compareTime(t1, t2)
 	
 	if check == 1:
 		return 0
