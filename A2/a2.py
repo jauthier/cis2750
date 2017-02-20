@@ -14,6 +14,7 @@ def printPosts(postList, topPos, lastPost):
 	post = postList[currentPost]
 	# display what you can of the post
 	for post in postList:
+		print(post)
 		count = 0;
 		hold = list(post.values())
 		for i in range(topPos, topPos+21):
