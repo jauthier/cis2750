@@ -9,6 +9,7 @@ void pictures(char * line){
     char * height;
     char * width;
 
+    printf("%s\n", line);
     char * token = strtok(line,"()");
     token = strtok(NULL,"()");
 
