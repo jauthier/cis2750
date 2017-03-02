@@ -41,6 +41,13 @@ void pictures(char * line){
     char * newLine = malloc(sizeof(char)*(strlen("    <img src=\"")
         + strlen(src) + strlen("\" height=\"") + strlen(height)
         + strlen("\" width=\"") + strlen(width) + strlen("\"/>\n")));
+    strcpy(newLine,"    <img src=\"");
+    strcat(newLine,src);
+    strcat(newLine,"\" height=\"");
+    strcat(newLine,height);
+    strcat(newLine,"\" width=\"");
+    strcat(newLine,width);
+    strcat(newLine,"\"/>\n");
     printf("%s\n", newLine);
 }
 
