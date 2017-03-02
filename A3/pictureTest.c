@@ -24,14 +24,15 @@ void pictures(char * line){
     } else {
         /*check which one is image and which one is size*/
         if (strstr(token,"image")){
-            printf("image first\n");
             /*get the stuff between the quotes*/
             src = strtok(token,"\"");
+            src = strtok(NULL,"\"");
             token = strtok(token2,"<>");
             height = strtok(NULL,"<>");
             width = strtok(NULL,"<>");
         } else {
             src = strtok(token2,"\"");
+            src = strtok(NULL,"\"");
             token = strtok(token,"<>");
             height = strtok(NULL,"<>");
             width = strtok(NULL,"<>");
