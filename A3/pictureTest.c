@@ -16,12 +16,14 @@ void pictures(char * line){
     char * token2 = strtok(token,",");
     token = strtok(NULL,",");
     if (token == NULL){ /*there is no size indicated*/
+        printf("no size\n");
         src = strtok(token2,"\"");
         height = "100";
         width = "100";
     } else {
         /*check which one is image and which one is size*/
         if (strstr(token,"image")){
+            printf("image first\n");
             /*get the stuff between the quotes*/
             src = strtok(token,"\"");
             token = strtok(token2,"<>");
