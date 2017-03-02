@@ -9,7 +9,6 @@ void pictures(char * line){
     char * height;
     char * width;
 
-    printf("%s\n", line);
     char * token = strtok(line,"()");
     token = strtok(NULL,"()");
 
@@ -17,8 +16,8 @@ void pictures(char * line){
     char * token2 = strtok(token,",");
     token = strtok(NULL,",");
     if (token == NULL){ /*there is no size indicated*/
-        printf("no size\n");
         src = strtok(token2,"\"");
+        src = strtok(NULL,"\"");
         height = "100";
         width = "100";
     } else {
