@@ -44,7 +44,7 @@ void pictures(char * line){
 }
 
 int main (int argc, char *argv[]){
-    char hold[] = ".p(src=\"this_pic\", size=<20><30>)";
+    char hold[] = ".p(image=\"this_pic\", size=<20><30>)";
     pictures(hold);
     return 0;
 }
