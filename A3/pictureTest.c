@@ -4,7 +4,7 @@
 
 /*pictures*/
 
-void pictures(char * line){
+void pictures (char * line, FILE *fp){
     char * src;
     char * height;
     char * width;
@@ -26,15 +26,15 @@ void pictures(char * line){
             /*get the stuff between the quotes*/
             src = strtok(token,"\"");
             src = strtok(NULL,"\"");
-            token = strtok(token2,"<>");
-            height = strtok(NULL,"<>");
-            width = strtok(NULL,"<>");
+            token = strtok(token2,"=");
+            height = strtok(NULL,"=x");
+            width = strtok(NULL,"x\n");
         } else {
             src = strtok(token2,"\"");
             src = strtok(NULL,"\"");
-            token = strtok(token,"<>");
-            height = strtok(NULL,"<>");
-            width = strtok(NULL,"<>");
+            token = strtok(token,"=");
+            height = strtok(NULL,"=x");
+            width = strtok(NULL,"x\n");
         }
     }
 
@@ -48,7 +48,8 @@ void pictures(char * line){
     strcat(newLine,"\" width=\"");
     strcat(newLine,width);
     strcat(newLine,"\"/>\n");
-    printf("%s", newLine);
+    fprintf(fp, "%s", newLine);
+    free(newLine);
 }
 
 int main (int argc, char *argv[]){

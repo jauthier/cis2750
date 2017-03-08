@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-void headings (char *line){
+void headings (char *line, FILE *fp){
     char *text;
     char *size;
 
@@ -22,13 +22,13 @@ void headings (char *line){
         if (strstr(token,"size")){
             text = strtok(token2,"\"");
             text = strtok(NULL,"\"");
-            size = strtok(token,"<>");
-            size = strtok(NULL,"<>");
+            size = strtok(token,"=\n");
+            size = strtok(NULL,"=\n");
         } else {
             text = strtok(token,"\"");
             text = strtok(NULL,"\"");
-            size = strtok(token2,"<>");
-            size = strtok(NULL,"<>");
+            size = strtok(token2,"=\n");
+            size = strtok(NULL,"=\n");
         }
     }
 
@@ -41,7 +41,8 @@ void headings (char *line){
     strcat(newLine,"</h");
     strcat(newLine,size);
     strcat(newLine,">\n");
-    printf("%s", newLine);
+    fprintf(fp, "%s", newLine);
+    free(newLine);
 }
 
 int main (int argc, char * argv[]){
