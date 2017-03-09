@@ -9,11 +9,12 @@
 <form action="login.php" method="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
     Username: <input type="text" name="username"><br><br>
     Stream: <input type="text" name="stream"><br><br>
-    <input type="submit" name="login" value="Login"><br>
+    <input type="submit" value="Login"><br>
 </form>
 
 <?php
     if ($_SERVER["REQUEST_METHOD"] == "POST"){
+        echo "in if";
         $username = $_POST["username"];
         $stream = $_POST["stream"];
         echo "$username";
