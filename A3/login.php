@@ -8,7 +8,7 @@
     $stream = $_POST["stream"];
     $command = "./runCSU" . $username . $Stream;
     exec($command,$output,$return);
-    echo $output;
+    echo $output[0];
 ?>
 
 </head>
