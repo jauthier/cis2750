@@ -18,13 +18,13 @@
             echo "$username";
             $command = "./runCSU" . $username . $Stream;
             exec($command,$output,$return);
-            echo $output[0];
+            echo "$output[0]";
         }
         
         
     }
 ?>
-<?php if ($output == 1): ?>
+<?php if ($output[0] == 1): ?>
 
 <form method="post", action="test.php">
     <input type="hidden" name="username" value="$username">
