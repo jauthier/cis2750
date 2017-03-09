@@ -6,13 +6,18 @@
 <?php
     $username = $_POST["username"];
     $stream = $_POST["stream"];
-    $command = "./runCUS" . $username . $Stream;
+    $command = "./runCSU" . $username . $Stream;
     exec($command,$output,$return);
 ?>
 
 </head>
 
 <body>
+<form action="login.php" method="post">
+    Username: <input type="text" name="username"><br><br>
+    Stream: <input type="text" name="stream"><br><br>
+    <input type="submit" name="login" value="Login"><br>
+</form>
 <?php if (!$return): ?>
 
 <form method="post", action="test.html">

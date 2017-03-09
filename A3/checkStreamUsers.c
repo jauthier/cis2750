@@ -4,9 +4,12 @@
 
 int checkStreamUsers (FILE *sufp, char *username);
 
-int main (){
-    char * streamFile = malloc(sizeof(char)*(strlen("messages/")+strlen(stream)+strlen("StreamUsers.txt")));
-    strcpy(streamFile,"messages/");
+int main (int argc, char *argv[]){
+    char *username, *stream;
+    strcpy(username,argv[1]);
+    strcpy(stream, argv[2]);
+    char * streamFile = malloc(sizeof(char)*(strlen("a2/messages/")+strlen(stream)+strlen("StreamUsers.txt")));
+    strcpy(streamFile,"a2/messages/");
     strcat(streamFile,stream);
     strcat(streamFile,"StreamUsers.txt");
     /*check username and stream*/
