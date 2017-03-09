@@ -3,39 +3,39 @@
 void link (char * line, FILE *fp){
     char *text;
     char *link;
+    char * extra = malloc(sizeof(char)*200);
+    strcpy(extra," ");
+    int noLink = 0;
+    int noText = 0;
 
-    char * token = strtok(line,"()");
-    token = strtok(NULL,"()");
-
-    /*token holds the inside of the ()*/
-    char * token2 = strtok(token,",");
-    token = strtok(NULL,",");
-
-    if (if token == NULL){
-        link = strtok(token2,"<>");
-        link = strtok(NULL,"<>");
-        text = "link";
-    } else {
-        if (strstr(token,"link")){
-            text = strtok(token2,"\"");
-            text = strtok(NULL,"\"");
+    char * token = strtok(line,",");
+    while (token != NULL){
+        if (strstr(token,"link") != NULL){
             link = strtok(token,"=");
             link = strtok(NULL,"=\n");
-        } else {
+            noLink = 1;
+        } else if (strstr(token,"text") != NULL){
             text = strtok(token,"\"");
             text = strtok(NULL,"\"");
-            link = strtok(token2,"=");
-            link = strtok(NULL,"=\n");
+            noText = 1;
+        } else {
+            strcat(extra, token);
+            strcat(extra, " ");
         }
+        token = strtok(NULL,",");
     }
 
-    char * newLine = malloc(sizeof(char)*(strlen("    <a href=\"") + strlen(link) 
-        + strlen("\">") + strlen(text) + strlen("</a>\n")));
-    strcpy(newLine,"    <a href=\"");
-    strcat(newLine,link);
-    strcat(newLine,"\">");
-    strcat(newLine,text);
-    strcat(newLine,"</a>\n");
-    fprintf(fp,"%s", newLine);
-    free(newLine);
+    if (noText == 0)
+        strcpy(text, "link");
+    if (noLink == 0)
+        return;
+
+    printf("    <a href=\"");
+    printf("%s", link);
+    printf("\"");
+    printf("%s", extra);
+    printf(">");
+    printf("%s\n", text);
+    printf("</a>\n");
+    free(extra);
 }

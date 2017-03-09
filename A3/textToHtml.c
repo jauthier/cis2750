@@ -48,10 +48,12 @@ int main(int argc, char * argv[]){
 void interpretLine(char * line, FILE *fp){
     /*check the first letter of the line*/
     char first = line[0];
+    char * inside = strtok(line,"()");
+    inside = strtok(NULL,"()");
 
     switch (first){
         case 'b' :
-            button(line, outFP);
+            button(inside, outFP);
             break;
         case 'd' :
 
@@ -60,16 +62,16 @@ void interpretLine(char * line, FILE *fp){
 
             break;
         case 'h' :
-            heading(line, outFP);
+            heading(inside, outFP);
             break;
         case 'i' :
 
             break;
         case 'l' :
-            link(line, outFP);
+            link(inside, outFP);
             break;
         case 'p' :
-            pictures(line, outFP);
+            pictures(inside, outFP);
             break;
         case 'r' :
 

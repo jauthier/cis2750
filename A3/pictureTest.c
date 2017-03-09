@@ -5,51 +5,46 @@
 /*pictures*/
 
 void pictures (char * line, FILE *fp){
-    char * src;
-    char * height;
-    char * width;
+    char * src, * height, * width;
+    char * extra = malloc(sizeof(char)*200);
+    strcpy(extra," ");
+    int nosize = 0;
+    int noSrc = 0;
 
-    char * token = strtok(line,"()");
-    token = strtok(NULL,"()");
+    char * token = strtok(line,",");
+    while (token != NULL){
 
-    /*token holds the inside of the ()*/
-    char * token2 = strtok(token,",");
-    token = strtok(NULL,",");
-    if (token == NULL){ /*there is no size indicated*/
-        src = strtok(token2,"\"");
-        src = strtok(NULL,"\"");
-        height = "100";
-        width = "100";
-    } else {
-        /*check which one is image and which one is size*/
-        if (strstr(token,"image")){
-            /*get the stuff between the quotes*/
+        if (strstr(token,"image") == NULL){
             src = strtok(token,"\"");
             src = strtok(NULL,"\"");
-            token = strtok(token2,"=");
-            height = strtok(NULL,"=x");
-            width = strtok(NULL,"x\n");
-        } else {
-            src = strtok(token2,"\"");
-            src = strtok(NULL,"\"");
+            noSrc = 1;
+        } else if (strstr(token,"size") == NULL){
             token = strtok(token,"=");
             height = strtok(NULL,"=x");
             width = strtok(NULL,"x\n");
+            nosize = 1;
+        } else {
+            strcat(extra, token);
+            strcat(extra, " ");
         }
+        token = strtok(NULL,",");
     }
 
-    char * newLine = malloc(sizeof(char)*(strlen("    <img src=\"")
-        + strlen(src) + strlen("\" height=\"") + strlen(height)
-        + strlen("\" width=\"") + strlen(width) + strlen("\"/>\n")));
-    strcpy(newLine,"    <img src=\"");
-    strcat(newLine,src);
-    strcat(newLine,"\" height=\"");
-    strcat(newLine,height);
-    strcat(newLine,"\" width=\"");
-    strcat(newLine,width);
-    strcat(newLine,"\"/>\n");
-    fprintf(fp, "%s", newLine);
-    free(newLine);
+    if (nosize == 0){ /*there is no size indicated*/
+        strcpy(height, "100");
+        strcpy(width, "100");
+    }
+    if (noSrc == 0)
+        return;
+
+    printf("    <img src=\"");
+    printf("%s",src);
+    printf("\" height=\"");
+    printf("%s",height);
+    printf("\" width=\"");
+    printf("%s",width);
+    printf("\"/>\n");
+    free(extra);
 }
 
 int main (int argc, char *argv[]){
