@@ -15,8 +15,9 @@
         } else {
             $username = $_POST["username"];
             $stream = $_POST["stream"];
-            echo "$username";
+            echo "$username $stream";
             $command = "./runCSU " . $username . " " . $Stream;
+            echo "$command";
             exec($command,$output,$return);
             echo "$output[0]";
         }
