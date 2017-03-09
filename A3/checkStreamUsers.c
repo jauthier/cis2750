@@ -5,7 +5,8 @@
 int checkStreamUsers (FILE *sufp, char *username);
 
 int main (int argc, char *argv[]){
-    char *username, *stream;
+    char *username = malloc(sizeof(char)*100); 
+    char *stream = malloc(sizeof(char)*100);
     strcpy(username,argv[1]);
     strcpy(stream, argv[2]);
     char * streamFile = malloc(sizeof(char)*(strlen("a2/messages/")+strlen(stream)+strlen("StreamUsers.txt")));
