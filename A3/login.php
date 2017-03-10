@@ -15,23 +15,20 @@
         } else {
             $username = $_POST["username"];
             $stream = $_POST["stream"];
-            echo "$username $stream";
             $command = "./runCSU " . $username . " " . $stream;
-            echo "$command";
             exec($command,$output,$return);
-            echo "$output[0]";
         }
-        
-        
     }
 ?>
 <?php if ($output[0] == 1): ?>
 
-<form method="post", action="test.php">
+<form id="form" method="post" action="test.php">
     <input type="hidden" name="username" value="$username">
     <input type="hidden" name="stream" value="$stream">
-    <input type="submit">
 </form>
+<script type="text/javascript">
+  document.getElementById('form').submit();
+</script
 <?php endif; ?>
 
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
