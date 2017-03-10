@@ -23,8 +23,8 @@
 <?php if ($output[0] == 1): ?>
 
 <form id="form" method="post" action="test.php">
-    <input type="hidden" name="username" value="$username">
-    <input type="hidden" name="stream" value="$stream">
+    <input type="hidden" name="username" value="<?php echo $username; ?>">
+    <input type="hidden" name="stream" value="<?php echo $stream; ?>">
 </form>
 <script type="text/javascript">
   document.getElementById('form').submit();
