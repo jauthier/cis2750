@@ -46,14 +46,3 @@ void pictures (char * line, FILE *fp){
     printf("\"/>\n");
     free(extra);
 }
-
-int main (int argc, char *argv[]){
-    char hold[] = ".p(image=\"this_pic\", size=<20><30>)";
-    pictures(hold);
-    char hold1[] = ".p(image=\"this_pic\")";
-    pictures(hold1);
-    char hold2[] = ".p(size=<20><30>, image=\"this_pic\")";
-    pictures(hold2);
-    return 0;
-}
-

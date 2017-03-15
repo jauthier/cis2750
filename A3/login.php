@@ -28,7 +28,7 @@
 </form>
 <script type="text/javascript">
   document.getElementById('form').submit();
-</script
+</script>
 <?php endif; ?>
 
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">

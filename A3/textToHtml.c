@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "translateConfig.h"
 
 void interpretLine(char * line);
 
@@ -26,12 +27,14 @@ int main(int argc, char * argv[]){
         exit(0);
     }
 
-    /*make the html file*/
+    /*make the php file*/
     
     char *outFileName = malloc(sizeof(char)*(strlen(fileName)+1));
     strcpy(outFileName,strtok(fileName,"."));
-    strcat(outFileName,".html");
-    FILE *outFP = fopen(outFileName,"w");
+    strcat(outFileName,".php");
+    FILE *outFP = fopen(outFileName,"a");
+
+    fprintf(outFP, "<!DOCTYPE html>\n<html>\n<body>\n");
 
     /*read in file line by  line*/
     char buffer[500]
@@ -42,6 +45,7 @@ int main(int argc, char * argv[]){
             token = strtok(NULL,".\n");
         }
     }
+    fprintf(outFP, "</body>\n</html>\n");
     return 0;
 }
 
@@ -52,32 +56,35 @@ void interpretLine(char * line, FILE *fp){
     inside = strtok(NULL,"()");
 
     switch (first){
-        case 'b' :
+        case 'b' : /*button*/
             button(inside, outFP);
             break;
-        case 'd' :
-
+        case 'd' : /*horizontal line*/
+            fprintf(outFP, "<hr>\n");
             break;
-        case 'e' :
-
+        case 'e' : /*executable*/
+            executable(inside, outFP);
             break;
-        case 'h' :
+        case 'h' : /*header*/
             heading(inside, outFP);
             break;
-        case 'i' :
-
+        case 'i' : /*one input*/
+            input(inside,outFP);
             break;
-        case 'l' :
+        case 'l' : /*link*/
             link(inside, outFP);
             break;
-        case 'p' :
+        case 'p' : /*picture*/
             pictures(inside, outFP);
             break;
-        case 'r' :
-
+        case 'r' : /*radio button*/
+            radioButton(inside, outFP);
             break;
-        case 't' :
-
+        case 't' : /*text*/
+            text(inside, outFP);
+            break;
+        case 'n': /*new line*/
+            fprintf(outFP, "<br>\n");
             break;
     }
 }
