@@ -4,7 +4,7 @@ import sys
 import os
 
 
-def updateFile(stream, userName):
+def updateFile(stream, userName,inc):
 	fileName = "messages/%sStreamUsers.txt"%stream
 	tempFile = "messages/temp.txt"
 	file = open(fileName, "r")
@@ -12,7 +12,7 @@ def updateFile(stream, userName):
 	for line in file:
 		hold = line.split(' ')
 		if userName in line:
-			temp.write("%s %d"%hold[0],(int(hold[1])+1))
+			temp.write("%s %d"%hold[0],(int(hold[1])+inc))
 		else:
 			temp.write(line)
 	remove(fileName)
@@ -20,12 +20,22 @@ def updateFile(stream, userName):
 
 def getStream(streamList):
 	os.system('clear')
-	print("Which stream would you like to view?");
-	for stream in streamList:
-		print (stream +" ", end='');
-	print("all");
-	#get the users choice
-	choice = input().rstrip('\n')
+	check = 0
+	while check == 0:
+
+		print("Which stream would you like to view?");
+		for stream in streamList:
+			print (stream +" ", end='');
+		print("all");
+		#get the users choice
+		choice = input().rstrip('\n')
+		if choice == "all":
+			count = 1
+		else:
+			for line in streamList:
+				if choice == line:
+					count = 1
+
 	postList = [] # a list of all the posts
 	lastPRList = [] # a list of the users current pos in each stream file they are viewing
 
