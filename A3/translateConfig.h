@@ -10,7 +10,7 @@
 
 void button (char * line, FILE * fp);
 
-void executable (cha * line, FILE * fp);
+void executable (char * line, FILE * fp);
 
 void headings (char * line, FILE * fp);
 
@@ -20,4 +20,4 @@ void link (char * line, FILE * fp);
 
 void pictures (char * line, FILE * fp);
 
-void radioButton (char * line, FILE *f p);
+void radioButton (char * line, FILE *fp);

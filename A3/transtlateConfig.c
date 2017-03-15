@@ -49,7 +49,7 @@ void button (char * line, FILE * fp){
     free(extra);
 }
 
-void executable (char * line, FILE * fp){
+void executable (cha * line, FILE * fp){
     char * file;
     int noFile = 0;
 
@@ -259,7 +259,7 @@ void pictures (char * line, FILE * fp){
     free(extra);
 }
 
-void radioButton (char * line, FILE *fp){
+void radioButton (char * line, FILE *f p){
     char * action, * name;
     char * values[10];
     char * extra = malloc(sizeof(char)*200);

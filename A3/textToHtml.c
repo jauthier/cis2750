@@ -9,7 +9,7 @@
 #include <string.h>
 #include "translateConfig.h"
 
-void interpretLine(char * line);
+void interpretLine(char * line, FILE * fp);
 
 int main(int argc, char * argv[]){
 
@@ -37,7 +37,7 @@ int main(int argc, char * argv[]){
     fprintf(outFP, "<!DOCTYPE html>\n<html>\n<body>\n");
 
     /*read in file line by  line*/
-    char buffer[500]
+    char buffer[500];
     while (fgets(buffer,500,fp) != NULL){
         char *token = strtok(buffer,".\n");
         while (token != NULL){
