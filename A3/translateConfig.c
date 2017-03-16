@@ -78,27 +78,28 @@ void headings (char * line, FILE * fp){
     strcpy(extra," ");
     int nosize = 0;
     int noText = 0;
+    char * savePtr1, *savePtr2;
 
-    char * token = strtok(line,",");
+    char * token = strtok_r(line,",", &savePtr1);
     while (token != NULL){
 printf("here\n");
 
         if (strstr(token,"size") != NULL){
 printf("in size\n");
-            size = strtok(token,"=");
-            size = strtok(NULL,"=\n");
+            size = strtok_r(token,"=", &savePtr2);
+            size = strtok_r(NULL,"=\n", &savePtr2);
 printf("%s\n",size);
             nosize = 1;
         } else if (strstr(token,"text") != NULL){
-            text = strtok(token,"\"");
-            text = strtok(NULL,"\"");
+            text = strtok_r(token,"\"", &savePtr2);
+            text = strtok_r(NULL,"\"", &savePtr2);
             noText = 1;
         } else {
 printf("in extra\n");
             strcat(extra, token);
             strcat(extra, " ");
         }
-        token = strtok(line,",");
+        token = strtok_r(line,",", &savePtr1);
     printf("%s\n",token);
     }
 
