@@ -120,9 +120,10 @@ void input (char * line, FILE * fp){
     int noText = 0;
     int noName = 0;
     int noValue = 0;
+    char * sp =",";
 
     char * token;
-    for (token = strtok(line,","); token != NULL; token = strtok((token+strlen(token)+1),",")){
+    for (token = strtok(line,sp); token != NULL; token = strtok((token+strlen(token)+1),sp)){
         printf("%s\n", token);
         char *type = strtok(token,"=");
         printf("%s\n", type);
