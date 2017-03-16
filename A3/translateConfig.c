@@ -127,7 +127,7 @@ void input (char * line, FILE * fp){
         if (strstr(token,"action") != NULL){
             action = strtok(token,"\"");
             action = strtok(NULL,"\"");
-            noaction = 1;
+            noAction = 1;
         } else if (strstr(token,"text") != NULL){
             text = strtok(token,"\"");
             text = strtok(NULL,"\"");
