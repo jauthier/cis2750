@@ -46,10 +46,8 @@ int main(int argc, char * argv[]){
                 char * line = malloc(sizeof(char)*200);
                 int i = 0;
                 line[i] = c;
-                printf("%c\n", line[i]);
                 i++;
                 line[i] = d;
-                printf("%c\n", line[i]);
                 i++;
                 int openBraces = 0;
                 d = fgetc(fp);
@@ -59,13 +57,11 @@ int main(int argc, char * argv[]){
                     if (d == ')')
                         openBraces--;
                     line[i] = d;
-                    printf("%c\n", line[i]);
                     i++;
                     d = fgetc(fp);
                 }
                 line[i] = d;
                 line[i+1] = '\0';
-                printf("%s\n", line);
                 interpretLine(line, outFP);
                 free(line);
             }

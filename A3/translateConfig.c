@@ -82,18 +82,16 @@ void headings (char * line, FILE * fp){
     char * token;
     token = strtok(line,",=");
     while ( token != NULL){
-printf("%s\n", token);
         if (strcmp(token,"size") == 0){
             size = strtok(NULL,",=");
-            printf("size: %s\n", size);
             nosize = 1;
         } else if (strcmp(token,"text") == 0){
             text = strtok(NULL,",=\"");
-            printf("text: %s\n", text);
             noText = 1;
         } else {
             strcat(extra, token);
             token = strtok(NULL,",");
+            strcat(extra,"=");
             strcat(extra,token);
             strcat(extra, " ");
         }
@@ -128,25 +126,23 @@ void input (char * line, FILE * fp){
     char * token;
     token = strtok(line,",=");
     while (token != NULL){
-        printf("token: %s\n", token);
         if (strcmp(token,"action") == 0){
             action = strtok(NULL,"=,\"");
-            printf("action: %s\n", action);
             noAction = 1;
         } else if (strcmp(token,"text") == 0){
             text = strtok(NULL,"=,\"");
-            printf("text: %s\n", text);
             noText = 1;
         } else if (strcmp(token,"name") == 0){
             name = strtok(NULL,"=,\"");
-            printf("name: %s\n", name);
             noName = 1;
         } else if (strcmp(token,"value") == 0){
             value = strtok(NULL,"=,\"");
-            printf("value: %s\n", value);
             noValue = 1;
         } else {
             strcat(extra, token);
+            token = strtok(NULL,",");
+            strcat(extra,"=");
+            strcat(extra,token);
             strcat(extra, " ");
         }
         token = strtok(NULL,",="); 
@@ -186,21 +182,22 @@ void link (char * line, FILE * fp){
     int noLink = 0;
     int noText = 0;
 
-    char * token = strtok(line,",");
+    char * token = strtok(line,",=");
     while (token != NULL){
-        if (strstr(token,"link") != NULL){
-            link = strtok(token,"=");
-            link = strtok(NULL,"=\n");
+        if (strcpm(token,"link") == 0){
+            link = strtok(NULL,"=");
             noLink = 1;
-        } else if (strstr(token,"text") != NULL){
-            text = strtok(token,"\"");
+        } else if (strcpm(token,"text") == 0){
             text = strtok(NULL,"\"");
             noText = 1;
         } else {
             strcat(extra, token);
+            token = strtok(NULL,",");
+            strcat(extra,"=");
+            strcat(extra,token);
             strcat(extra, " ");
         }
-        token = strtok(NULL,",");
+        token = strtok(NULL,",=");
     }
 
     if (noText == 0)
