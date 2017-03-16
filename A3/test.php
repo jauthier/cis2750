@@ -2,18 +2,25 @@
 
 <html>
 <head>
-<title>Login</title>
-
+<?php 
+	$username = $_POST["username"];
+ 	$stream = $_POST["stream"];
+ ?>
+<title><?php echo $stream; ?></title>
 </head>
 
 <body>
 
-<h3>Next Page</h3>
+<h3>Welcome <?php echo $username; ?></h3>
 
-<?php 
-	$username = $_POST["username"];
-	echo "$username";
- ?>
+
+
+<form>
+	<input type="submit" value="Next">
+	<input type="submit" value="Previous">
+	<input type="submit" value="New Stream">
+	<input type="submit" value="Logout">
+</form>
 
 </body>
 </html>

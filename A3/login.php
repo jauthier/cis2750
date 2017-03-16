@@ -8,14 +8,14 @@
 <body>
 <h3>Login</h3>
 <?php
-    $username = $Stream = "";
+    $check = 0;
+    $username = "";
     if ($_SERVER["REQUEST_METHOD"] == "POST"){
-        if (empty($_POST["username"]) or empty($_POST["stream"])){
+        if (empty($_POST["username"])){
             echo "empty";
         } else {
             $username = $_POST["username"];
-            $stream = $_POST["stream"];
-            $command = "./runCSU " . $username . " " . $stream;
+            $command = "./runCSU " . $username;
             exec($command,$output,$return);
         }
     }
@@ -24,7 +24,6 @@
 
 <form id="form" method="post" action="test.php">
     <input type="hidden" name="username" value="<?php echo $username; ?>">
-    <input type="hidden" name="stream" value="<?php echo $stream; ?>">
 </form>
 <script type="text/javascript">
   document.getElementById('form').submit();
@@ -33,7 +32,6 @@
 
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
     Username: <input type="text" name="username"><br><br>
-    Stream: <input type="text" name="stream"><br><br>
     <input type="submit" value="Login"><br>
 </form>
 
