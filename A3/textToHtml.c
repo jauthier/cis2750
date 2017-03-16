@@ -60,6 +60,7 @@ int main(int argc, char * argv[]){
                     i++;
                     d = fgetc(fp);
                 }
+                printf("%s\n", line);
                 interpretLine(line, outFP);
             }
         }
