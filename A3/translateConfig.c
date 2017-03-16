@@ -83,10 +83,12 @@ void headings (char * line, FILE * fp){
     for (token = strtok(line,",="); token != NULL; token = strtok(token+strlen(token)+1,",=")){
 
         if (strcmp(token,"size") == 0){
-            size = strtok(NULL,",=\n");
+            size = strtok(NULL,",=");
+            printf("size: %s\n", size);
             nosize = 1;
         } else if (strcmp(token,"text") == 0){
             text = strtok(NULL,",=\"");
+            printf("text: %s\n", text);
             noText = 1;
         } else {
             strcat(extra, token);
@@ -99,7 +101,7 @@ void headings (char * line, FILE * fp){
     if (noText == 0)
         strcpy(text, " ");
     
-    fprintf(fp, "    <h");
+    fprintf(fp, "<h");
     fprintf(fp, "%s", size);
     fprintf(fp, "%s", extra);
     fprintf(fp, ">");
