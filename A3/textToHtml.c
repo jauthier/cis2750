@@ -49,8 +49,10 @@ int main(int argc, char * argv[]){
                 printf("good\n");
                 int i = 0;
                 line[i] = c;
+                printf("%c\n", line[i]);
                 i++;
                 line[i] = d;
+                printf("%c\n", line[i]);
                 i++;
                 int openBraces = 0;
                 while (d != ')' || openBraces != 0){
