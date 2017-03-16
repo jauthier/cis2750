@@ -124,26 +124,24 @@ void input (char * line, FILE * fp){
     char * token;
     for (token = strtok(line,","); token != NULL; token = strtok(token+strlen(token)+1,",")){
         printf("%s\n", token);
-        if (strstr(token,"action") != NULL){
-            action = strtok(token,"\"");
+        char *type = strtok(token,"=");
+        if (strcmp(type,"action") == 0){
             action = strtok(NULL,"\"");
             noAction = 1;
-        } else if (strstr(token,"text") != NULL){
-            text = strtok(token,"\"");
+        } else if (strcmp(type,"text") == 0){
             text = strtok(NULL,"\"");
             noText = 1;
-        } else if (strstr(token,"name") != NULL){
-            name = strtok(token,"\"");
+        } else if (strcmp(type,"name") == 0){
             name = strtok(NULL,"\"");
             noName = 1;
-        } else if (strstr(token,"value") != NULL){
-            value = strtok(token,"\"");
+        } else if (strcmp(type,"value") == 0){
             value = strtok(NULL,"\"");
             noValue = 1;
         } else {
             strcat(extra, token);
             strcat(extra, " ");
         }
+        printf("%s\n", type);
     }
     if (noAction == 0)
         return;
