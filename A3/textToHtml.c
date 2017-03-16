@@ -29,7 +29,6 @@ int main(int argc, char * argv[]){
     }
 
     /*make the php file*/
-    
     char *outFileName = malloc(sizeof(char)*(strlen(fileName)+1));
     strcpy(outFileName,strtok(fileName,"."));
     strcat(outFileName,".php");

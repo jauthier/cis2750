@@ -93,6 +93,8 @@ printf("%s\n", token);
             noText = 1;
         } else {
             strcat(extra, token);
+            token = strtok(NULL,",")
+            strcat(extra,token)
             strcat(extra, " ");
         }
         token = strtok(NULL,",=");
