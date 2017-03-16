@@ -148,7 +148,7 @@ void input (char * line, FILE * fp){
             strcat(extra, token);
             strcat(extra, " ");
         }
-        token = (NULL,sp);
+        token = strtok(NULL,sp);
     }
 
     if (noAction == 0)
