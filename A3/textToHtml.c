@@ -55,8 +55,8 @@ int main(int argc, char * argv[]){
                 printf("%c\n", line[i]);
                 i++;
                 int openBraces = 0;
+                d = fgetc(fp);
                 while (d != ')' || openBraces != 0){
-                    printf("%d\n", openBraces);
                     if (d == '(')
                         openBraces++;
                     if (d == ')')
