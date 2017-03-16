@@ -87,12 +87,12 @@ printf("here\n");
         if (strstr(token,"size") != NULL){
 printf("in size\n");
             size = strtok_r(token,"=", &savePtr2);
-            size = strtok_r(NULL,"=\n", &savePtr2);
+            size = strtok_r(token,"=\n", &savePtr2);
 printf("%s\n",size);
             nosize = 1;
         } else if (strstr(token,"text") != NULL){
             text = strtok_r(token,"\"", &savePtr2);
-            text = strtok_r(NULL,"\"", &savePtr2);
+            text = strtok_r(token,"\"", &savePtr2);
             noText = 1;
         } else {
 printf("in extra\n");
