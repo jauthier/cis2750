@@ -32,7 +32,7 @@ int main(int argc, char * argv[]){
     char *outFileName = malloc(sizeof(char)*(strlen(fileName)+1));
     strcpy(outFileName,strtok(fileName,"."));
     strcat(outFileName,".php");
-    FILE *outFP = fopen(outFileName,"a");
+    FILE *outFP = fopen(outFileName,"w");
 
     fprintf(outFP, "<!DOCTYPE html>\n<html>\n<body>\n");
     /*read in file line by  line*/
