@@ -80,7 +80,8 @@ void headings (char * line, FILE * fp){
     int noText = 0;
     char * savePtr1, *savePtr2;
 
-    char * token = strtok_r(line,",", &savePtr1);
+    char * token; 
+    token = (char *)strtok_r(line,",", &savePtr1);
     while (token != NULL){
 printf("here\n");
 
