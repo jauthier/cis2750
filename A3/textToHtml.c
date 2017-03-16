@@ -61,6 +61,7 @@ int main(int argc, char * argv[]){
                     if (d == ')')
                         openBraces--;
                     line[i] = d;
+                    printf("%c\n", line[i]);
                     i++;
                     d = fgetc(fp);
                 }
