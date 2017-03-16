@@ -22,8 +22,8 @@ void button (char * line, FILE * fp){
             link = strtok(NULL,"\"");
             noLink = 1;
         } else if (strstr(token,"name") != NULL){
-            text = strtok(token,"\"");
-            text = strtok(NULL,"\"");
+            name = strtok(token,"\"");
+            name = strtok(NULL,"\"");
             noName = 1;
         } else {
             strcat(extra, token);
@@ -69,7 +69,6 @@ void executable (char * line, FILE * fp){
     fprintf(fp, "<?php exec(");
     fprintf(fp, "%s", file);
     fprintf(fp, "); ?>\n");
-    free(extra);
 }
 
 void headings (char * line, FILE * fp){
@@ -126,20 +125,20 @@ void input (char * line, FILE * fp){
     char * token = strtok(line,",");
     while (token != NULL){
         if (strstr(token,"action") != NULL){
-            link = strtok(token,"\"");
-            link = strtok(NULL,"\"");
+            action = strtok(token,"\"");
+            action = strtok(NULL,"\"");
             noLink = 1;
         } else if (strstr(token,"text") != NULL){
             text = strtok(token,"\"");
             text = strtok(NULL,"\"");
             noText = 1;
         } else if (strstr(token,"name") != NULL){
-            text = strtok(token,"\"");
-            text = strtok(NULL,"\"");
+            name = strtok(token,"\"");
+            name = strtok(NULL,"\"");
             noText = 1;
         } else if (strstr(token,"value") != NULL){
-            text = strtok(token,"\"");
-            text = strtok(NULL,"\"");
+            value = strtok(token,"\"");
+            value = strtok(NULL,"\"");
             noText = 1;
         } else {
             strcat(extra, token);

@@ -57,34 +57,34 @@ void interpretLine(char * line, FILE *fp){
 
     switch (first){
         case 'b' : /*button*/
-            button(inside, outFP);
+            button(inside, fp);
             break;
         case 'd' : /*horizontal line*/
-            fprintf(outFP, "<hr>\n");
+            fprintf(fp, "<hr>\n");
             break;
         case 'e' : /*executable*/
-            executable(inside, outFP);
+            executable(inside, fp);
             break;
         case 'h' : /*header*/
-            heading(inside, outFP);
+            heading(inside, fp);
             break;
         case 'i' : /*one input*/
-            input(inside,outFP);
+            input(inside,fp);
             break;
         case 'l' : /*link*/
-            link(inside, outFP);
+            link(inside, fp);
             break;
         case 'p' : /*picture*/
-            pictures(inside, outFP);
+            pictures(inside, fp);
             break;
         case 'r' : /*radio button*/
-            radioButton(inside, outFP);
+            radioButton(inside, fp);
             break;
         case 't' : /*text*/
-            text(inside, outFP);
+            text(inside, fp);
             break;
         case 'n': /*new line*/
-            fprintf(outFP, "<br>\n");
+            fprintf(fp, "<br>\n");
             break;
     }
 }
