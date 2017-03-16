@@ -122,24 +122,22 @@ void input (char * line, FILE * fp){
     int noValue = 0;
 
     char * token;
-    for (token = strtok(line,","); token != NULL; token = strtok(token+strlen(token)+1,",")){
-        printf("%s\n", token);
-        char *type = strtok(token,"=,");
-        printf("%s\n", type);
-        if (strcmp(type,"action") == 0){
-            action = strtok(NULL,"\"");
+    for (token = strtok(line,",="); token != NULL; token = strtok(token+strlen(token)+1,",=")){
+        
+        if (strcmp(token,"action") == 0){
+            action = strtok(NULL,"=,\"");
             printf("action: %s\n", action);
             noAction = 1;
-        } else if (strcmp(type,"text") == 0){
-            text = strtok(NULL,"\"");
+        } else if (strcmp(token,"text") == 0){
+            text = strtok(NULL,"=,\"");
             printf("text: %s\n", text);
             noText = 1;
-        } else if (strcmp(type,"name") == 0){
-            name = strtok(NULL,"\"");
+        } else if (strcmp(token,"name") == 0){
+            name = strtok(NULL,"=,\"");
             printf("name: %s\n", name);
             noName = 1;
-        } else if (strcmp(type,"value") == 0){
-            value = strtok(NULL,"\"");
+        } else if (strcmp(token,"value") == 0){
+            value = strtok(NULL,"=,\"");
             printf("value: %s\n", value);
             noValue = 1;
         } else {
