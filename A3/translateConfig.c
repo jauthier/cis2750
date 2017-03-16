@@ -123,8 +123,7 @@ void input (char * line, FILE * fp){
     char * sp =",";
 
     char * token;
-    token = strtok(line,sp);
-    while (token != NULL){
+    for (token = strtok(line,sp); token != NULL; token = strtok((token+strlen(token)+1),sp)){
         printf("%s\n", token);
         char *type = strtok(token,"=");
         printf("%s\n", type);
@@ -148,7 +147,6 @@ void input (char * line, FILE * fp){
             strcat(extra, token);
             strcat(extra, " ");
         }
-        token = strtok(NULL,sp);
     }
 
     if (noAction == 0)

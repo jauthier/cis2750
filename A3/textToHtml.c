@@ -35,14 +35,36 @@ int main(int argc, char * argv[]){
     FILE *outFP = fopen(outFileName,"w");
 
     fprintf(outFP, "<!DOCTYPE html>\n<html>\n<body>\n");
-    /*read in file line by  line*/
-    char buffer[500];
-    while (fgets(buffer,500,fp) != NULL){
-        char *token = strtok(buffer,".\n");
-        while (token != NULL){
-            interpretLine(token, outFP);
-            token = strtok(NULL,".\n");
+    /*read in file character by character*/
+    char c = fgetc(fp);
+    
+    
+    int j = 0;
+    while (!feof(fp)){
+        if (c == '.'){
+            char line[200];
+            c = fgetc(fp);
+            char d = fgetc(fp);
+            if (isalpha(c) != 0 && d == "("){
+                int i = 0;
+                line[i] = c;
+                i++;
+                line[i] = d;
+                i++;
+                int openBraces = 0;
+                while (d != ')' || openBraces != 0){
+                    if (d == "(")
+                        openBraces++;
+                    if (d == ")")
+                        openBraces--;
+                    line[i] = d;
+                    i++;
+                    d = fgetc(fp);
+                }
+                interpretLine(line, outFP);
+            }
         }
+        c = fgetc(fp);
     }
     fprintf(outFP, "</body>\n</html>\n");
     return 0;
