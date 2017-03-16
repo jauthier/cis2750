@@ -125,23 +125,27 @@ void input (char * line, FILE * fp){
     for (token = strtok(line,","); token != NULL; token = strtok(token+strlen(token)+1,",")){
         printf("%s\n", token);
         char *type = strtok(token,"=");
+        printf("%s\n", type);
         if (strcmp(type,"action") == 0){
             action = strtok(NULL,"\"");
+            printf("action: %s\n", action);
             noAction = 1;
         } else if (strcmp(type,"text") == 0){
             text = strtok(NULL,"\"");
+            printf("text: %s\n", text);
             noText = 1;
         } else if (strcmp(type,"name") == 0){
             name = strtok(NULL,"\"");
+            printf("name: %s\n", name);
             noName = 1;
         } else if (strcmp(type,"value") == 0){
             value = strtok(NULL,"\"");
+            printf("value: %s\n", value);
             noValue = 1;
         } else {
             strcat(extra, token);
             strcat(extra, " ");
         }
-        printf("%s\n", type);
     }
     if (noAction == 0)
         return;
