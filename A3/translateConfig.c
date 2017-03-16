@@ -122,7 +122,7 @@ void input (char * line, FILE * fp){
     int noValue = 0;
 
     char * token;
-    for (token = strtok(line,",="); token != NULL; token = strtok(token+strlen(token)+1,",=")){
+    for (token = strtok(line,",="); token != NULL; token = strtok(token+strlen(token)+1,",")){
         
         if (strcmp(token,"action") == 0){
             action = strtok(NULL,"=,\"");
@@ -144,7 +144,6 @@ void input (char * line, FILE * fp){
             strcat(extra, token);
             strcat(extra, " ");
         }
-        token = strtok(NULL, ",");
     }
     if (noAction == 0)
         return;
