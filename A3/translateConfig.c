@@ -124,9 +124,9 @@ void input (char * line, FILE * fp){
 
     char * token;
     for (token = strtok(line,sp); token != NULL; token = strtok((token+strlen(token)+1),sp)){
-        printf("%s\n", token);
+        printf("token: %s\n", token);
         char *type = strtok(token,"=");
-        printf("%s\n", type);
+        printf("type: %s\n", type);
         if (strcmp(type,"action") == 0){
             action = strtok(NULL,"\"");
             printf("action: %s\n", action);
