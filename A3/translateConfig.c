@@ -154,8 +154,8 @@ void input (char * line, FILE * fp){
 
 
     fprintf(fp, "<form type=\"post\" action=\"");
-    fprintf(fp, "%s\"\n    ", action);
-    fprintf(fp, "%s\"", text);
+    fprintf(fp, "%s\">\n    ", action);
+    fprintf(fp, "%s, text);
     fprintf(fp, ": <input type=\"text\"");
     if (noName == 1){
         fprintf(fp, " name=\"");
@@ -167,8 +167,7 @@ void input (char * line, FILE * fp){
         fprintf(fp, "%s", value);
         fprintf(fp, "\"");
     }
-    fprintf(fp, "%s", extra);
-    fprintf(fp, ">\n");
+    fprintf(fp, "%s>\n", extra);
     fprintf(fp, "    <input type=\"submit\">\n");
     fprintf(fp, "</form>\n");
     free(extra);
@@ -234,6 +233,9 @@ void pictures (char * line, FILE * fp){
             nosize = 1;
         } else {
             strcat(extra, token);
+            token = strtok(NULL,",");
+            strcat(extra,"=");
+            strcat(extra,token);
             strcat(extra, " ");
         }
         token = strtok(NULL,",=");
@@ -268,26 +270,26 @@ void radioButton (char * line, FILE *fp){
     int noValues = 0;
     int valCount = 0;
 
-    char * token = strtok(line,",");
+    char * token = strtok(line,",=");
     while (token != NULL){
-        if (strstr(token,"action") == NULL){
-            action = strtok(token,"\"");
+        if (strcmp(token,"action") == 0){
             action = strtok(NULL,"\"");
             noAction = 1;
-        } else if (strstr(token,"name") == NULL){
-            name = strtok(token,"\"");
+        } else if (strcmp(token,"name") == 0){
             name = strtok(NULL,"\"");
             noName = 1;
-        } else if (strstr(token,"value") == NULL){
-            token = strtok(token,"\"");
+        } else if (strcmp(token,"value") == 0){
             values[valCount] = strtok(NULL,"\"");
             noValues = 1;
             valCount ++;
         } else {
             strcat(extra, token);
+            token = strtok(NULL,",");
+            strcat(extra,"=");
+            strcat(extra,token);
             strcat(extra, " ");
         }
-        token = strtok(NULL,",");
+        token = strtok(NULL,",=");
     }
 
     if (noAction == 0||noValues == 0)

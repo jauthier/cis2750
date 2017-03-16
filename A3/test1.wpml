@@ -5,3 +5,4 @@
 .l(text="meow",link=www.google.com)
 .p(image="cats.pdf",size=30x60)
 .n()
+.r(action="test.php",name="gender",value="male",value="female",value="other")
