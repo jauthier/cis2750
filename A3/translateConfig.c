@@ -168,7 +168,7 @@ void input (char * line, FILE * fp){
     }
     fprintf(fp, "%s", extra);
     fprintf(fp, ">\n");
-    fprintf(fp, "<input type=\"submit\">\n", );
+    fprintf(fp, "<input type=\"submit\">\n");
     fprintf(fp, "</form>\n");
     free(extra);
 }
@@ -305,7 +305,7 @@ void radioButton (char * line, FILE *fp){
         else 
             fprintf(fp, "    <input type=\"radio\" name=\"%s\" value=\"%s\"> %s <br>\n", name, values[i], values[i]);
     }
-    fprintf(fp, "    <input type=\"submit\">\n", );
+    fprintf(fp, "    <input type=\"submit\">\n");
     fprintf(fp, "<form>\n");
     free(extra);
 }
@@ -333,7 +333,7 @@ void text (char * line, FILE * fp){
                 printf("The file: %s was not found.\n", file);
                 return;
             }
-            strcpy(text,fgets(buffer, 100, fp2))
+            strcpy(text,fgets(buffer, 100, fp2));
             while (buffer != NULL){
                 fgets(buffer, 100, fp2);
                 strcat(text, buffer);
