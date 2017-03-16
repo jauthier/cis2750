@@ -120,13 +120,12 @@ void input (char * line, FILE * fp){
     int noText = 0;
     int noName = 0;
     int noValue = 0;
-    char * sp =",";
 
     char * token;
-    for (token = strtok(line,sp); token != NULL; token = strtok((token+strlen(token)+1),sp)){
-        printf("token: %s\n", token);
-        char *type = strtok(token,"=");
-        printf("type: %s\n", type);
+    for (token = strtok(line,","); token != NULL; token = strtok(token+strlen(token)+1,",")){
+        printf("%s\n", token);
+        char *type = strtok(token,"=,");
+        printf("%s\n", type);
         if (strcmp(type,"action") == 0){
             action = strtok(NULL,"\"");
             printf("action: %s\n", action);
@@ -141,14 +140,13 @@ void input (char * line, FILE * fp){
             noName = 1;
         } else if (strcmp(type,"value") == 0){
             value = strtok(NULL,"\"");
-            printf("value: %s\n", value);
+            printf("value: %s\n", );
             noValue = 1;
         } else {
             strcat(extra, token);
             strcat(extra, " ");
         }
     }
-
     if (noAction == 0)
         return;
     if (noText == 0)
