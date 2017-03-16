@@ -81,7 +81,7 @@ void headings (char * line, FILE * fp){
 
     char * token;
     for (token = strtok(line,",="); token != NULL; token = strtok(token+strlen(token)+1,",=")){
-
+printf("%s\n", token);
         if (strcmp(token,"size") == 0){
             size = strtok(NULL,",=");
             printf("size: %s\n", size);
