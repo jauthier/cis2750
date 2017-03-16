@@ -41,10 +41,12 @@ int main(int argc, char * argv[]){
 
     while (!feof(fp)){
         if (c == '.'){
+            printf("found a .\n");
             char line[200];
             c = fgetc(fp);
             char d = fgetc(fp);
             if (isalpha(c) != 0 && d == '('){
+                printf("good\n");
                 int i = 0;
                 line[i] = c;
                 i++;
