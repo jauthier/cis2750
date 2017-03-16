@@ -81,20 +81,25 @@ void headings (char * line, FILE * fp){
 
     char * token = strtok(line,",");
     while (token != NULL){
+printf("here\n");
 
-        if (strstr(token,"size") == NULL){
-            size = strtok(token,"=\n");
+        if (strstr(token,"size") != NULL){
+printf("in size\n");
+            size = strtok(token,"=");
             size = strtok(NULL,"=\n");
+printf("%s\n",size);
             nosize = 1;
-        } else if (strstr(token,"text") == NULL){
+        } else if (strstr(token,"text") != NULL){
             text = strtok(token,"\"");
             text = strtok(NULL,"\"");
             noText = 1;
         } else {
+printf("in extra\n");
             strcat(extra, token);
             strcat(extra, " ");
         }
-        token = strtok(NULL,",");
+        token = strtok(line,",");
+    printf("%s\n",token);
     }
 
     if (nosize == 0)

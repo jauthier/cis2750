@@ -15,7 +15,7 @@ int main(int argc, char * argv[]){
 
     /*check a file name has been given*/
     if (argc <= 1){
-        printf("You must enter a text config file.\n");
+        printf("You must enter a config file.\n");
         exit(0);
     }
 
@@ -35,12 +35,14 @@ int main(int argc, char * argv[]){
     FILE *outFP = fopen(outFileName,"a");
 
     fprintf(outFP, "<!DOCTYPE html>\n<html>\n<body>\n");
-
+printf("here\n");
     /*read in file line by  line*/
     char buffer[500];
     while (fgets(buffer,500,fp) != NULL){
+printf("%s\n",buffer);
         char *token = strtok(buffer,".\n");
         while (token != NULL){
+printf("%s\n",token);
             interpretLine(token, outFP);
             token = strtok(NULL,".\n");
         }
@@ -66,6 +68,7 @@ void interpretLine(char * line, FILE *fp){
             executable(inside, fp);
             break;
         case 'h' : /*header*/
+printf("in header\n");
             headings(inside, fp);
             break;
         case 'i' : /*one input*/
