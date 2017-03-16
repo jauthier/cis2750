@@ -65,6 +65,7 @@ int main(int argc, char * argv[]){
                     d = fgetc(fp);
                 }
                 line[i] = d;
+                line[i+1] = '\0'
                 printf("%s\n", line);
                 interpretLine(line, outFP);
                 free(line);
