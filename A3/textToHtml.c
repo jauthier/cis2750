@@ -37,15 +37,13 @@ int main(int argc, char * argv[]){
     fprintf(outFP, "<!DOCTYPE html>\n<html>\n<body>\n");
     /*read in file character by character*/
     char c = fgetc(fp);
-    
-    
-    int j = 0;
+
     while (!feof(fp)){
         if (c == '.'){
             char line[200];
             c = fgetc(fp);
             char d = fgetc(fp);
-            if (isalpha(c) != 0 && d == "("){
+            if (isalpha(c) != 0 && d == '('){
                 int i = 0;
                 line[i] = c;
                 i++;
@@ -53,9 +51,9 @@ int main(int argc, char * argv[]){
                 i++;
                 int openBraces = 0;
                 while (d != ')' || openBraces != 0){
-                    if (d == "(")
+                    if (d == '(')
                         openBraces++;
-                    if (d == ")")
+                    if (d == ')')
                         openBraces--;
                     line[i] = d;
                     i++;
