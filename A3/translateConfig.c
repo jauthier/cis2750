@@ -81,24 +81,19 @@ void headings (char * line, FILE * fp){
 
     char * token;
     for (token = strtok(line,","); token != NULL; token = strtok(token+strlen(token)+1,",")){
-printf("here\n");
 
         if (strstr(token,"size") != NULL){
-printf("in size\n");
             size = strtok(token,"=");
             size = strtok(NULL,"=\n");
-printf("%s\n",size);
             nosize = 1;
         } else if (strstr(token,"text") != NULL){
             text = strtok(token,"\"");
             text = strtok(NULL,"\"");
             noText = 1;
         } else {
-printf("in extra\n");
             strcat(extra, token);
             strcat(extra, " ");
         }
-    printf("%s\n",token);
     }
 
     if (nosize == 0)
@@ -126,8 +121,8 @@ void input (char * line, FILE * fp){
     int noName = 0;
     int noValue = 0;
 
-    char * token = strtok(line,",");
-    while (token != NULL){
+    char * token;
+    while (token = strtok(line,","); token != NULL;token = strtok(token+strlen(token)+1,",")){
         if (strstr(token,"action") != NULL){
             action = strtok(token,"\"");
             action = strtok(NULL,"\"");
@@ -148,7 +143,6 @@ void input (char * line, FILE * fp){
             strcat(extra, token);
             strcat(extra, " ");
         }
-        token = strtok(NULL,",");
     }
     if (noAction == 0)
         return;
