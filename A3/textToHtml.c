@@ -56,6 +56,7 @@ int main(int argc, char * argv[]){
                 i++;
                 int openBraces = 0;
                 while (d != ')' || openBraces != 0){
+                    printf("%d\n", openBraces);
                     if (d == '(')
                         openBraces++;
                     if (d == ')')
