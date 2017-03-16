@@ -140,7 +140,7 @@ void input (char * line, FILE * fp){
             noName = 1;
         } else if (strcmp(type,"value") == 0){
             value = strtok(NULL,"\"");
-            printf("value: %s\n", );
+            printf("value: %s\n", value);
             noValue = 1;
         } else {
             strcat(extra, token);
