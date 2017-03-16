@@ -3,4 +3,5 @@
 .d()
 .i(action="login.php",text="username",name="username",value="jess")
 .l(text="meow",link=www.google.com)
-
+.p(image="cats.pdf",size=30x60)
+.n()

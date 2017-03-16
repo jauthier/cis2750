@@ -127,16 +127,16 @@ void input (char * line, FILE * fp){
     token = strtok(line,",=");
     while (token != NULL){
         if (strcmp(token,"action") == 0){
-            action = strtok(NULL,"=,\"");
+            action = strtok(NULL,"\"");
             noAction = 1;
         } else if (strcmp(token,"text") == 0){
-            text = strtok(NULL,"=,\"");
+            text = strtok(NULL,"\"");
             noText = 1;
         } else if (strcmp(token,"name") == 0){
-            name = strtok(NULL,"=,\"");
+            name = strtok(NULL,"\"");
             noName = 1;
         } else if (strcmp(token,"value") == 0){
-            value = strtok(NULL,"=,\"");
+            value = strtok(NULL,"\"");
             noValue = 1;
         } else {
             strcat(extra, token);
@@ -222,23 +222,21 @@ void pictures (char * line, FILE * fp){
     int nosize = 0;
     int noSrc = 0;
 
-    char * token = strtok(line,",");
+    char * token = strtok(line,",=");
     while (token != NULL){
 
-        if (strstr(token,"image") == NULL){
-            src = strtok(token,"\"");
+        if (strcmp(token,"image") == 0){
             src = strtok(NULL,"\"");
             noSrc = 1;
-        } else if (strstr(token,"size") == NULL){
-            token = strtok(token,"=");
+        } else if (strcmp(token,"size") == 0){
             height = strtok(NULL,"=x");
-            width = strtok(NULL,"x\n");
+            width = strtok(NULL,"x");
             nosize = 1;
         } else {
             strcat(extra, token);
             strcat(extra, " ");
         }
-        token = strtok(NULL,",");
+        token = strtok(NULL,",=");
     }
 
     if (nosize == 0){ /*there is no size indicated*/
