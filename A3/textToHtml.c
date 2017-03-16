@@ -66,7 +66,7 @@ void interpretLine(char * line, FILE *fp){
             executable(inside, fp);
             break;
         case 'h' : /*header*/
-            heading(inside, fp);
+            headings(inside, fp);
             break;
         case 'i' : /*one input*/
             input(inside,fp);

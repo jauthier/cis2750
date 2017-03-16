@@ -21,3 +21,5 @@ void link (char * line, FILE * fp);
 void pictures (char * line, FILE * fp);
 
 void radioButton (char * line, FILE *fp);
+
+void text (char * line, FILE * fp);

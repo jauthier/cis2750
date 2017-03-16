@@ -33,7 +33,7 @@ void button (char * line, FILE * fp){
     }
 
     if (noName == 0)
-        strcpy(text, "Button");
+        strcpy(name, "Button");
     if (noLink == 0)
         return;
 
@@ -127,7 +127,7 @@ void input (char * line, FILE * fp){
         if (strstr(token,"action") != NULL){
             action = strtok(token,"\"");
             action = strtok(NULL,"\"");
-            noLink = 1;
+            noaction = 1;
         } else if (strstr(token,"text") != NULL){
             text = strtok(token,"\"");
             text = strtok(NULL,"\"");
@@ -135,11 +135,11 @@ void input (char * line, FILE * fp){
         } else if (strstr(token,"name") != NULL){
             name = strtok(token,"\"");
             name = strtok(NULL,"\"");
-            noText = 1;
+            noName = 1;
         } else if (strstr(token,"value") != NULL){
             value = strtok(token,"\"");
             value = strtok(NULL,"\"");
-            noText = 1;
+            noValue = 1;
         } else {
             strcat(extra, token);
             strcat(extra, " ");
