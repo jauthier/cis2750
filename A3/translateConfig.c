@@ -123,6 +123,7 @@ void input (char * line, FILE * fp){
 
     char * token;
     for (token = strtok(line,","); token != NULL; token = strtok(token+strlen(token)+1,",")){
+        printf("%s\n", token);
         if (strstr(token,"action") != NULL){
             action = strtok(token,"\"");
             action = strtok(NULL,"\"");
