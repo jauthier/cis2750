@@ -155,7 +155,7 @@ void input (char * line, FILE * fp){
 
     fprintf(fp, "<form type=\"post\" action=\"");
     fprintf(fp, "%s\">\n    ", action);
-    fprintf(fp, "%s, text);
+    fprintf(fp, "%s", text);
     fprintf(fp, ": <input type=\"text\"");
     if (noName == 1){
         fprintf(fp, " name=\"");
