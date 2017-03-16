@@ -184,10 +184,10 @@ void link (char * line, FILE * fp){
 
     char * token = strtok(line,",=");
     while (token != NULL){
-        if (strcpm(token,"link") == 0){
+        if (strcmp(token,"link") == 0){
             link = strtok(NULL,"=");
             noLink = 1;
-        } else if (strcpm(token,"text") == 0){
+        } else if (strcmp(token,"text") == 0){
             text = strtok(NULL,"\"");
             noText = 1;
         } else {
