@@ -80,15 +80,13 @@ void headings (char * line, FILE * fp){
     int noText = 0;
 
     char * token;
-    for (token = strtok(line,","); token != NULL; token = strtok(token+strlen(token)+1,",")){
+    for (token = strtok(line,",="); token != NULL; token = strtok(token+strlen(token)+1,",=")){
 
-        if (strstr(token,"size") != NULL){
-            size = strtok(token,"=");
-            size = strtok(NULL,"=\n");
+        if (strcmp(token,"size") == 0){
+            size = strtok(NULL,",=\n");
             nosize = 1;
-        } else if (strstr(token,"text") != NULL){
-            text = strtok(token,"\"");
-            text = strtok(NULL,"\"");
+        } else if (strcmp(token,"text") == 0){
+            text = strtok(NULL,",=\"");
             noText = 1;
         } else {
             strcat(extra, token);
@@ -167,7 +165,7 @@ void input (char * line, FILE * fp){
     }
     fprintf(fp, "%s", extra);
     fprintf(fp, ">\n");
-    fprintf(fp, "<input type=\"submit\">\n");
+    fprintf(fp, "    <input type=\"submit\">\n");
     fprintf(fp, "</form>\n");
     free(extra);
 }
