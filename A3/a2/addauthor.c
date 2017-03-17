@@ -27,9 +27,9 @@ int main (int argc, char * argv[]){
 
     char * streams = malloc(sizeof(char)*strlen(argv[i]));
     strcpy(streams,argv[i]);
-    printf("here\n");
+    
     if (check == 1)
-        removeUser(username,streams);
+        removeUser(username, streams);
     else 
         addUser(username, streams);
 
