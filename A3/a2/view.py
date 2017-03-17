@@ -186,10 +186,11 @@ def getAllStreams(userName):
 		line = line.rstrip('\n')
 		allSList.append("%s"%line)
 	file_1.close()
-	print(allSList)
+
 	#check each streamUser file
 	userStreams = []
 	for stream in allSList:
+		print(stream)
 		usersFile = "messages/%sStreamUsers.txt"%stream
 		streamFile = "messages/%sStream.txt"%stream
 		f = open(usersFile,"r")
@@ -200,8 +201,9 @@ def getAllStreams(userName):
 	f.close()
 	print(userStreams)
 	postList = [] # a list of all the posts
+	if (len(userStreams)==0):
+		return postList;
 	#make the postList
-	
 	listOfList = [] # a list of lists
 	for s in userStreams:
 		# file names for the stream
