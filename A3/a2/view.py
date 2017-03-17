@@ -75,16 +75,16 @@ def getAllStreams(userName):
 
 	postList = [] # a list of all the posts
 	#make the postList
-	if choice == "all":
-		listOfList = [] # a list of lists
-		for s in streamList:
-			# file names for the stream
-			streamFile = "messages/%sStream.txt"%s
-			dataFile = "messages/%sStreamData.txt"%s 
-			usersFile = "messages/%sStreamUsers.txt"%s
-			# add the stream list to the list of lists
-			listOfList.append(streamFileToList(streamFile,dataFile,s))
-		postList = combineStreams(listOfList)
+	
+	listOfList = [] # a list of lists
+	for s in streamList:
+		# file names for the stream
+		streamFile = "messages/%sStream.txt"%s
+		dataFile = "messages/%sStreamData.txt"%s 
+		usersFile = "messages/%sStreamUsers.txt"%s
+		# add the stream list to the list of lists
+		listOfList.append(streamFileToList(streamFile,dataFile,s))
+	postList = combineStreams(listOfList)
 	return postList
 
 
