@@ -40,7 +40,6 @@ void submitPost (struct userPost *up){
 int checkStreamUsers (FILE *sufp, char *username){
 
     if (sufp == NULL){
-        printf("The stream you wish to access does not exist!\n");
         return 0;
     }
 
@@ -49,7 +48,6 @@ int checkStreamUsers (FILE *sufp, char *username){
         if (strstr(userLine,username) != NULL)
             return 1;
     }
-    printf("You do not have permission to post to this stream!\n");
     return 0;
 }
 
@@ -93,7 +91,6 @@ int main (int argc, char *argv[]){
         printf("0");
         return 0;
     }
-
 
     /*format the post into a UserPost struct*/
     userPost * newPost = formatEntry(username, stream, text);
