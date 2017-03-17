@@ -77,7 +77,7 @@ int main (int argc, char *argv[]){
     /* take in username, steam and text */
     char * username = malloc(sizeof(char)*strlen(argv[1]));
     strcpy(username,argv[1]);
-    char * stream = malloc(sizeof(char)*strlen(srgv[2]));
+    char * stream = malloc(sizeof(char)*strlen(argv[2]));
     strcpy(stream, argv[2]);
     char * text = malloc(sizeof(char)*strlen(argv[3]));
     strcpy(text, argv[3]);
@@ -89,11 +89,15 @@ int main (int argc, char *argv[]){
     strcat(streamFile,"StreamUsers.txt");
     FILE * sufp = fopen(streamFile,"r");
     int checkSU = checkStreamUsers(sufp, username);
-    if (checkSU == 0)
+    if (checkSU == 0){
+        printf("0");
         return 0;
+    }
+
 
     /*format the post into a UserPost struct*/
     userPost * newPost = formatEntry(username, stream, text);
     submitPost(newPost);
-    return 1;
+    printf("1");
+    return 0;
 }
