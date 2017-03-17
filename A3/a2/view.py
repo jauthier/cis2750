@@ -186,7 +186,7 @@ def getAllStreams(userName):
 		line = line.rstrip('\n')
 		allSList.append("%s"%line)
 	file_1.close()
-
+	print(allSList)
 	#check each streamUser file
 	userStreams = []
 	for stream in allSList:
