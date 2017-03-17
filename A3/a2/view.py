@@ -198,7 +198,7 @@ def getAllStreams(userName):
 			if len(sf) != 0: #if the stream is empty it wont be added
 				userStreams.append("%s"%stream)
 	f.close()
-
+	print(userStreams)
 	postList = [] # a list of all the posts
 	#make the postList
 	
@@ -211,7 +211,7 @@ def getAllStreams(userName):
 		# add the stream list to the list of lists
 		listOfList.append(streamFileToList(streamFile,dataFile,s))
 		print (listOfList)
-	postList = combineStreams(listOfList)
+	#postList = combineStreams(listOfList)
 	return postList
 
 
