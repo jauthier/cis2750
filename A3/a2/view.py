@@ -53,7 +53,7 @@ def getStream(stream):
 
 def getAllStreams(userName):
 	#puts all the streams into a list
-	allSFile = "a2/messages/allStreams.txt"
+	allSFile = "messages/allStreams.txt"
 	file_1 = open(allSFile,"r")
 	allSList = []
 	for line in file_1:
@@ -64,8 +64,8 @@ def getAllStreams(userName):
 	#check each streamUser file
 	userStreams = []
 	for stream in allSList:
-		usersFile = "a2/messages/%sStreamUsers.txt"%stream
-		streamFile = "a2/messages/%sStream.txt"%stream
+		usersFile = "messages/%sStreamUsers.txt"%stream
+		streamFile = "messages/%sStream.txt"%stream
 		f = open(usersFile,"r")
 		sf = open(streamFile, "r").readlines()
 		if userName in f.read():
