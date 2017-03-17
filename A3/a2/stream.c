@@ -25,8 +25,8 @@ void destroyUserPost(userPost *toDestroy){
 
 int updateStream(userPost *up){
     /*find the stream file*/
-    char * streamFile = malloc(sizeof(char)*(strlen("messages/")+strlen("stream.txt")+strlen(up->streamname)));
-    strcpy(streamFile,"messages/");
+    char * streamFile = malloc(sizeof(char)*(strlen("./messages/")+strlen("stream.txt")+strlen(up->streamname)));
+    strcpy(streamFile,"./messages/");
     strcat(streamFile,up->streamname);
     strcat(streamFile,"Stream.txt");
     FILE * fp = fopen(streamFile,"a");
@@ -51,8 +51,8 @@ int updateStream(userPost *up){
 
 void updateStreamData(userPost * up, int end){
     /*find the streamData file*/
-    char * streamDataFile = malloc(sizeof(char)*(strlen("messages/")+strlen("streamData.txt")+strlen(up->streamname)));
-    strcpy(streamDataFile,"messages/");
+    char * streamDataFile = malloc(sizeof(char)*(strlen("./messages/")+strlen("streamData.txt")+strlen(up->streamname)));
+    strcpy(streamDataFile,"./messages/");
     strcat(streamDataFile,up->streamname);
     strcat(streamDataFile,"StreamData.txt");
     FILE * fp = fopen(streamDataFile,"a");
@@ -67,8 +67,8 @@ void addUser(char *username, char *list){
     char * token = strtok(list," ,\n");
     while (token != NULL){
         /*get the name of the file*/
-        char * streamFile = malloc(sizeof(char)*(strlen("messages/")+strlen(token)+strlen("StreamUsers.txt")));
-        strcpy(streamFile,"messages/");
+        char * streamFile = malloc(sizeof(char)*(strlen("./messages/")+strlen(token)+strlen("StreamUsers.txt")));
+        strcpy(streamFile,"./messages/");
         strcat(streamFile,token);
         strcat(streamFile,"StreamUsers.txt");
 
@@ -77,7 +77,7 @@ void addUser(char *username, char *list){
         FILE *fpTest = fopen(streamFile, "r");
         if (fpTest == NULL){
             makeStreamFiles(token);
-            FILE * fp1 = fopen("messages/allStreams.txt","a");
+            FILE * fp1 = fopen("./messages/allStreams.txt","a");
             fprintf(fp1, "%s\n", token);
             fclose(fp1);
         } else {
@@ -108,8 +108,8 @@ void removeUser(char *username, char *list){
     char * token = strtok(list," ,\n");
     while (token != NULL){
         /*get the name of the file*/
-        char * streamFile = malloc(sizeof(char)*(strlen("messages/")+strlen(token)+strlen("StreamUsers.txt")));
-        strcpy(streamFile,"messages/");
+        char * streamFile = malloc(sizeof(char)*(strlen("./messages/")+strlen(token)+strlen("StreamUsers.txt")));
+        strcpy(streamFile,"./messages/");
         strcat(streamFile,token);
         strcat(streamFile,"StreamUsers.txt");
         /*open the file*/
@@ -124,16 +124,16 @@ void removeUser(char *username, char *list){
 
 void makeStreamFiles(char *stream){
     /*make stream file*/
-    char * streamFile = malloc(sizeof(char)*(strlen("messages/")+strlen(stream)+strlen("Stream.txt")));
-    strcpy(streamFile,"messages/");
+    char * streamFile = malloc(sizeof(char)*(strlen("./messages/")+strlen(stream)+strlen("Stream.txt")));
+    strcpy(streamFile,"./messages/");
     strcat(streamFile,stream);
     strcat(streamFile,"Stream.txt");
     FILE * fp1 = fopen(streamFile,"w");
     fclose(fp1);
 
     /*make streamData file*/
-    char * streamDataFile = malloc(sizeof(char)*(strlen("messages/")+strlen(stream)+strlen("StreamData.txt")));
-    strcpy(streamDataFile,"messages/");
+    char * streamDataFile = malloc(sizeof(char)*(strlen("./messages/")+strlen(stream)+strlen("StreamData.txt")));
+    strcpy(streamDataFile,"./messages/");
     strcat(streamDataFile,stream);
     strcat(streamDataFile,"StreamData.txt");
     FILE * fp2 = fopen(streamDataFile,"w");
