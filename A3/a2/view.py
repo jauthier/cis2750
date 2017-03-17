@@ -45,8 +45,8 @@ def getStream(stream):
 	os.system('clear')
 	postList = [] # a list of all the posts
 	# file names
-	streamFile = "a2/messages/%sStream.txt"%stream
-	dataFile = "a2/messages/%sStreamData.txt"%stream
+	streamFile = "messages/%sStream.txt"%stream
+	dataFile = "messages/%sStreamData.txt"%stream
 	# get the list of the posts
 	postList = streamFileToList(streamFile, dataFile, stream)
 	return postList
