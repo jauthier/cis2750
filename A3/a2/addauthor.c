@@ -24,10 +24,10 @@ int main (int argc, char * argv[]){
     }
     char * username = malloc(sizeof(char)*strlen(argv[i]));
     strcpy(username,argv[i]);
-
+    i++;
     char * streams = malloc(sizeof(char)*strlen(argv[i]));
     strcpy(streams,argv[i]);
-    
+
     if (check == 1)
         removeUser(username, streams);
     else 
