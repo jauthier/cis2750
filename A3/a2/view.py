@@ -77,7 +77,7 @@ def getAllStreams(userName):
 	#make the postList
 	
 	listOfList = [] # a list of lists
-	for s in streamList:
+	for s in userStreams:
 		# file names for the stream
 		streamFile = "messages/%sStream.txt"%s
 		dataFile = "messages/%sStreamData.txt"%s 
