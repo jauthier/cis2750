@@ -210,6 +210,7 @@ def getAllStreams(userName):
 		usersFile = "messages/%sStreamUsers.txt"%s
 		# add the stream list to the list of lists
 		listOfList.append(streamFileToList(streamFile,dataFile,s))
+		print listOfList
 	postList = combineStreams(listOfList)
 	return postList
 
