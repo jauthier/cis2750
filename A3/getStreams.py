@@ -27,7 +27,7 @@ def getStreams(user):
 		if userName in f.read():
 			if len(sf) != 0: #if the stream is empty it wont be added
 				print("%s"%stream)
-	f.close()
+		f.close()
 
 if __name__ == "__main__":
 	user = "%s" % sys.argv[1]
