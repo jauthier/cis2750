@@ -20,8 +20,8 @@ def getStreams(user):
 	#check each streamUser file
 	userStreams = []
 	for stream in allSList:
-		usersFile = "messages/%sStreamUsers.txt"%stream
-		streamFile = "messages/%sStream.txt"%stream
+		usersFile = "a2/messages/%sStreamUsers.txt"%stream
+		streamFile = "a2/messages/%sStream.txt"%stream
 		f = open(usersFile,"r")
 		sf = open(streamFile, "r").readlines()
 		if userName in f.read():
