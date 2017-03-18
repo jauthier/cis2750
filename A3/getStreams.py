@@ -9,7 +9,7 @@ import os
 
 def getStreams(user):
 	#puts all the streams into a list
-	allSFile = "messages/allStreams.txt"
+	allSFile = "a2/messages/allStreams.txt"
 	file_1 = open(allSFile,"r")
 	allSList = []
 	for line in file_1:
