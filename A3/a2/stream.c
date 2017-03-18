@@ -76,8 +76,10 @@ void addUser(char *username, char *list){
         int check = 0;
         FILE *fpTest = fopen(streamFile, "r");
         if (fpTest == NULL){
+
             makeStreamFiles(token);
             FILE * fp1 = fopen("a2/messages/allStreams.txt","a");
+
             fprintf(fp1, "%s\n", token);
             fclose(fp1);
         } else {

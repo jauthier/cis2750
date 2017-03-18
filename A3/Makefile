@@ -15,4 +15,4 @@ post: a2/post.o
 	gcc $(FLAGS) a2/post.o -o a2/post -L./a2 -lstream
 
 clean:
-	rm a2/*.o
+	rm a2/*.o a2/post a2/addauthor
