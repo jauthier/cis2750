@@ -1,5 +1,9 @@
 #!/usr/bin/python3
 
+# view.py
+# Author: Jessica Authier
+# 2017/03/17
+
 import sys
 import os
 
@@ -190,7 +194,6 @@ def getAllStreams(userName):
 	#check each streamUser file
 	userStreams = []
 	for stream in allSList:
-		print(stream)
 		usersFile = "messages/%sStreamUsers.txt"%stream
 		streamFile = "messages/%sStream.txt"%stream
 		f = open(usersFile,"r")
@@ -199,7 +202,6 @@ def getAllStreams(userName):
 			if len(sf) != 0: #if the stream is empty it wont be added
 				userStreams.append("%s"%stream)
 	f.close()
-	print(userStreams)
 	postList = [] # a list of all the posts
 	if (len(userStreams)==0):
 		return postList;
@@ -212,10 +214,70 @@ def getAllStreams(userName):
 		usersFile = "messages/%sStreamUsers.txt"%s
 		# add the stream list to the list of lists
 		listOfList.append(streamFileToList(streamFile,dataFile,s))
-		print (listOfList)
 	#postList = combineStreams(listOfList)
 	return postList
 
+def sortByAuthor(postList):
+	
+	l = len(postList)
+	if (l < 2):
+		return postList;
+	h = l//2
+	list1 = postList[0:h]
+	list2 = postList[h:]
+	list1 = sortByAuthor(list1)
+	list2 = sortByAuthor(list2)
+	return merge(list1,list2)
+
+def merge(list1, list2):
+	newList = []
+	i=0
+    j=0
+    k=0
+    while i < len(list1) and j < len(list2):
+        if list1[i].user < list2[j].user:
+            newList[k]=list1[i]
+            i=i+1
+        else:
+            newList[k]=list2[j]
+            j=j+1
+        k=k+1
+
+    while i < len(list1):
+        newList[k]=list1[i]
+        i=i+1
+        k=k+1
+
+    while j < len(list2):
+        newList[k]=list2[j]
+        j=j+1
+        k=k+1
+
+def printPost (post):
+	print("Stream: %s\nUser: %s\nDate: %s\n%s"%post.stream,post.user,post.date,post.text)
+
+def getUsersCurrentStream(user, stream):
+	fn = "messages/%sStreamUsers.txt"%stream
+	file = open(fn,"r")
+	for line in file:
+		if user in line:
+			pos = line.split(' ')
+			return pos[1]
+	return -1
+
+def updateFile(stream, userName,inc):
+	fileName = "messages/%sStreamUsers.txt"%stream
+	tempFile = "messages/temp.txt"
+	file = open(fileName, "r")
+	temp = open(tempFile,"w")
+	for line in file:
+		hold = line.split(' ')
+		if userName in line:
+			temp.write("%s %d\n"%(hold[0],(int(hold[1])+inc)))
+		else:
+			temp.write(line)
+	os.remove(fileName)
+	os.rename(tempFile, fileName)
 
 if __name__ == "__main__":
 	#get command line agruments
@@ -223,7 +285,9 @@ if __name__ == "__main__":
 	# get the stream list and print the appropriate post to the screen, update files if needed
 	userName = "%s" % (sys.argv[1])
 	stream = "%s" % (sys.argv[2])
-	action = "%s" % (sys.argv[3])
+	action = "%s" % (sys.argv[3]) # -p -n -c -r
+	sort = "%s" % (sys.argv[4]) # -d -a
+	currentPost = "%s" % (sys.argv[5])
 
 	postList = []
 	if (stream == "all"):
@@ -231,7 +295,34 @@ if __name__ == "__main__":
 	else:
 		postList = getStream(stream)
 	
+	if (sort == "-a"):
+		postList = sortByAuthor(postList)
+	cp = 0
+	l = len(postList)
 	# deal with the action
+	if (action == "-p"): #previous
+		if (int(currentPost)-1 >= 0):
+			cp = int(currentPost)-1
+			printPost(postList[cp])
+		else:
+			cp = int(currentPost)
+			printPost(postList[cp])
+	elif (action == "-n"): #next
+		if (int(currentPost)+1 < l):
+			cp = int(currentPost)+1
+			printPost(postList[cp])
+			if (sort != "-a"):
+				if (cp > getUsersCurrentStream(userName, stream)):
+					updateFile(stream, userName, 1)
+		else:
+			cp = int(currentPost)
+			printPost(postList[cp])
+	elif (action == "-c"): #current
+		cp = int(currentPost)
+		printPost(postList[cp])
+	elif (action == "-r"): #most recent
+		cp = l-1
+		printPost(postList[cp])
 
-
+	print(cp)
 	#done

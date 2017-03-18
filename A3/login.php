@@ -11,9 +11,7 @@
     $check = 0;
     $username = "";
     if ($_SERVER["REQUEST_METHOD"] == "POST"){
-        if (empty($_POST["username"])){
-            echo "empty";
-        } else {
+        if (!empty($_POST["username"])){
             $username = $_POST["username"];
             $command = "./runCSU " . $username;
             exec($command,$output,$return);
@@ -22,7 +20,9 @@
 ?>
 <?php if ($output[0] == 1): ?>
 
-<form id="form" method="post" action="test.php">
+
+
+<form id="form" method="post" action="stream.php">
     <input type="hidden" name="username" value="<?php echo $username; ?>">
 </form>
 <script type="text/javascript">
