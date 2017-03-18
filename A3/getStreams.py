@@ -30,5 +30,5 @@ def getStreams(user):
 	f.close()
 
 if __name__ == "__main__":
-	user = argv[1]
+	user = "%s" % sys.argv[1]
 	getStreams(user)
