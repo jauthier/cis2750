@@ -24,9 +24,9 @@ if __name__ == "__main__":
     sort = "%s" % (sys.argv[3])
 
     if (stream != "all" and sort == "-d"):
-        print( getUsersCurrentStream(userName, stream))
+        print( getUsersCurrentStream(userName, stream),end="")
     elif (stream != "all" and sort == "-r"):
         dataFile = "a2/messages/%sStreamData.txt"
         file = open(dataFile, "r").readlines()
-        print (len(file)-1)
+        print (len(file)-1,end="")
 

@@ -24,8 +24,8 @@ def getStreams(user):
 		streamFile = "a2/messages/%sStream.txt"%stream
 		f = open(usersFile,"r")
 		sf = open(streamFile, "r").readlines()
-		if userName in f.read():
-			if len(sf) != 0: #if the stream is empty it wont be added
+		if user in f.read():
+			if len(sf) != 0:
 				print("%s"%stream)
 		f.close()
 
