@@ -175,15 +175,15 @@ def getStream(stream):
 	os.system('clear')
 	postList = [] # a list of all the posts
 	# file names
-	streamFile = "messages/%sStream.txt"%stream
-	dataFile = "messages/%sStreamData.txt"%stream
+	streamFile = "a2/messages/%sStream.txt"%stream
+	dataFile = "a2/messages/%sStreamData.txt"%stream
 	# get the list of the posts
 	postList = streamFileToList(streamFile, dataFile, stream)
 	return postList
 
 def getAllStreams(userName):
 	#puts all the streams into a list
-	allSFile = "messages/allStreams.txt"
+	allSFile = "a2/messages/allStreams.txt"
 	file_1 = open(allSFile,"r")
 	allSList = []
 	for line in file_1:
@@ -194,8 +194,8 @@ def getAllStreams(userName):
 	#check each streamUser file
 	userStreams = []
 	for stream in allSList:
-		usersFile = "messages/%sStreamUsers.txt"%stream
-		streamFile = "messages/%sStream.txt"%stream
+		usersFile = "a2/messages/%sStreamUsers.txt"%stream
+		streamFile = "a2/messages/%sStream.txt"%stream
 		f = open(usersFile,"r")
 		sf = open(streamFile, "r").readlines()
 		if userName in f.read():
@@ -209,9 +209,9 @@ def getAllStreams(userName):
 	listOfList = [] # a list of lists
 	for s in userStreams:
 		# file names for the stream
-		streamFile = "messages/%sStream.txt"%s
-		dataFile = "messages/%sStreamData.txt"%s 
-		usersFile = "messages/%sStreamUsers.txt"%s
+		streamFile = "a2/messages/%sStream.txt"%s
+		dataFile = "a2/messages/%sStreamData.txt"%s 
+		usersFile = "a2/messages/%sStreamUsers.txt"%s
 		# add the stream list to the list of lists
 		listOfList.append(streamFileToList(streamFile,dataFile,s))
 	#postList = combineStreams(listOfList)
@@ -257,7 +257,7 @@ def printPost (post):
 	print("Stream: %s\nUser: %s\nDate: %s\n%s"%post.stream,post.user,post.date,post.text)
 
 def getUsersCurrentStream(user, stream):
-	fn = "messages/%sStreamUsers.txt"%stream
+	fn = "a2/messages/%sStreamUsers.txt"%stream
 	file = open(fn,"r")
 	for line in file:
 		if user in line:
@@ -266,8 +266,8 @@ def getUsersCurrentStream(user, stream):
 	return -1
 
 def updateFile(stream, userName,inc):
-	fileName = "messages/%sStreamUsers.txt"%stream
-	tempFile = "messages/temp.txt"
+	fileName = "a2/messages/%sStreamUsers.txt"%stream
+	tempFile = "a2/messages/temp.txt"
 	file = open(fileName, "r")
 	temp = open(tempFile,"w")
 	for line in file:
