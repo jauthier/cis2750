@@ -230,8 +230,8 @@ def sortByAuthor(postList):
 	return merge(list1,list2)
 
 def merge(list1, list2):
-	newList = []
-	i=0
+    newList = []
+    i=0
     j=0
     k=0
     while i < len(list1) and j < len(list2):

@@ -13,12 +13,11 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST"){
         if (!empty($_POST["username"])){
             $username = $_POST["username"];
-            $command = "./runCSU " . $username;
-            exec($command,$output,$return);
+            $check = 1;
         }
     }
 ?>
-<?php if ($output[0] == 1): ?>
+<?php if ($check == 1): ?>
 
 
 

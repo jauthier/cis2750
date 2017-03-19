@@ -10,6 +10,12 @@ readPost.php
     $action = $_POST["action"];
     $sort = $_POST["sort"];
     $currentPost = $_POST["currentPost"];
+    if ($currentPost == "-1"){
+        $command = "./getCP ".$username." ".$stream." ".$sort;
+        exec($command,$output,$return);
+        $currentPost = $output[0];
+    }
+
     $s = $cp = $a = "";
  ?>
 <title><?php echo $stream; ?></title>
@@ -23,6 +29,7 @@ readPost.php
     $command = "./a2/view.py ".$username." ".$stream." ".$action." ".$sort." ".$currentPost;
     exec($command, $output, $return);
     echo $output[0];
+    echo $output[1];
     $currentPost = $output[2];
 ?>
 
@@ -33,7 +40,7 @@ readPost.php
     <input type="hidden" name="action" value="-n">
     <input type="hidden" name="sort" value="<?php echo $sort ?>">
     <input type="hidden" name="currentPost" value="<?php echo $currentPost ?>">
-    <input type="submit" name="next" value="Next">    
+    <input type="submit" name="next" value="Next">
 </form>
 
 <form method="post" action="create.php" name="previous">
@@ -43,7 +50,7 @@ readPost.php
     <input type="hidden" name="action" value="-p">
     <input type="hidden" name="sort" value="<?php echo $sort ?>">
     <input type="hidden" name="currentPost" value="<?php echo $currentPost ?>">
-    <input type="submit" name="previous" value="Previous"> 
+    <input type="submit" name="previous" value="Previous">
 </form>
 
 <form method="post" action="create.php" name="sortByAuthor">
