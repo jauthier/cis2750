@@ -172,7 +172,6 @@ def streamFileToList(streamFile, dataFile, stream):
 	return postList
 
 def getStream(stream):
-	os.system('clear')
 	postList = [] # a list of all the posts
 	# file names
 	streamFile = "a2/messages/%sStream.txt"%stream
@@ -254,7 +253,7 @@ def merge(list1, list2):
         k=k+1
 
 def printPost (post):
-	print("Stream: %s\nUser: %s\nDate: %s\n%s"%post.stream,post.user,post.date,post.text)
+	print("Stream: %s\nUser: %s\nDate: %s\n%s"%(post.stream, post.user, post.date, post.text))
 
 def getUsersCurrentStream(user, stream):
 	fn = "a2/messages/%sStreamUsers.txt"%stream
