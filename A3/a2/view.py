@@ -253,7 +253,7 @@ def merge(list1, list2):
         k=k+1
 
 def printPost (post):
-	print("Stream: %s\nUser: %s\nDate: %s\n%s"%(post.stream, post.user, post.date, post.text))
+	print("Stream: %s\nUser: %s\nDate: %s\n%s"%(post.stream, post.author, post.date, post.text))
 
 def getUsersCurrentStream(user, stream):
 	fn = "a2/messages/%sStreamUsers.txt"%stream
