@@ -55,7 +55,7 @@ char ** getAllStreams (){
         strcpy(hold,line);
         printf("%s\n", hold);
         list[i] = hold;
-        printf("%s\n", listî);
+        printf("%s\n", list[i]);
         free(hold);
     }
 
