@@ -61,9 +61,9 @@ char ** getAllStreams (){
 void getUsers (MYSQL mysql){
     /*make a user table to hold all the users*/
     char * query = malloc(sizeof(char)*200);
-    printf("in getUSers\n");
     strcpy(query,"SELECT * FROM users");
     mysql_query(&mysql, query);
+    printf("in getUSers\n");
     MYSQL_RES *result = mysql_store_result(&mysql);
     int num_fields = mysql_num_fields(result);
     MYSQL_ROW row;
