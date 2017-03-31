@@ -51,7 +51,9 @@ char ** getAllStreams (){
         char * hold = malloc(sizeof(char)*strlen(line));
         strcpy(hold,line);
         list[i] = hold;
+        printf("%s\n", list[i]);
     }
+    
     list[i+1] = NULL;
     return list;
 }
