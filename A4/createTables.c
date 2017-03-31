@@ -142,7 +142,7 @@ int main(int argc, char *argv[]){
     } else if (strcmp(action,"-posts")==0){
         printf("in post\n");
         if (mysql_query(&mysql,"CREATE TABLE cats (stream CHAR(30),user CHAR(30),date CHAR(30),text CHAR(1000) )"))
-            printf("didnt work\n");
+            printf("didnt work\n%s\n",mysql_error(&mysql));
         mysql_query(&mysql,"CREATE TABLE dogs (stream CHAR(30),user CHAR(30),date CHAR(30),text CHAR(1000))");
         mysql_query(&mysql,"CREATE TABLE cars (stream CHAR(30), user CHAR(30), date CHAR(30), text CHAR(1000))");
         mysql_query(&mysql, "INSERT INTO cats VALUES ('cats','jess','Mar 31, 2013 6:41:57','Hello\nI am a cat!\n')");
