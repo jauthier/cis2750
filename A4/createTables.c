@@ -87,6 +87,7 @@ void getPosts (MYSQL mysql){
         char * query = malloc(sizeof(char)*200);
         strcpy(query,"SELECT * FROM ");
         strcat(query,list[i]);
+        printf("%s\n", query);
         if (mysql_query(&mysql, query))
             printf("bad\n%s\n",mysql_error(&mysql));
 
@@ -138,6 +139,8 @@ int main(int argc, char *argv[]){
     } else if (strcmp(action,"-users")==0){
         getUsers(mysql);
     } else if (strcmp(action,"-posts")==0){
+        mysql_query (&mysql, "CREATE TABLE cars (stream CHAR(30),user CHAR(30), date CHAR(30), text CHAR(100))");
+        mysql_query (&mysql,);
         getPosts (mysql);
     }
 
