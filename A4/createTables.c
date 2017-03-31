@@ -68,7 +68,8 @@ void getUsers (MYSQL mysql){
     MYSQL_ROW row;
   
     while (row = mysql_fetch_row(result)){ 
-        for (int i = 0; i < num_fields; i++){ 
+        int i = 0;
+        for (i=0;i<num_fields; i++){ 
             printf("%s ", row[i] ? row[i] : "NULL"); 
         } 
             printf("\n"); 
