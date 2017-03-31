@@ -53,8 +53,8 @@ char ** getAllStreams (){
         list[i] = hold;
         printf("%s\n", list[i]);
     }
-    
-    list[i+1] = NULL;
+
+    list[count] = NULL;
     return list;
 }
 
