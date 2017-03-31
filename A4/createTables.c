@@ -52,10 +52,6 @@ char ** getAllStreams (){
         strcpy(hold,line);
         list[i] = hold;
     }
-    fclose(fp);
-    for (i=0;i<count;i++){
-        printf("%s\n", list[i]);
-    }
     return list;
 }
 
@@ -84,7 +80,16 @@ int main(int argc, char *argv[]){
     
     if (strcmp(action,"-streams")==0){
         char ** list = getAllStreams();
+        int i = 0;
+        while (list[i] != NULL){
+            char *query = malloc(sizeof(char)*200);
+            strcpy(query,"DROP TABLE IF EXISTS ");
+            strcat(query,list[i]);
+            mysql_query(&mysql, query);
+            i++;
+        }
     }
+
 
     return 0;
 }
