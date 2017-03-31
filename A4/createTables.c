@@ -51,7 +51,6 @@ char ** getAllStreams (){
         char * hold = malloc(sizeof(char)*strlen(line));
         strcpy(hold,line);
         list[i] = hold;
-        printf("%s\n", list[i]);
     }
 
     list[count] = NULL;
@@ -86,10 +85,13 @@ void getPosts (MYSQL mysql){
     int i = 0;
     printf("in getPosts\n");
     while (list[i] != NULL){
+        printf("%s\n", list[i]);
         char * query = malloc(sizeof(char)*200);
         strcpy(query,"SELECT * FROM ");
         strcat(query,list[i]);
-        mysql_query(&mysql, query);
+        if (mysql_query(&mysql, query))
+            printf("bad\n");
+
         MYSQL_RES *result = mysql_store_result(&mysql);
         if (result == NULL)
             return;
