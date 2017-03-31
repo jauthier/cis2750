@@ -139,8 +139,8 @@ int main(int argc, char *argv[]){
     } else if (strcmp(action,"-users")==0){
         getUsers(mysql);
     } else if (strcmp(action,"-posts")==0){
-        mysql_query (&mysql, "CREATE TABLE cars (stream CHAR(30),user CHAR(30), date CHAR(30), text TEXT(100))");
-        mysql_query (&mysql, "INSERT INTO cars VALUES ('cars','josh','Mar 31, 2013 7:23:32','Hello\nI am a car!\n')");
+        // mysql_query (&mysql, "CREATE TABLE cars (stream CHAR(30),user CHAR(30), date CHAR(30), text TEXT(100))");
+        // mysql_query (&mysql, "INSERT INTO cars VALUES ('cars','josh','Mar 31, 2013 7:23:32','Hello\nI am a car!\n')");
         getPosts (mysql);
     }
 
