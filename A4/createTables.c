@@ -58,6 +58,25 @@ char ** getAllStreams (){
     return list;
 }
 
+void getUsers (MYSQL mysql){
+    /*make a user table to hold all the users*/
+    char * query = malloc(sizeof(char)*200);
+    strcpy(query,"SELECT * FROM users");
+    mysql_query(&mysql, query);
+    MYSQL_RES *result = mysql_store_result(&mysql);
+    int num_fields = mysql_num_fields(result);
+    MYSQL_ROW row;
+  
+    while (row = mysql_fetch_row(result)){ 
+        for (int i = 0; i < num_fields; i++){ 
+            printf("%s ", row[i] ? row[i] : "NULL"); 
+        } 
+            printf("\n"); 
+    }
+  
+  mysql_free_result(result);
+}
+
 int main(int argc, char *argv[]){
 
     // get the host name from the command line
@@ -88,6 +107,12 @@ int main(int argc, char *argv[]){
             printf("%s\n", list[i]);
             i++;
         }
+    } else if (strcmp(action,"-users")==0){
+        mysql_query(&mysql,"CREATE TABLE users (user CHAR[30])");
+        mysql_query(&mysql,"INSERT INTO users Values (jess)");
+        mysql_query(&mysql,"INSERT INTO users Values (josh)");
+        mysql_query(&mysql,"INSERT INTO users Values (luke)");
+        getUsers(mysql);
     }
 
 
