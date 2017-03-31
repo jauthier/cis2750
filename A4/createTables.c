@@ -103,8 +103,8 @@ void getPost (MYSQL mysql){
             printf("\n"); 
         }        
         i++;
+        mysql_free_result(result);
     }
-    mysql_free_result(result);
 }
 
 int main(int argc, char *argv[]){
