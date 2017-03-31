@@ -81,7 +81,7 @@ void getUsers (MYSQL mysql){
 }
 
 /*get posts*/
-void getPost (MYSQL mysql){
+void getPosts (MYSQL mysql){
     char ** list = getAllStreams();
     int i = 0;
     while (list[i] != NULL){
@@ -98,7 +98,7 @@ void getPost (MYSQL mysql){
         while (row = mysql_fetch_row(result)){ 
             int j = 0;
             for (j=0; j<num_fields; j++){ 
-                printf("poo: %s ", row[j] ? row[j] : ""); 
+                printf("poo: %s ", row[j] ? row[j] : " "); 
             } 
             printf("\n"); 
         }        
@@ -144,7 +144,7 @@ int main(int argc, char *argv[]){
         // mysql_query(&mysql, "INSERT INTO cats VALUES ('cats','jess','Mar 31, 2013 6:41:57','Hello\nI am a cat!\n')");
         // mysql_query(&mysql, "INSERT INTO dogs VALUES ('dogs','luke','Mar 31, 2013 6:43:57','Hello\nI am a Dog!\n')");
         // mysql_query(&mysql, "INSERT INTO cars VALUES ('cars','josh','Mar 31, 2013 6:45:57','Hello\nI am a car!\n')");
-        getPost(mysql);
+        getPosts (mysql);
     }
 
 
