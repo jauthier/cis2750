@@ -34,13 +34,15 @@ void createTables (MYSQL mysql, char *stream){
 /* get the names of all the current streams*/
 char ** getAllStreams (){
     char * file = "allStreams.txt";
-    FILE * fp = fopen(file, "r");
+    FILE * fpCount = fopen(file, "r");
     int count = 0;
     char line[31];
-    while (!feof(fp)){
+    while (!feof(fpCount)){
         fgets(line, 31, fp);
         count ++;
     }
+    fclose(fpCount);
+    FILE * fp = fopen(file, "r");
     char ** list = malloc(sizeof(char*)*count);
     int i = 0;
     for (i=0;i<count;i++){
@@ -50,6 +52,7 @@ char ** getAllStreams (){
         strcpy(hold,line);
         list[i] = hold;
     }
+    fclose(fp);
     for (i=0;i<count;i++){
         printf("%s\n", list[i]);
     }
