@@ -88,7 +88,7 @@ void getPosts (MYSQL mysql){
         strcpy(query,"SELECT * FROM ");
         strcat(query,list[i]);
         if (mysql_query(&mysql, query))
-            printf("bad\n%s\n"mysql_error(&mysql));
+            printf("bad\n%s\n",mysql_error(&mysql));
 
         MYSQL_RES *result = mysql_store_result(&mysql);
         if (result == NULL)
