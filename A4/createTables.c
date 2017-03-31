@@ -33,7 +33,7 @@ void createTables (MYSQL mysql, char *stream){
 
 /* get the names of all the current streams*/
 char ** getAllStreams (){
-    char * file = "a2/messages/allStreams.txt";
+    char * file = "allStreams.txt";
     FILE * fp = fopen(file, "r");
     int count = 0;
     while (!feof(fp)){
