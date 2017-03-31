@@ -39,7 +39,8 @@ char ** getAllStreams (){
     char line[31];
     while (!feof(fpCount)){
         fgets(line, 31, fpCount);
-        count ++;
+        if (strcmp(line[i],"\n")!=0)
+            count ++;
     }
     fclose(fpCount);
     FILE * fp = fopen(file, "r");
@@ -87,7 +88,7 @@ void getPosts (MYSQL mysql){
         char * query = malloc(sizeof(char)*200);
         strcpy(query,"SELECT * FROM ");
         strcat(query,list[i]);
-        printf("%s\n", query);
+        printf("%s\n", list[i]);
         if (mysql_query(&mysql, query))
             printf("bad\n%s\n",mysql_error(&mysql));
 
