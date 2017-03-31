@@ -37,11 +37,12 @@ char ** getAllStreams (){
     FILE * fpCount = fopen(file, "r");
     int count = 0;
     char line[31];
+    fgets(line, 31, fpCount);
     while (!feof(fpCount)){
-        fgets(line, 31, fpCount);
-        printf("%s\n", line);
+        printf("%s", line);
         if (strcmp(line,"\n")!=0 && strcmp(line,"\0")!=0)
             count ++;
+        fgets(line, 31, fpCount);
     }
     printf("%d\n", count);
     // = count - 1;
