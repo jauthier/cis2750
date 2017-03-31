@@ -64,8 +64,8 @@ void getUsers (MYSQL mysql){
     strcpy(query,"SELECT * FROM users");
     mysql_query(&mysql, query);
     MYSQL_RES *result = mysql_store_result(&mysql);
-    printf("in getUSers\n");
     int num_fields = mysql_num_fields(result);
+    printf("in getUSers\n");
     MYSQL_ROW row;
     while (row = mysql_fetch_row(result)){ 
         int i = 0;
