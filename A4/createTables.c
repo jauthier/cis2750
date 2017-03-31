@@ -43,7 +43,7 @@ char ** getAllStreams (){
             count ++;
     }
     printf("%d\n", count);
-    count = count - 1;
+    // = count - 1;
     fclose(fpCount);
     FILE * fp = fopen(file, "r");
     char ** list = malloc(sizeof(char*)*count+1);
