@@ -75,7 +75,7 @@ void getUsers (MYSQL mysql){
         printf("in loop\n");
         int i = 0;
         for (i=0; i<num; i++){ 
-            printf("%s ", row[i]); 
+            printf("%s ", row[i] ? row[i] : "NULL"); 
         } 
             printf("\n"); 
     }
