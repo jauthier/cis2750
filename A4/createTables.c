@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <#include <mysql/mysql.h>
+#include <mysql/mysql.h>
 #define HOSTNAME "dursley.socs.uoguelph.ca"
 #define USERNAME "jauthier"
 #define PASSWORD "0849720"
