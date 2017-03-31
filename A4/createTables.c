@@ -39,7 +39,7 @@ char ** getAllStreams (){
     while (!feof(fp)){
         count ++;
     }
-    char * list[count] = malloc(sizeof(char*)*count);
+    char ** list = malloc(sizeof(char*)*count);
     char line[31];
     int i = 0;
     for (i=0;i<count;i++){
