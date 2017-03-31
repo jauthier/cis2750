@@ -70,9 +70,11 @@ void getUsers (MYSQL mysql){
         return;
     int num = mysql_num_rows(result);
     MYSQL_ROW row;
+    printf("%d\n", num);
     while (row = mysql_fetch_row(result)){ 
+        printf("in loop\n");
         int i = 0;
-        for (i=0;i<num; i++){ 
+        for (i=0; i<num; i++){ 
             printf("%s ", row[i]); 
         } 
             printf("\n"); 
