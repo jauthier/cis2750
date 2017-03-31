@@ -84,6 +84,7 @@ void getUsers (MYSQL mysql){
 void getPosts (MYSQL mysql){
     char ** list = getAllStreams();
     int i = 0;
+    printf("in getPosts\n");
     while (list[i] != NULL){
         char * query = malloc(sizeof(char)*200);
         strcpy(query,"SELECT * FROM ");
