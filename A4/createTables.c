@@ -62,7 +62,8 @@ void getUsers (MYSQL mysql){
     /*make a user table to hold all the users*/
     char * query = malloc(sizeof(char)*200);
     strcpy(query,"SELECT * FROM users");
-    mysql_query(&mysql, query);
+    if (mysql_query(&mysql, query))
+        printf("bad\n");;
 
     MYSQL_RES *result = mysql_store_result(&mysql);
     if (result == NULL)
