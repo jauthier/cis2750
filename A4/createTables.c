@@ -101,7 +101,7 @@ void getPosts (MYSQL mysql){
         while (row = mysql_fetch_row(result)){ 
             int j = 0;
             for (j=0; j<num_fields; j++){ 
-                printf("poo: %s ", row[j] ? row[j] : " "); 
+                printf("\n%s ", row[j] ? row[j] : " "); 
             } 
             printf("\n"); 
         }        
