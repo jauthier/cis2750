@@ -113,7 +113,8 @@ int main(int argc, char *argv[]){
             i++;
         }
     } else if (strcmp(action,"-users")==0){
-        mysql_query(&mysql,"CREATE TABLE users (user CHAR[30])");
+        if (mysql_query(&mysql,"CREATE TABLE users (user CHAR[30])"))
+            printf("table was not created\n");
         mysql_query(&mysql,"INSERT INTO users Values (jess)");
         mysql_query(&mysql,"INSERT INTO users Values (josh)");
         mysql_query(&mysql,"INSERT INTO users Values (luke)");
