@@ -83,9 +83,7 @@ void getUsers (MYSQL mysql){
 void getPosts (MYSQL mysql){
     char ** list = getAllStreams();
     int i = 0;
-    printf("in getPosts\n");
     while (list[i] != NULL){
-        printf("%s\n", list[i]);
         char * query = malloc(sizeof(char)*200);
         strcpy(query,"SELECT * FROM ");
         strcat(query,list[i]);
@@ -140,11 +138,7 @@ int main(int argc, char *argv[]){
     } else if (strcmp(action,"-users")==0){
         getUsers(mysql);
     } else if (strcmp(action,"-posts")==0){
-        printf("in post\n");
-        mysql_query(&mysql,"CREATE TABLE dogs (stream CHAR(30),user CHAR(30),date CHAR(30),text TEXT(1000))");
-        mysql_query(&mysql,"CREATE TABLE cars (stream CHAR(30), user CHAR(30), date CHAR(30), text TEXT(1000))");
-        mysql_query(&mysql, "INSERT INTO cats VALUES ('cats','jess','Mar 31, 2013 7:11:53','Hello\nWelcome To All Cat Lovers\n')");
-        mysql_query(&mysql, "INSERT INTO dogs VALUES ('dogs','luke','Mar 31, 2013 6:43:57','Hello\nI am a Dog!\n')");
+        mysql_query(&mysql,"CREATE TABLE cars (stream CHAR(30),user CHAR(30),date CHAR(30),text TEXT(1000))");
         mysql_query(&mysql, "INSERT INTO cars VALUES ('cars','josh','Mar 31, 2013 6:45:57','Hello\nI am a car!\n')");
         getPosts (mysql);
     }
