@@ -91,10 +91,7 @@ void getPosts (MYSQL mysql){
         char * query = malloc(sizeof(char)*200);
         strcpy(query,"SELECT * FROM ");
         strcat(query,list[i]);
-        printf("P: %s\n", list[i]);
-        if (mysql_query(&mysql, query))
-            printf("bad\n%s\n",mysql_error(&mysql));
-
+        mysql_query(&mysql, query)
         MYSQL_RES *result = mysql_store_result(&mysql);
         if (result == NULL)
             return;
@@ -105,9 +102,8 @@ void getPosts (MYSQL mysql){
             int j = 0;
             for (j=0; j<num_fields; j++){ 
                 printf("\n%s ", row[j] ? row[j] : " "); 
-            } 
-            printf("\n"); 
-        }        
+            }
+        }    
         i++;
         mysql_free_result(result);
     }
