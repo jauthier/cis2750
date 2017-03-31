@@ -63,18 +63,17 @@ void getUsers (MYSQL mysql){
     char * query = malloc(sizeof(char)*200);
     strcpy(query,"SELECT * FROM users");
     if (mysql_query(&mysql, query))
-        printf("bad\n");;
+        return;
 
     MYSQL_RES *result = mysql_store_result(&mysql);
     if (result == NULL)
-        printf("bad\n");
+        return;
     int num = mysql_num_rows(result);
-    printf("in getUSers\n");
     MYSQL_ROW row;
     while (row = mysql_fetch_row(result)){ 
         int i = 0;
         for (i=0;i<num; i++){ 
-            printf("%s ", row[i] ? row[i] : "NULL"); 
+            printf("%s ", row[i]); 
         } 
             printf("\n"); 
     }
@@ -114,7 +113,6 @@ int main(int argc, char *argv[]){
         }
     } else if (strcmp(action,"-users")==0){
         if (mysql_query(&mysql,"CREATE TABLE users ( user CHAR(30))"))
-            printf("table was not created\n");
         mysql_query(&mysql,"INSERT INTO users Values (jess)");
         mysql_query(&mysql,"INSERT INTO users Values (josh)");
         mysql_query(&mysql,"INSERT INTO users Values (luke)");
