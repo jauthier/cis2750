@@ -33,9 +33,9 @@ void createTables (MYSQL mysql, char *stream){
 
 /* get the names of all the current streams*/
 char ** getAllStreams (){
-    file = "a2/messages/allStreams.txt";
+    char * file = "a2/messages/allStreams.txt";
     FILE * fp = fopen(file, "r");
-    count = 0;
+    int count = 0;
     while (!feof(fp)){
         count ++;
     }
