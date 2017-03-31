@@ -38,7 +38,7 @@ char ** getAllStreams (){
     int count = 0;
     char line[31];
     while (!feof(fpCount)){
-        fgets(line, 31, fp);
+        fgets(line, 31, fpCount);
         count ++;
     }
     fclose(fpCount);
