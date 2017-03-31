@@ -63,8 +63,8 @@ void getUsers (MYSQL mysql){
     char * query = malloc(sizeof(char)*200);
     strcpy(query,"SELECT * FROM users");
     mysql_query(&mysql, query);
-    printf("in getUSers\n");
     MYSQL_RES *result = mysql_store_result(&mysql);
+    printf("in getUSers\n");
     int num_fields = mysql_num_fields(result);
     MYSQL_ROW row;
     while (row = mysql_fetch_row(result)){ 
