@@ -68,13 +68,14 @@ void getUsers (MYSQL mysql){
     MYSQL_RES *result = mysql_store_result(&mysql);
     if (result == NULL)
         return;
-    int num = mysql_num_rows(result);
+    int num = mysql_num_fields(result);
     MYSQL_ROW row;
     printf("%d\n", num);
-    while (row = mysql_fetch_row(result)){ 
+    while (row = mysql_fetch_row(result) != NULL){ 
         printf("in loop\n");
         int i = 0;
         for (i=0; i<num; i++){ 
+            printf("here1\n");
             printf("%s ", row[i] ? row[i] : "NULL"); 
         } 
             printf("\n"); 
