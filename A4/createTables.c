@@ -44,7 +44,7 @@ char ** getAllStreams (){
     int i = 0;
     for (i=0;i<count;i++){
         fgets(line, 31, fp);
-        line[strlen(line)] = "\0";
+        line[strlen(line)] = '\0';
         char * hold = malloc(sizeof(char)*strlen(line));
         strcpy(hold,line);
         list[i] = hold;
