@@ -39,7 +39,6 @@ char ** getAllStreams (){
     char line[31];
     fgets(line, 31, fpCount);
     while (!feof(fpCount)){
-        printf("%s", line);
         if (strcmp(line,"\n")!=0 && strcmp(line,"\0")!=0)
             count ++;
         fgets(line, 31, fpCount);
@@ -55,9 +54,7 @@ char ** getAllStreams (){
         line[strlen(line)-1] = '\0';
         char * hold = malloc(sizeof(char)*strlen(line));
         strcpy(hold,line);
-        printf("%s\n", hold);
         list[i] = hold;
-        printf("%s\n", list[i]);
         free(hold);
     }
 
@@ -91,6 +88,7 @@ void getUsers (MYSQL mysql){
 void getPosts (MYSQL mysql){
     char ** list = getAllStreams();
     int i = 0;
+    printf("%s\n", list[0]);
     while (list[i] != NULL){
         char * query = malloc(sizeof(char)*200);
         strcpy(query,"SELECT * FROM ");
