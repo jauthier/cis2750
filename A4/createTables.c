@@ -55,7 +55,6 @@ char ** getAllStreams (){
         char * hold = malloc(sizeof(char)*strlen(line));
         strcpy(hold,line);
         list[i] = hold;
-        free(hold);
     }
 
     list[count] = NULL;
@@ -88,7 +87,6 @@ void getUsers (MYSQL mysql){
 void getPosts (MYSQL mysql){
     char ** list = getAllStreams();
     int i = 0;
-    printf("%s\n", list[0]);
     while (list[i] != NULL){
         char * query = malloc(sizeof(char)*200);
         strcpy(query,"SELECT * FROM ");
