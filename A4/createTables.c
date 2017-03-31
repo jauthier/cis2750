@@ -64,12 +64,12 @@ void getUsers (MYSQL mysql){
     strcpy(query,"SELECT * FROM users");
     mysql_query(&mysql, query);
     MYSQL_RES *result = mysql_store_result(&mysql);
-    int num_fields = mysql_num_fields(result);
+    int num = mysql_num_rows(result);
     printf("in getUSers\n");
     MYSQL_ROW row;
     while (row = mysql_fetch_row(result)){ 
         int i = 0;
-        for (i=0;i<num_fields; i++){ 
+        for (i=0;i<num; i++){ 
             printf("%s ", row[i] ? row[i] : "NULL"); 
         } 
             printf("\n"); 
