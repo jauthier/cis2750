@@ -141,7 +141,7 @@ int main(int argc, char *argv[]){
         getUsers(mysql);
     } else if (strcmp(action,"-posts")==0){
         printf("in post\n");
-        if (mysql_query(&mysql,"CREATE TABLE cats (stream CHAR(30), user CHAR(30), date CHAR(30), text CHAR(1000))"))
+        if (mysql_query(&mysql,"CREATE TABLE cats (stream CHAR(30), user CHAR(30), date CHAR(30), text CHAR(1000) )"))
             printf("didnt work\n");
         mysql_query(&mysql,"CREATE TABLE dogs (stream CHAR(30), user CHAR(30), date CHAR(30), text CHAR(1000))");
         mysql_query(&mysql,"CREATE TABLE cars (stream CHAR(30), user CHAR(30), date CHAR(30), text CHAR(1000))");
