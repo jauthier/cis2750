@@ -78,8 +78,9 @@ int main(int argc, char *argv[]){
         exit(0);
     }
     
-    if (strcmp(action,"-streams")==0)
+    if (strcmp(action,"-streams")==0){
         char ** list = getAllStreams();
+    }
 
     return 0;
 }
