@@ -77,8 +77,33 @@ void getUsers (MYSQL mysql){
         } 
             printf("\n"); 
     }
+    mysql_free_result(result);
+}
+
+/*get posts*/
+void getPost (MYSQL mysql){
+    char ** list = getAllStreams();
+    int i = 0;
+    while (list[i] != NULL){
+        char * query = malloc(sizeof(char)*200);
+        strcpy(query,"SELECT * FROM ");
+        strcat(query,list[i]);
+        mysql_query(&mysql, query);
+        MYSQL_RES *result = mysql_store_result(&mysql);
+        if (result == NULL)
+            return;
+        int num_fields = mysql_num_fields(result);
+        MYSQL_ROW row;
   
-  mysql_free_result(result);
+        while (row = mysql_fetch_row(result)){ 
+            int j = 0;
+            for (j=0; j<num_fields; j++){ 
+                printf("%s ", row[j] ? row[j] : ""); 
+            } 
+            printf("\n"); 
+        }        
+        i++;
+    }
 }
 
 int main(int argc, char *argv[]){
@@ -92,9 +117,6 @@ int main(int argc, char *argv[]){
     strcpy(action,argv[1]);
 
     MYSQL mysql;
-    MYSQL_RES *res;
-    MYSQL_ROW row;
-    MYSQL_FIELD *field;
     char query[MAX_QUERY];
 
     /*Connect to Database Server*/
@@ -113,6 +135,14 @@ int main(int argc, char *argv[]){
         }
     } else if (strcmp(action,"-users")==0){
         getUsers(mysql);
+    } else if (strcmp(action,"-posts")==0){
+        mysql_query(&mysql,"CREATE TABLE cats (stream CHAR[30], user CHAR[30]), date CHAR[30]), text CHAR[100]");
+        mysql_query(&mysql,"CREATE TABLE dogs (stream CHAR[30], user CHAR[30]), date CHAR[30]), text CHAR[100]");
+        mysql_query(&mysql,"CREATE TABLE cars (stream CHAR[30], user CHAR[30]), date CHAR[30]), text CHAR[100]");
+        mysql_query(&mysql, "INSERT INTO cats VALUES ('cats','jess','Mar 31, 2013 6:41:57','Hello\nI am a cat!\n')");
+        mysql_query(&mysql, "INSERT INTO dogs VALUES ('dogs','luke','Mar 31, 2013 6:43:57','Hello\nI am a Dog!\n')");
+        mysql_query(&mysql, "INSERT INTO cars VALUES ('cars','josh','Mar 31, 2013 6:45:57','Hello\nI am a car!\n')");
+        getPost(mysql);
     }
 
 
