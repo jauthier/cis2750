@@ -39,7 +39,7 @@ char ** getAllStreams (){
     char line[31];
     while (!feof(fpCount)){
         fgets(line, 31, fpCount);
-        if (strcmp(line,"\n")!=0)
+        if (strcmp(line,"\n")!=0 && strcmp(line,"\0")!=0)
             count ++;
     }
     printf("%d\n", count);
