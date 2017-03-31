@@ -47,11 +47,10 @@ char ** getAllStreams (){
     FILE * fp = fopen(file, "r");
     char ** list = malloc(sizeof(char*)*count);
     int i = 0;
-    printf("%d\n", count);
     for (i=0;i<count;i++){
         fgets(line, 31, fp);
-        printf("%s\n", line);
         line[strlen(line)-1] = '\0';
+        printf("%s\n", line);
         char * hold = malloc(sizeof(char)*strlen(line));
         strcpy(hold,line);
         list[i] = hold;
@@ -92,7 +91,7 @@ void getPosts (MYSQL mysql){
         char * query = malloc(sizeof(char)*200);
         strcpy(query,"SELECT * FROM ");
         strcat(query,list[i]);
-        printf("%s\n", list[i]);
+        printf("P: %s\n", list[i]);
         if (mysql_query(&mysql, query))
             printf("bad\n%s\n",mysql_error(&mysql));
 
