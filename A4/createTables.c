@@ -42,6 +42,7 @@ char ** getAllStreams (){
         if (strcmp(line,"\n")!=0)
             count ++;
     }
+    count --;
     fclose(fpCount);
     FILE * fp = fopen(file, "r");
     char ** list = malloc(sizeof(char*)*count);
