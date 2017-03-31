@@ -66,7 +66,7 @@ void getUsers (MYSQL mysql){
     MYSQL_RES *result = mysql_store_result(&mysql);
     int num_fields = mysql_num_fields(result);
     MYSQL_ROW row;
-  
+    printf("in getUSers\n");
     while (row = mysql_fetch_row(result)){ 
         int i = 0;
         for (i=0;i<num_fields; i++){ 
@@ -113,6 +113,7 @@ int main(int argc, char *argv[]){
         mysql_query(&mysql,"INSERT INTO users Values (jess)");
         mysql_query(&mysql,"INSERT INTO users Values (josh)");
         mysql_query(&mysql,"INSERT INTO users Values (luke)");
+        printf("here\n");
         getUsers(mysql);
     }
 
