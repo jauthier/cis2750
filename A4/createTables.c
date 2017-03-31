@@ -42,11 +42,10 @@ char ** getAllStreams (){
         if (strcmp(line,"\n")!=0)
             count ++;
     }
-    printf("%d\n", count);
-    count --;
+    count = count - 1;
     fclose(fpCount);
     FILE * fp = fopen(file, "r");
-    char ** list = malloc(sizeof(char*)*count);
+    char ** list = malloc(sizeof(char*)*count+1);
     int i = 0;
     for (i=0;i<count;i++){
         fgets(line, 31, fp);
