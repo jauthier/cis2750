@@ -16,8 +16,7 @@ void createTables (MYSQL mysql, char *stream){
     char *query = malloc(sizeof(char)*200);
     strcpy(query,"CREATE TABLE ");
     strcat(query,stream);
-    strcat(query," (id INT NOT NULL auto_increment, stream CHAR[30],
-        user CHAR[30]), date CHAR[30]), text CHAR[100]");
+    strcat(query," (id INT NOT NULL auto_increment, stream CHAR[30], user CHAR[30]), date CHAR[30]), text CHAR[100]");
     mysql_query(&mysql, query);
     query[0] = '\0';
     strcpy(query,"CREATE TABLE ");
@@ -50,9 +49,9 @@ int main(int argc, char *argv[]){
     char query[MAX_QUERY];
 
     /*Connect to Database Server*/
-    mysql_init(mysql);
+    mysql_init(&mysql);
     if (!mysql_real_connect(&mysql,HOSTNAME,USERNAME,PASSWORD,DATABASE,0,NULL,0)){
-        printf("could not connect to host.\n%s\n",mysql_error(mysql));
+        printf("could not connect to host.\n%s\n",mysql_error(&mysql));
         exit(0);
     }
     createTables(mysql, "cats");
