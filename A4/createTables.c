@@ -82,10 +82,7 @@ int main(int argc, char *argv[]){
         char ** list = getAllStreams();
         int i = 0;
         while (list[i] != NULL){
-            char *query = malloc(sizeof(char)*200);
-            strcpy(query,"DROP TABLE IF EXISTS ");
-            strcat(query,list[i]);
-            mysql_query(&mysql, query);
+            printf("%s\n", list[i]);
             i++;
         }
     }
