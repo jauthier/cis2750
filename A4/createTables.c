@@ -31,6 +31,29 @@ void createTables (MYSQL mysql, char *stream){
     query[0] = '\0';
 }
 
+/* get the names of all the current streams*/
+char ** getAllStreams (){
+    file = "a2/messages/allStreams.txt";
+    FILE * fp = fopen(file, "r");
+    count = 0;
+    while (!feof(fp)){
+        count ++;
+    }
+    char * list[count];
+    char line[31];
+    int i = 0;
+    for (i=0;i<count;i++){
+        fgets(line, 31, fp);
+        line[strlen(line)] = "\0";
+        char * hold = malloc(sizeof(char)*strlen(line));
+        strcpy(hold,line);
+        list[i] = hold;
+    }
+    for (i=0;i<count;i++){
+        printf("%s\n", list[i]);
+    }
+    return list;
+}
 
 int main(int argc, char *argv[]){
 
@@ -54,6 +77,9 @@ int main(int argc, char *argv[]){
         printf("could not connect to host.\n%s\n",mysql_error(&mysql));
         exit(0);
     }
-    createTables(mysql, "cats");
+    
+    if (strcmp(action,"-streams")==0)
+        char ** list = getAllStreams();
+
     return 0;
 }
