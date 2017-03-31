@@ -42,6 +42,7 @@ char ** getAllStreams (){
         if (strcmp(line,"\n")!=0)
             count ++;
     }
+    printf("%d\n", count);
     count = count - 1;
     fclose(fpCount);
     FILE * fp = fopen(file, "r");
