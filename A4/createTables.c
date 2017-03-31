@@ -36,11 +36,12 @@ char ** getAllStreams (){
     char * file = "allStreams.txt";
     FILE * fp = fopen(file, "r");
     int count = 0;
+    char line[31];
     while (!feof(fp)){
+        fgets(line, 31, fp);
         count ++;
     }
     char ** list = malloc(sizeof(char*)*count);
-    char line[31];
     int i = 0;
     for (i=0;i<count;i++){
         fgets(line, 31, fp);
