@@ -52,6 +52,7 @@ char ** getAllStreams (){
         strcpy(hold,line);
         list[i] = hold;
     }
+    list[i+1] = NULL;
     return list;
 }
 
