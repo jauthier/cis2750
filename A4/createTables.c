@@ -88,7 +88,7 @@ void getPosts (MYSQL mysql){
         strcpy(query,"SELECT * FROM ");
         strcat(query,list[i]);
         if (mysql_query(&mysql, query))
-            printf("bad\n");
+            printf("bad\n%s\n"mysql_error(&mysql));
 
         MYSQL_RES *result = mysql_store_result(&mysql);
         if (result == NULL)
@@ -138,9 +138,6 @@ int main(int argc, char *argv[]){
     } else if (strcmp(action,"-users")==0){
         getUsers(mysql);
     } else if (strcmp(action,"-posts")==0){
-        if(mysql_query(&mysql,"CREATE TABLE cars (stream CHAR(30),user CHAR(30),date CHAR(30),text TEXT(1000))"))
-            printf("Didn't work\n%s\n", mysql_error(&mysql));
-        mysql_query(&mysql, "INSERT INTO cars VALUES ('cars','josh','Mar 31, 2013 6:45:57','Hello\nI am a car!\n')");
         getPosts (mysql);
     }
 
