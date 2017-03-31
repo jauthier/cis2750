@@ -42,6 +42,7 @@ char ** getAllStreams (){
         if (strcmp(line,"\n")!=0)
             count ++;
     }
+    printf("%d\n", count);
     count --;
     fclose(fpCount);
     FILE * fp = fopen(file, "r");
@@ -50,10 +51,11 @@ char ** getAllStreams (){
     for (i=0;i<count;i++){
         fgets(line, 31, fp);
         line[strlen(line)-1] = '\0';
-        printf("%s\n", line);
         char * hold = malloc(sizeof(char)*strlen(line));
         strcpy(hold,line);
+        printf("%s\n", hold);
         list[i] = hold;
+        printf("%s\n", listî);
         free(hold);
     }
 
