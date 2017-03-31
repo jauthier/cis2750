@@ -46,12 +46,15 @@ char ** getAllStreams (){
     FILE * fp = fopen(file, "r");
     char ** list = malloc(sizeof(char*)*count);
     int i = 0;
+    printf("%d\n", count);
     for (i=0;i<count;i++){
         fgets(line, 31, fp);
+        printf("%s\n", line);
         line[strlen(line)-1] = '\0';
         char * hold = malloc(sizeof(char)*strlen(line));
         strcpy(hold,line);
         list[i] = hold;
+        free(hold);
     }
 
     list[count] = NULL;
