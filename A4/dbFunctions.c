@@ -75,7 +75,7 @@ int getUsersCP (MYSQL mysql, char* user, char * stream){
     /*check if table exists*/
     if (mysql_query(&mysql, query))
         return 0;
-    result = mysql_store_results(&mysql);
+    MYSQL_RES *result = mysql_store_results(&mysql);
     if (result == 0)
         return 0;
     MYSQL_ROW row = mysql_fetch_row(result);
@@ -116,7 +116,7 @@ void clearTables (MYSQL mysql){
         strcat(query,list[i]);
         mysql_query(&mysql, query);
         query[0] = '\0';
-        (query,"TRUNCATE TABLE ");
+        strcpy(query,"TRUNCATE TABLE ");
         strcat(query,list[i]);
         strcat(query,"Users");
         mysql_query(&mysql, query);
@@ -126,6 +126,7 @@ void clearTables (MYSQL mysql){
         strcat(query,"Data");
         mysql_query(&mysql, query);
         i++;
+        free(query);
     }
     i = 0;
     while (list[i] != NULL){
@@ -134,7 +135,7 @@ void clearTables (MYSQL mysql){
     }
     free(list[i]);
     free(list);
-    free(query);
+    
 }
 
 /*remove tables*/
@@ -158,6 +159,7 @@ void removeTables (MYSQL mysql){
         strcat(query,"Data");
         mysql_query(&mysql, query);
         i++;
+        free(query);
     }
     i = 0;
     while (list[i] != NULL){
@@ -166,7 +168,6 @@ void removeTables (MYSQL mysql){
     }
     free(list[i]);
     free(list);
-    free(query);
 }
 
 /*get streams*/
@@ -233,6 +234,7 @@ void getPosts (MYSQL mysql){
         }
         i++;
         mysql_free_result(result);
+        free(query);
     }
     i = 0;
     while (list[i] != NULL){
@@ -241,7 +243,7 @@ void getPosts (MYSQL mysql){
     }
     free(list[i]);
     free(list);
-    free(query);
+    
 }
 
 void getStreamPosts(MYSQL mysql, char * stream){
@@ -261,7 +263,6 @@ void getStreamPosts(MYSQL mysql, char * stream){
             printf("\n%s ", row[j] ? row[j] : " ");
         }
     }
-    i++;
     mysql_free_result(result);
     free(query);
 
@@ -332,7 +333,6 @@ void printDataTable (MYSQL mysql, char * stream){
             printf("%s ", row[j] ? row[j] : " ");
         }
     }
-    i++;
     mysql_free_result(result);
     free(query);
 }
@@ -355,7 +355,6 @@ void printStreamUsers(MYSQL mysql, char * stream){
             printf("%s ", row[j] ? row[j] : " ");
         }
     }
-    i++;
     mysql_free_result(result);
     free(query);
 }
@@ -364,7 +363,6 @@ void updateUserTable (MYSQL mysql, char * stream, char * user){
     int num = getUsersCP (mysql, user, stream) + 1;
     char buffer[10];
     snprintf(buffer, 10, "%d",num);
-    $sql = "UPDATE MyGuests SET lastname='Doe' WHERE id=2";
     char * query = malloc(sizeof(char)*512);
     strcpy(query,"UPDATE ");
     strcat(query,stream);
