@@ -18,7 +18,7 @@ readConfig: textToHtml.c translateConfig.c
 	gcc $(FLAGS) textToHtml.c translateConfig.c -o readConfig 
 
 db: db.o dbFunctions.o
-	gcc db.o dbFunctions.o -o db -lmysqlclient -L/usr/lib/x86_64-linux-gnu/
+	gcc db.o dbFunctions.o -o db -lmysqlclient -L/usr/lib/x86_64-linux-gnu/ -I.
 db.o:
 	gcc db.c -o db.o -c
 
