@@ -101,12 +101,14 @@ void getPosts (MYSQL mysql){
         while (row = mysql_fetch_row(result)){ 
             int j = 0;
             for (j=0; j<num_fields; j++){ 
-                printf("\n%s ", row[j] ? row[j] : " "); 
+                printf("\n%s ", row[j] ? row[j] : " ");
             }
-        }    
+        }
         i++;
+        free(list[i]);
         mysql_free_result(result);
     }
+    free(list);
 }
 
 int main(int argc, char *argv[]){
