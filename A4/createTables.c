@@ -91,7 +91,7 @@ void getPosts (MYSQL mysql){
         char * query = malloc(sizeof(char)*200);
         strcpy(query,"SELECT * FROM ");
         strcat(query,list[i]);
-        mysql_query(&mysql, query)
+        mysql_query(&mysql, query);
         MYSQL_RES *result = mysql_store_result(&mysql);
         if (result == NULL)
             return;
