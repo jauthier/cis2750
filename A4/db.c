@@ -85,12 +85,12 @@ int main(int argc, char *argv[]){
         char * stream = malloc(sizeof(char)*strlen(argv[3]));
         strcpy(stream,argv[3]);
         char * date = malloc(sizeof(char)*strlen(argv[4]));
-        strcpy(date,argv[4])
+        strcpy(date,argv[4]);
         char * text = malloc(sizeof(char)*1000);
         strcpy(text, argv[5]);
         int i = 6;
         for (i=6;i<argc;i++){
-            strcat(text,argc[i]);
+            strcat(text,argv[i]);
         }
         post(mysql,stream,user,date,text);
     } else if (strcmp(action,"-sPost")==0){
@@ -137,8 +137,8 @@ int main(int argc, char *argv[]){
         char * stream = malloc(sizeof(char)*strlen(argv[3]));
         strcpy(stream,argv[3]);
         getUsersCP(mysql, stream);
-    }
         updateUserTable (mysql, stream, user);
+    }
     mysql_close(&mysql);
     return 0;
 }
