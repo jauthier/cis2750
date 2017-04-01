@@ -105,9 +105,14 @@ void getPosts (MYSQL mysql){
             }
         }
         i++;
-        free(list[i]);
         mysql_free_result(result);
     }
+    i = 0;
+    while (list[i] != NULL){
+        free(list[i]);
+        i++;
+    }
+    free(list[i]);
     free(list);
 }
 
