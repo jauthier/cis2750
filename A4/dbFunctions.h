@@ -3,6 +3,8 @@
 *   Author: jessica Auhtier
 *   Date Modified: 2017/03/31
 */
+#ifndef DBFUNCTIONS_H
+#define DBFUNCTIONS_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -42,3 +44,5 @@ void printDataTable (MYSQL mysql, char * stream);
 void printStreamUsers(MYSQL mysql, char * stream);
 
 void updateUserTable (MYSQL mysql, char * stream, char * user);
+
+#endif
