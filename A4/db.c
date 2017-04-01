@@ -55,7 +55,7 @@ int main(int argc, char *argv[]){
         char * stream = malloc(sizeof(char)*strlen(argv[3]));
         strcpy(stream,argv[3]);
         /*check if the table exists*/
-        int check = checkTables(mysql,stream);
+        int check = checkTable(mysql,stream);
         if (check == 1)
             removeUser(mysql,stream, user);
     } else if (strcmp(action,"-add")==0){
@@ -67,13 +67,13 @@ int main(int argc, char *argv[]){
         strcpy(user,argv[2]);
         char * stream = malloc(sizeof(char)*strlen(argv[3]));
         strcpy(stream,argv[3]);
-        int check1 = checkTables(mysql,stream);
+        int check1 = checkTable(mysql,stream);
         if (check1 == 1){
             int check2 = checkUser(mysql,stream,user);
             if (check2 == 0)
                 addUser(mysql,stream, user);
         } else {
-            createTable(mysql, stream);
+            createTables(mysql, stream);
             addUser(mysql,stream, user);
         }
     } else if (strcmp(action,"-post")==0){
@@ -109,7 +109,7 @@ int main(int argc, char *argv[]){
         }
         char * stream = malloc(sizeof(char)*strlen(argv[2]));
         strcpy(stream,argv[2]);
-        printDataTanble(mysql, stream);
+        printDataTable(mysql, stream);
     } else if (strcmp(action,"-getSU")==0){
         if (argc < 3){
 
