@@ -12,6 +12,7 @@
 #define USERNAME "jauthier"
 #define PASSWORD "0849720"
 #define DATABASE "jauthier"
+#include "dbFunctions.h"
 
 int main(int argc, char *argv[]){
 
